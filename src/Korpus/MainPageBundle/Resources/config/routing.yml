@@ -1,3 +1,70 @@
 korpus_main_page_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: KorpusMainPageBundle:Default:index }
+    pattern:  /
+    defaults: { _controller: KorpusMainPageBundle:Page:index }
+
+#news
+korpus_main_page_news:
+    pattern:  /news
+    defaults: { _controller: KorpusMainPageBundle:Page:news }
+    
+korpus_main_page_news_post:
+    pattern:  /news/{day}/{month}/{year}
+    defaults: { _controller: KorpusMainPageBundle:Page:newsPost }
+        
+#impressum
+korpus_main_page_impressum:
+    pattern:  /impressum
+    defaults: { _controller: KorpusMainPageBundle:Page:impressum }
+    
+#datenschutz
+korpus_main_page_datenschutz:
+    pattern:  /datenschutz
+    defaults: { _controller: KorpusMainPageBundle:Page:datenschutz }
+    
+#band
+korpus_main_page_band:
+    pattern:  /band
+    defaults: { _controller: KorpusMainPageBundle:Page:band }
+    
+korpus_main_page_bio:
+    pattern:  /band/bio
+    defaults: { _controller: KorpusMainPageBundle:Page:bio }
+    
+korpus_main_page_member:
+    pattern:  /band/member/{name}
+    defaults: { _controller: KorpusMainPageBundle:Page:member, name: null }
+    
+#live
+korpus_main_page_live:
+    pattern:  /live
+    defaults: { _controller: KorpusMainPageBundle:Page:live }
+    
+#media
+korpus_main_page_media:
+    pattern:  /media
+    defaults: { _controller: KorpusMainPageBundle:Page:media }
+    
+korpus_main_page_audio:
+    pattern:  /media/audio
+    defaults: { _controller: KorpusMainPageBundle:Page:audio }
+    
+korpus_main_page_video:
+    pattern:  /media/video
+    defaults: { _controller: KorpusMainPageBundle:Page:video }
+    
+korpus_main_page_lyrics:
+    pattern:  /media/lyrics
+    defaults: { _controller: KorpusMainPageBundle:Page:lyrics }
+    
+korpus_main_page_photos:
+    pattern:  /band/photos
+    defaults: { _controller: KorpusMainPageBundle:Page:photos }
+    
+#kontakt
+korpus_main_page_kontakt:
+    pattern:  /contact
+    defaults: { _controller: KorpusMainPageBundle:Page:contact }
+    
+korpus_main_page_photos:
+    pattern:  /contact/links
+    defaults: { _controller: KorpusMainPageBundle:Page:links }
