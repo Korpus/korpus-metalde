@@ -33,6 +33,11 @@ class PageController extends Controller
         }
     }
 
+    public function newsListAction()
+    {
+        
+    }
+
     public function newsPostAction($day, $month, $year, $slug)
     {
         $newsPost = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findOneBySlug($slug);

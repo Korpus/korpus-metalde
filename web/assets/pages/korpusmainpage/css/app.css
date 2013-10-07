@@ -87,7 +87,8 @@ a {
 
 .content-area {
     font-family: ropa-sans, serif;
-    /*font-size: 16px;*/
+    font-size: 16px;
+    padding-top: 20px;
 }
 
 .content-area #bio {

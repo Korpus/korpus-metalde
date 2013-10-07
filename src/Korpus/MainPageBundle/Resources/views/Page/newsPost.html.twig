@@ -1,10 +1,14 @@
 {% extends 'KorpusMainPageBundle::layout.html.twig' %}
 
+{% block currentpage %}news{% endblock %}
+
 {% block content %}
 
-<span class="headline">{{newspost.title}}</span>    
-<span class="pull-right"><span class="date">//{{newspost.publishDate|date("d.m.Y G:i")}}</span></span>
-<br><br>
-<p class="text">{{newspost.text|nl2br}}</p>
+<div class="news-post">
+    <span class="headline">{{newspost.title}}</span>    
+    <span class="pull-right"><span class="date">//{{newspost.publishDate|date("d.m.Y G:i")}}</span></span>
+    <br><br>
+    <p class="text">{{newspost.text|nl2br}}</p>
+</div>
 
 {% endblock %}

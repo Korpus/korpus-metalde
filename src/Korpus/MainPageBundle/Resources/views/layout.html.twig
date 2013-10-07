@@ -1,11 +1,86 @@
-{% extends "::base_bs3.html.twig" %}
+{% extends "::base_main.html.twig" %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/pages/korpusmainpage/css/app.css') }}" />
+{% endblock %}
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('assets/pages/korpusmainpage/js/app.js') }}"></script>
+{% endblock %}
 
 {% block body %}
 
-{% block content %}{% endblock %}
+<span class="hidden" id="current-page">{% block currentpage %}{% endblock %}</span>
+<span class="hidden" id="current-subpage">{% block currentsubpage %}{% endblock %}</span>
+
+<nav class="navbar navbar-default navbar-static-top visible-xs" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('korpus_main_page_homepage') }}"><img src="{{ asset('assets/img/layout/logo.png') }}"></a>
+    </div>
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li class="nl-news nav-link"><a href="{{ path('korpus_main_page_news') }}">News</a></li>
+            <li class="nl-band nav-link"><a href="{{ path('korpus_main_page_band') }}">Band</a></li>
+            <li class="nl-live nav-link"><a href="#">Live</a></li>
+            <li class="nl-media nav-link"><a href="#">Media</a></li>
+            <li class="nl-merch nav-link"><a href="#">Merch</a></li>
+            <li class="nl-kontakt nav-link"><a href="#">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container page">
+    <div class="col-lg-12">
+        <div class="header hidden-sm hidden-xs">
+            <a href="{{ path('korpus_main_page_homepage') }}"><img src="{{ asset('assets/img/layout/header.png') }}"></a>
+        </div>
+        <div class="navigator">
+            <div class="pull-left visible-sm">
+                <img src="{{ asset('assets/img/layout/logo.png') }}">
+            </div>
+            <span class="hidden-xs">
+                <a href="{{ path('korpus_main_page_news') }}" class="nl-news nav-link">News</a>
+                <a href="{{ path('korpus_main_page_band') }}" class="nl-band nav-link">Band</a>
+                <a href="{{ path('korpus_main_page_live') }}" class="nl-live nav-link">Live</a>
+                <a href="#" class="nl-media nav-link">Media</a>
+                <a href="#" class="nl-merch nav-link">Merch</a>
+                <a href="#" class="nl-kontakt nav-link">Kontakt</a>
+            </span>
+        </div>
+        <div class="row content-row">
+            <div class="col-lg-9 col-md-9 content-area">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-lg-3 col-md-3 sidebar">
+            {% include 'KorpusMainPageBundle::sidebar.html.twig' %}
+                </div>
+            </div>
+            <footer>
+                <hr class="bs-docs-separator">
+                <span class="cp">© 2013, Florian Weber, Korpus</span>
+                <br>
+                <div class="footer-links">
+                    <span>
+                        <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a> | 
+                        <a target="_blank" href="http://forum.korpus-metal.de">Forum</a> |
+                        <a href="{{ path('korpus_main_page_datenschutz') }}">Datenschutz</a>
+                    </span>
+                </div>
+                <br>
+                <div class="tech pull-right">
+                    powered by <a target="_blank" href="http://jquery.com/"><img src="{{ asset('assets/img/layout/jquery.png') }}"></a> <a target="_blank" href="http://symfony.com/"><img src="{{ asset('assets/img/layout/symfony.png') }}"></a>
+                </div>
+                <br>
+                <br>
+            </footer>
+        </div>
+    </div>
 
 {% endblock %}

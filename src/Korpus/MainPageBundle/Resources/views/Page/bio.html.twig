@@ -1,0 +1,44 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}band{% endblock %}
+{% block currentsubpage %}bio{% endblock %}
+
+{% block content %}
+
+{% include 'KorpusMainPageBundle::small-nav-band.html.twig' %}
+
+<div class="centered">
+    <div>
+        <img src="{{ asset('assets/img/layout/group.jpg') }}" class="img-thumbnail" />
+        <br>
+        <br>
+        <span>
+            <a href="{{ path('korpus_main_page_member', {name: 'Mag'}) }}">Mag</a> |
+            <a href="{{ path('korpus_main_page_member', {name: 'Flo'}) }}">Flo</a> | 
+            <a href="{{ path('korpus_main_page_member', {name: 'SanZ'}) }}">SanZ</a> |            
+            <a href="{{ path('korpus_main_page_member', {name: 'Costen'}) }}">Costen</a> | 
+            <a href="{{ path('korpus_main_page_member', {name: 'Gastel'}) }}">Gastel</a>
+        </span>
+
+    </div>
+    <br>
+    <div id="bio">
+        Die aus Dresden stammende Band KORPUS agiert seit 2008 erfolgreich im deutschen Underground.<br>
+        <br>
+        Dabei kreieren die fünf Bandmitglieder eine einzigartige Synthese aus<br>
+        der rohen Kraft des Death Metal, der unbändigen Energie des Thrash Metal sowie dem Groove<br>
+        und der Dynamik des Hardcore. Dieses Grundgerüst wird durch emotionale,<br>
+        deutschsprachige Texte und diverse musikalische Experimente zu einer spannenden Mixtur.<br>
+        <br>
+        Ebenbild, das zweite Album der Band, führt den eingeschlagenen Weg konsequent fort.<br>
+        Es besticht durch abwechslungsreiche Songstrukturen, epische Arrangements, unerwartete<br>
+        musikalische Wendungen und Texte, die unter die Haut gehen.<br>
+        <br>
+        In der Metalszene haben sich KORPUS durch ihren unverwechselbaren Sound bereits<br>
+        einen Namen machen können. Nicht zuletzt durch die energische Live-Darbietung konnte<br>
+        sich die Band innerhalb der letzten Jahre eine beachtliche Fanbase erspielen. Dabei teilte die<br>
+        Band die Bühne mit Größen wie Eisregen, Disbelief, Debauchery, Hail of Bullets und Hatesphere.<br>
+    </div>
+</div>
+
+{% endblock %}
