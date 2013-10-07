@@ -21,7 +21,7 @@ class NewsPostRepository extends EntityRepository
         $currentDate = new \DateTime('now');
         //$currentDate->setTime(0, 0, 0);
 
-        $dql = 'select n from KorpusDataBundle:NewsPost n where n.publishDate <= ?1';
+        $dql = 'select n from KorpusDataBundle:NewsPost n where n.publishDate <= ?1 order by n.publishDate desc';
 
         $query = $em->createQuery($dql);
         $query->setParameter(1, $currentDate);

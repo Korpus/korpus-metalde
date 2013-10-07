@@ -2,6 +2,9 @@
 
 {% block content %}
 
-{{newspost.title}}
+<span class="headline">{{newspost.title}}</span>    
+<span class="pull-right"><span class="date">//{{newspost.publishDate|date("d.m.Y G:i")}}</span></span>
+<br><br>
+<p class="text">{{newspost.text|nl2br}}</p>
 
 {% endblock %}
