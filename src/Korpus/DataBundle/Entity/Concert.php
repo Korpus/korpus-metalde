@@ -46,7 +46,7 @@ class Concert
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -60,7 +60,7 @@ class Concert
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="edit_date", type="datetime")
+     * @ORM\Column(name="edit_date", type="datetime", nullable=true)
      */
     private $editDate;
 
@@ -74,7 +74,7 @@ class Concert
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_link", type="string", length=255)
+     * @ORM\Column(name="facebook_link", type="string", length=255, nullable=true)
      */
     private $facebookLink;
 
@@ -83,6 +83,13 @@ class Concert
      * @ORM\JoinColumn(name="flyer_id", referencedColumnName="id")
      * */
     private $flyer;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="info", type="string", length=255, nullable=true)
+     */
+    private $info;
 
     /**
      * Get id
