@@ -58,7 +58,7 @@ class File
     private $editDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FielType")
+     * @ORM\ManyToOne(targetEntity="FileType")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * */
     private $type;
