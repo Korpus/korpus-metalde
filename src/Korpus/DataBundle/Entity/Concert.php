@@ -77,6 +77,12 @@ class Concert
      * @ORM\Column(name="facebook_link", type="string", length=255)
      */
     private $facebookLink;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="flyer_id", referencedColumnName="id")
+     * */
+    private $flyer;
 
     /**
      * Get id
