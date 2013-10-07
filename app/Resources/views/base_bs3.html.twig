@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!--global styles-->
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/alertify.core.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/alertify.bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/global.css') }}" />
+        <!--block styles-->
+        {% block stylesheets %}{% endblock %}
+
+        <!--global JS-->
+        <script src="{{ asset('assets/js/lib/jquery.js') }}"></script>
+        <script src="{{ asset('assets/js/lib/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/js/lib/alertify.js') }}"></script>
+        <script src="{{ asset('assets/js/lib/livequery.js') }}"></script>
+        <!--block JS-->
+        {% block javascripts %}{% endblock %}
+
+        <!--favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!--FONTS-->
+
+    </head>
+    <body>
+        <div id="wrap">
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>
