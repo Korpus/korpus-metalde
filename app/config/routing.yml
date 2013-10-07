@@ -1,0 +1,4 @@
+korpus_main_page:
+    resource: "@KorpusMainPageBundle/Resources/config/routing.yml"
+    prefix:   /
+
