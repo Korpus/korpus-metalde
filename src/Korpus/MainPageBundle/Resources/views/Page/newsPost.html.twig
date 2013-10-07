@@ -13,21 +13,25 @@
 
 {% if leftpost != null %}
     {% set leftlink = path('korpus_main_page_news_post', {day: leftpost.publishDate|date('d'), month: leftpost.publishDate|date('m'), year: leftpost.publishDate|date('Y'), slug: leftpost.slug}) %}
+    {% set disabledprv = '' %}
 {% else %}
     {% set leftlink = '#' %}
+    {% set disabledprv = 'disabled' %}
 {% endif %}
 
 {% if rightpost != null %}
     {% set rightlink = path('korpus_main_page_news_post', {day: rightpost.publishDate|date('d'), month: rightpost.publishDate|date('m'), year: rightpost.publishDate|date('Y'), slug: rightpost.slug}) %}
+    {% set disablednxt = '' %}
 {% else %}
     {% set rightlink = '#' %}
+    {% set disablednxt = 'disabled' %}
 {% endif %}
 
 <div class="row">
     <div class="col-lg-12">
         <ul class="pager">
-            <li class="previous"><a href="{{leftlink}}"><span class="glyphicon glyphicon-chevron-left"></span> Älter</a></li>
-            <li class="next"><a href="{{rightlink}}">Neuer <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+            <li class="previous {{disabledprv}}"><a href="{{leftlink}}"><span class="glyphicon glyphicon-chevron-left"></span> Älter</a></li>
+            <li class="next {{disablednxt}}"><a href="{{rightlink}}">Neuer <span class="glyphicon glyphicon-chevron-right"></span></a></li>
         </ul>
     </div>
 </div>
