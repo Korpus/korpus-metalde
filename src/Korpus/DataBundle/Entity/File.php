@@ -6,27 +6,40 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * File
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Korpus\DataBundle\Entity\FileRepository")
  */
 class File
 {
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="hash", type="string", length=255)
      */
     private $hash;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255)
      */
     private $path;
 
@@ -61,26 +74,26 @@ class File
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return File
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
