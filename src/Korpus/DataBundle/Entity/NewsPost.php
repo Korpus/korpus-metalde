@@ -65,6 +65,20 @@ class NewsPost
     private $editDate;
 
     /**
+     * @ORM\ManyToMany(targetEntity="File")
+     * @ORM\JoinTable(name="newsposts_files",
+     *      joinColumns={@ORM\JoinColumn(name="newspost_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id")}
+     *      )
+     * */
+    private $files;
+
+    public function __construct()
+    {
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -237,6 +251,16 @@ class NewsPost
     public function getPublishYear()
     {
         return $this->publishDate->format('Y');
+    }
+
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    public function setFiles($files)
+    {
+        $this->files = $files;
     }
 
 }
