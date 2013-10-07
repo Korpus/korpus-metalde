@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FileType
 {
-
     /**
      * @var integer
      *
@@ -36,6 +35,7 @@ class FileType
      */
     private $isActive;
 
+
     /**
      * Get id
      *
@@ -55,7 +55,7 @@ class FileType
     public function setTitle($title)
     {
         $this->title = $title;
-
+    
         return $this;
     }
 
@@ -78,7 +78,7 @@ class FileType
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-
+    
         return $this;
     }
 
@@ -91,5 +91,4 @@ class FileType
     {
         return $this->isActive;
     }
-
 }
