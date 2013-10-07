@@ -77,7 +77,7 @@ class Concert
      * @ORM\Column(name="facebook_link", type="string", length=255)
      */
     private $facebookLink;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="File")
      * @ORM\JoinColumn(name="flyer_id", referencedColumnName="id")
@@ -263,6 +263,16 @@ class Concert
     public function setFacebookLink($facebookLink)
     {
         $this->facebookLink = $facebookLink;
+    }
+
+    public function getFlyer()
+    {
+        return $this->flyer;
+    }
+
+    public function setFlyer($flyer)
+    {
+        $this->flyer = $flyer;
     }
 
 }
