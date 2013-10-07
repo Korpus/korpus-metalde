@@ -221,3 +221,4 @@ pip-log.txt
 /vendor/
 /app/config/parameters.yml
 composer.lock
+/nbproject/*
