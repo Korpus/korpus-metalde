@@ -1,0 +1,20 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}news{% endblock %}
+
+{% block content %}
+
+<a href="{{ path('korpus_main_page_news') }}"><span class="glyphicon glyphicon-chevron-left"></span> Zurück</a>
+
+<br><br>
+
+<div class="list-group">
+    {% for post in posts %}
+    <a href="{{ path('korpus_main_page_news_post', {day: post.publishDate|date('d'), month: post.publishDate|date('m'), year: post.publishDate|date('Y'), slug: post.slug}) }}" class="list-group-item">
+        <h4 class="list-group-item-heading">{{post.title}}<span class="pull-right">{{post.publishDate|date("d.m.Y G:i")}}</span></h4>
+        <p class="list-group-item-text">{{post.text|length > 100 ? post.text|slice(0, 100) ~ '...' : post.text }}</p>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

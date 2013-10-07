@@ -35,4 +35,30 @@ class NewsPostRepository extends EntityRepository
         return $post[0];
     }
 
+    public function findSurroundingPosts($slug)
+    {
+        //entity manager
+        $em = $this->getEntityManager();
+
+        $dqlA = 'select n from KorpusDataBundle:NewsPost n where n.slug = ?1';
+        $query = $em->createQuery($dqlA);
+        $query->setParameter(1, $slug);
+        $query->setMaxResults(1);
+        $post = $query->getResult();
+                
+        $dqlB = 'select n from KorpusDataBundle:NewsPost n where n.publishDate < ?1';
+        $query = $em->createQuery($dqlB);
+        $query->setParameter(1, $post[0]->getPublishDate());
+        $query->setMaxResults(1);
+        $leftPost = $query->getResult();
+        
+        $dqlC = 'select n from KorpusDataBundle:NewsPost n where n.publishDate > ?1';
+        $query = $em->createQuery($dqlC);
+        $query->setParameter(1, $post[0]->getPublishDate());
+        $query->setMaxResults(1);
+        $rightPost = $query->getResult();
+                
+        return array(@$leftPost[0], @$rightPost[0]);
+    }
+
 }
