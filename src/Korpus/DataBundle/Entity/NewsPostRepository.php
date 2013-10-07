@@ -15,7 +15,24 @@ class NewsPostRepository extends EntityRepository
 
     public function findLatestPost()
     {
-        
+        //entity manager
+        $em = $this->getEntityManager();
+
+        $currentDate = new \DateTime('now');
+        //$currentDate->setTime(0, 0, 0);
+
+        $dql = 'select n from KorpusDataBundle:NewsPost n where n.publishDate <= ?1';
+
+        $query = $em->createQuery($dql);
+        $query->setParameter(1, $currentDate);
+        $query->setMaxResults(1);
+
+        $post = $query->getResult();
+
+        if (!$post)
+            return null;
+
+        return $post[0];
     }
 
 }

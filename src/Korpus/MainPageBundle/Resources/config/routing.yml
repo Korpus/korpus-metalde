@@ -8,7 +8,7 @@ korpus_main_page_news:
     defaults: { _controller: KorpusMainPageBundle:Page:news }
     
 korpus_main_page_news_post:
-    pattern:  /news/{day}/{month}/{year}
+    pattern:  /news/post/{day}/{month}/{year}/{slug}
     defaults: { _controller: KorpusMainPageBundle:Page:newsPost }
         
 #impressum

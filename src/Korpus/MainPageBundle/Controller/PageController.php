@@ -27,14 +27,25 @@ class PageController extends Controller
             $day = $newsPost->getPublishDay();
             $month = $newsPost->getPublishMonth();
             $year = $newsPost->getPublishYear();
+            $slug = $newsPost->getSlug();
 
-            return $this->redirect($this->generateUrl('korpus_main_page_news_post', array('day' => $day, 'month' => $month, 'year' => $year)));
+            return $this->redirect($this->generateUrl('korpus_main_page_news_post', array('day' => $day, 'month' => $month, 'year' => $year, 'slug' => $slug)));
         }
     }
 
-    public function newsPostAction($day, $month, $year)
+    public function newsPostAction($day, $month, $year, $slug)
     {
-        return $this->render('KorpusMainPageBundle:Page:newsPost.index.html');
+        $newsPost = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findOneBySlug($slug);
+
+        if (!$newsPost) {
+            throw new NotFoundHttpException("This NewsPost does not exist!");
+        } else {
+            if ($day != $newsPost->getPublishDay() || $month != $newsPost->getPublishMonth() || $year != $newsPost->getPublishYear()) {
+                throw new NotFoundHttpException("This NewsPost does not exist!");
+            }
+        }
+
+        return $this->render('KorpusMainPageBundle:Page:newsPost.html.twig', array('newspost' => $newsPost));
     }
 
     /**

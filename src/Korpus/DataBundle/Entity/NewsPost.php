@@ -25,7 +25,7 @@ class NewsPost
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -60,7 +60,7 @@ class NewsPost
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="edit_date", type="datetime")
+     * @ORM\Column(name="edit_date", type="datetime", nullable=true)
      */
     private $editDate;
 
