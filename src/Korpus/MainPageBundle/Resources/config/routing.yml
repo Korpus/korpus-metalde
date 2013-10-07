@@ -7,7 +7,7 @@ korpus_main_page_news:
     pattern:  /news
     defaults: { _controller: KorpusMainPageBundle:Page:news }
     
-korpus_main_page_news:
+korpus_main_page_news_list:
     pattern:  /news/list
     defaults: { _controller: KorpusMainPageBundle:Page:newsList }
     
