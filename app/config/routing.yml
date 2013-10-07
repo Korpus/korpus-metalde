@@ -1,3 +1,7 @@
+korpus_data:
+    resource: "@KorpusDataBundle/Resources/config/routing.yml"
+    prefix:   /
+
 korpus_console:
     resource: "@KorpusConsoleBundle/Resources/config/routing.yml"
     prefix:   /console

@@ -1,0 +1,7 @@
+parameters:
+#    korpus_data.example.class: Korpus\DataBundle\Example
+
+services:
+#    korpus_data.example:
+#        class: %korpus_data.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

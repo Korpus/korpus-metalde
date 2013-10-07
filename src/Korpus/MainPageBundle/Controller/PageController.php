@@ -3,6 +3,8 @@
 namespace Korpus\MainPageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Korpus\DataBundle\Entity\NewsPost;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageController extends Controller
 {
@@ -17,18 +19,24 @@ class PageController extends Controller
      */
     public function newsAction()
     {
-        $day = '01';
-        $month = '01';
-        $year = '2013';
+        $newsPost = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findLatestPost();
 
-        return $this->redirect($this->generateUrl('korpus_main_page_news_post', array('day' => $day, 'month' => $month, 'year' => $year)));
+        if (!$newsPost) {
+            throw new NotFoundHttpException("There is currently no NewsPost!");
+        } else {
+            $day = $newsPost->getPublishDay();
+            $month = $newsPost->getPublishMonth();
+            $year = $newsPost->getPublishYear();
+
+            return $this->redirect($this->generateUrl('korpus_main_page_news_post', array('day' => $day, 'month' => $month, 'year' => $year)));
+        }
     }
 
     public function newsPostAction($day, $month, $year)
     {
         return $this->render('KorpusMainPageBundle:Page:newsPost.index.html');
     }
-    
+
     /**
      * Impressum
      */
@@ -36,7 +44,7 @@ class PageController extends Controller
     {
         return $this->render('KorpusMainPageBundle:Page:impressum.html.twig');
     }
-    
+
     /**
      * Datenschutz
      */
@@ -44,7 +52,7 @@ class PageController extends Controller
     {
         return $this->render('KorpusMainPageBundle:Page:datenschutz.html.twig');
     }
-    
+
     /**
      * Band
      */
