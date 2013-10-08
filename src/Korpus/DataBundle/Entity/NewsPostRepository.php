@@ -13,6 +13,21 @@ use Doctrine\ORM\EntityRepository;
 class NewsPostRepository extends EntityRepository
 {
 
+    public function findAllOrdered($order = 'desc')
+    {
+        //entity manager
+        $em = $this->getEntityManager();
+
+        $orders = array('desc', 'asc');
+        if (!in_array($order, $orders))
+            $order = 'desc';
+
+        $dql = 'select n from KorpusDataBundle:NewsPost n order by n.publishDate ' . $order;
+        $query = $em->createQuery($dql);
+
+        return $query->getResult();
+    }
+
     public function findLatestPost()
     {
         //entity manager
@@ -45,19 +60,19 @@ class NewsPostRepository extends EntityRepository
         $query->setParameter(1, $slug);
         $query->setMaxResults(1);
         $post = $query->getResult();
-                
+
         $dqlB = 'select n from KorpusDataBundle:NewsPost n where n.publishDate < ?1';
         $query = $em->createQuery($dqlB);
         $query->setParameter(1, $post[0]->getPublishDate());
         $query->setMaxResults(1);
         $leftPost = $query->getResult();
-        
+
         $dqlC = 'select n from KorpusDataBundle:NewsPost n where n.publishDate > ?1';
         $query = $em->createQuery($dqlC);
         $query->setParameter(1, $post[0]->getPublishDate());
         $query->setMaxResults(1);
         $rightPost = $query->getResult();
-                
+
         return array(@$leftPost[0], @$rightPost[0]);
     }
 

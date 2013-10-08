@@ -15,7 +15,7 @@ class CMSController extends Controller
      */
     public function newsAction()
     {
-        $posts = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findAll();
+        $posts = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findAllOrdered();
         $postsAvailable = !(!$posts);
 
         return $this->render('KorpusConsoleBundle:CMS:news.html.twig', array('posts' => $posts, 'posts_available' => $postsAvailable));
@@ -26,10 +26,10 @@ class CMSController extends Controller
         $post = new NewsPost();
 
         $form = $this->createFormBuilder($post)
-                ->add('title', 'text')
-                ->add('text', 'text')
-                ->add('publishDate')
-                ->add('save', 'submit')
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('text', 'textarea', array('label' => 'Text'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
                 ->getForm();
 
         $form->handleRequest($request);

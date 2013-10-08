@@ -12,7 +12,7 @@ class NewsPostHelper
      */
     public static function generateSlug($title)
     {
-        return urlencode(substr(str_replace(' ', '-', str_replace('!', '', str_replace('?', '', str_replace('.', '', str_replace(',', '', $title))))), 0, 50));
+        return urlencode(strtolower(substr(str_replace(' ', '-', str_replace('!', '', str_replace('?', '', str_replace('.', '', str_replace(',', '', $title))))), 0, 50)));
     }
 
 }
