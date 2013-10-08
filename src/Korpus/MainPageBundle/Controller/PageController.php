@@ -47,7 +47,7 @@ class PageController extends Controller
     public function newsPostAction($day, $month, $year, $slug)
     {
         $newsPost = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findOneBySlug($slug);
-        
+
         if (!$newsPost) {
             throw new NotFoundHttpException("This NewsPost does not exist!");
         } else {
@@ -55,9 +55,9 @@ class PageController extends Controller
                 throw new NotFoundHttpException("This NewsPost does not exist!");
             }
         }
-        
+
         $surroundingPosts = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findSurroundingPosts($slug);
-        
+
         return $this->render('KorpusMainPageBundle:Page:newsPost.html.twig', array('newspost' => $newsPost, 'leftpost' => $surroundingPosts[0], 'rightpost' => $surroundingPosts[1]));
     }
 
@@ -97,6 +97,20 @@ class PageController extends Controller
         else {
             return $this->render('KorpusMainPageBundle:Page:member.html.twig');
         }
+    }
+    
+    /**
+     * Live
+     */
+    public function liveAction() {
+        $concerts = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findNextConcerts();
+        $concertsAvailable = ($concerts != null);
+        
+        return $this->render('KorpusMainPageBundle:Page:live.html.twig', array('concerts' => $concerts, 'concerts_available' => $concertsAvailable));
+    }
+    
+    public function concertAction($slug) {
+        
     }
 
 }

@@ -12,7 +12,7 @@ korpus_main_page_news_list:
     defaults: { _controller: KorpusMainPageBundle:Page:newsList }
     
 korpus_main_page_news_post:
-    pattern:  /news/post/{day}/{month}/{year}/{slug}
+    pattern:  /news/{day}/{month}/{year}/{slug}
     defaults: { _controller: KorpusMainPageBundle:Page:newsPost }
         
 #impressum
@@ -42,6 +42,10 @@ korpus_main_page_member:
 korpus_main_page_live:
     pattern:  /live
     defaults: { _controller: KorpusMainPageBundle:Page:live }
+    
+korpus_main_page_live_concert:
+    pattern:  /live/concert/{slug}
+    defaults: { _controller: KorpusMainPageBundle:Page:concert }
     
 #media
 korpus_main_page_media:

@@ -4,5 +4,14 @@
 
 {% block content %}
 
+{% if concerts_available == false %}
+    <strong>Momentan keine Konzerte verfügbar!</strong>
+{% else %}
+    
+    {% for concert in concerts %}
+        #
+    {% endfor %}
+    
+{% endif %}
 
 {% endblock %}
