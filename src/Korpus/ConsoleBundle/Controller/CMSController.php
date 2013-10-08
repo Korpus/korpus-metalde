@@ -12,7 +12,10 @@ class CMSController extends Controller
      */
     public function newsAction()
     {
-        return $this->render('KorpusConsoleBundle:CMS:news.html.twig');
+        $posts = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findAll();
+        $postsAvailable = !(!$posts);
+
+        return $this->render('KorpusConsoleBundle:CMS:news.html.twig', array('posts' => $posts, 'posts_available' => $postsAvailable));
     }
 
     public function createNewsAction()
@@ -40,7 +43,10 @@ class CMSController extends Controller
      */
     public function concertAction()
     {
-        return $this->render('KorpusConsoleBundle:CMS:concert.html.twig');
+        $concerts = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findAll();
+        $concertsAvailable = !(!$concerts);
+
+        return $this->render('KorpusConsoleBundle:CMS:concert.html.twig', array('concerts' => $concerts, 'concerts_available' => $concertsAvailable));
     }
 
     public function createConcertAction()

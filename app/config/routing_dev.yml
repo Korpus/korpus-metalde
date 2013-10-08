@@ -12,3 +12,7 @@ _configurator:
 
 _main:
     resource: routing.yml
+
+korpus_console:
+    resource: "@KorpusConsoleBundle/Resources/config/routing.yml"
+    prefix:   /_dev_console

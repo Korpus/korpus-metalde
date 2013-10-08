@@ -1,0 +1,35 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}news{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li class="active">News</li>
+</ol>
+
+<table class="table table-bordered">
+    <tr>
+        <th>VÖ-Datum</th><th>Titel</th><th>Text</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
+    </tr>
+    {% for post in posts %}
+        <tr>
+            <td>{{post.publishDate|date('d.m.Y G:i')}}</td>
+            <td>{{post.title}}</td>
+            <td>{{post.text|length > 50 ? post.text|slice(0, 50) ~ '...' : post.text }}</td>
+            <td>{{post.creationDate|date('d.m.Y G:i')}}</td>
+            <td>{% if post.editDate != null %}{{post.editDate|date('d.m.Y G:i')}}{% else %}-{% endif %}</td>
+            <td>
+                <a href="{{ path('korpus_console_cms_news_update', {slug: post.slug}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                <br>
+                <a href="{{ path('korpus_console_cms_news_delete', {slug: post.slug}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+                <br>
+                <a href="{{ path('korpus_console_cms_news_view', {slug: post.slug}) }}"><span class="glyphicon glyphicon-eye-open"></span> Ansehen</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

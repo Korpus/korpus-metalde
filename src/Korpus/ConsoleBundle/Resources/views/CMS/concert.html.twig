@@ -1,0 +1,36 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}concert{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li class="active">Konzerte</li>
+</ol>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Gig-Datum</th><th>Event</th><th>Venue</th><th>City</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
+    </tr>
+    {% for concert in concerts %}
+        <tr>
+            <td>{{concert.concertDate|date('d.m.Y G:i')}}</td>
+            <td>{{concert.event}}</td>
+            <td>{{concert.venue}}</td>
+            <td>{{concert.city}}</td>
+            <td>{{concert.creationDate|date('d.m.Y G:i')}}</td>
+            <td>{% if concert.editDate != null %}{{concert.editDate|date('d.m.Y G:i')}}{% else %}-{% endif %}</td>
+            <td>
+                <a href="{{ path('korpus_console_cms_concert_update', {slug: concert.slug}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                <br>
+                <a href="{{ path('korpus_console_cms_concert_delete', {slug: concert.slug}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+                <br>
+                <a href="{{ path('korpus_console_cms_concert_view', {slug: concert.slug}) }}"><span class="glyphicon glyphicon-eye-open"></span> Ansehen</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -15,7 +15,7 @@ korpus_console_cms_news_create:
     pattern:  /cms/news/create
     defaults: { _controller: KorpusConsoleBundle:CMS:createNews }
     
-korpus_console_cms_news_create:
+korpus_console_cms_news_update:
     pattern:  /cms/news/{slug}/edit
     defaults: { _controller: KorpusConsoleBundle:CMS:updateNews }
     
@@ -36,7 +36,7 @@ korpus_console_cms_concert_create:
     pattern:  /cms/concert/create
     defaults: { _controller: KorpusConsoleBundle:CMS:createConcert }
     
-korpus_console_cms_concert_create:
+korpus_console_cms_concert_update:
     pattern:  /cms/concert/{slug}/edit
     defaults: { _controller: KorpusConsoleBundle:CMS:updateConcert }
     
