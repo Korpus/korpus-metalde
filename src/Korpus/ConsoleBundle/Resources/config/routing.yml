@@ -1,3 +1,49 @@
 korpus_console_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: KorpusConsoleBundle:Default:index }
+    pattern:  /
+    defaults: { _controller: KorpusConsoleBundle:Page:index }
+
+korpus_console_dashboard:
+    pattern:  /dashboard
+    defaults: { _controller: KorpusConsoleBundle:Page:dashboard }
+
+#cms news
+korpus_console_cms_news:
+    pattern:  /cms/news
+    defaults: { _controller: KorpusConsoleBundle:CMS:news }
+    
+korpus_console_cms_news_create:
+    pattern:  /cms/news/create
+    defaults: { _controller: KorpusConsoleBundle:CMS:createNews }
+    
+korpus_console_cms_news_create:
+    pattern:  /cms/news/{slug}/edit
+    defaults: { _controller: KorpusConsoleBundle:CMS:updateNews }
+    
+korpus_console_cms_news_delete:
+    pattern:  /cms/news/{slug}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteNews }
+
+korpus_console_cms_news_view:
+    pattern:  /cms/news/{slug}/view
+    defaults: { _controller: KorpusConsoleBundle:CMS:viewNews }
+    
+#cms concert
+korpus_console_cms_concert:
+    pattern:  /cms/concert
+    defaults: { _controller: KorpusConsoleBundle:CMS:concert }
+    
+korpus_console_cms_concert_create:
+    pattern:  /cms/concert/create
+    defaults: { _controller: KorpusConsoleBundle:CMS:createConcert }
+    
+korpus_console_cms_concert_create:
+    pattern:  /cms/concert/{slug}/edit
+    defaults: { _controller: KorpusConsoleBundle:CMS:updateConcert }
+    
+korpus_console_cms_concert_delete:
+    pattern:  /cms/concert/{slug}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteConcert }
+
+korpus_console_cms_concert_view:
+    pattern:  /cms/concert/{slug}/view
+    defaults: { _controller: KorpusConsoleBundle:CMS:viewConcert }
