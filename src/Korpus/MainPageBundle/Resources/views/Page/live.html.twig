@@ -4,14 +4,29 @@
 
 {% block content %}
 
+<br>
+
 {% if concerts_available == false %}
     <strong>Momentan keine Konzerte verfügbar!</strong>
 {% else %}
-    
+
     {% for concert in concerts %}
-        #
+        <div class="media">
+            <a class="pull-left" href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">
+                <img class="media-object" src="http://placehold.it/64x64" alt="...">
+            </a>
+            <div class="media-body">
+                {% if concert.facebookLink != null %}
+                    <a target="_blank" href="{{concert.facebookLink}}" class="btn btn-xs btn-info pull-right"><span class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
+                {% endif %}
+                <a href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">
+                    <h4 class="media-heading">{{concert.event}} <span class="black-text"><strong><small>{{concert.concertDate|date('d.m.Y, G:i')}}</small></strong></span></h4>
+                </a>                    
+                {{concert.venue}} | {{concert.city}}{% if concert.info != null %} | {{concert.info}}{% endif %}                
+            </div>
+        </div>
     {% endfor %}
-    
+
 {% endif %}
 
 {% endblock %}

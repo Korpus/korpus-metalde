@@ -83,7 +83,7 @@ class Concert
      * @ORM\JoinColumn(name="flyer_id", referencedColumnName="id")
      * */
     private $flyer;
-    
+
     /**
      * @var string
      *
@@ -280,6 +280,16 @@ class Concert
     public function setFlyer($flyer)
     {
         $this->flyer = $flyer;
+    }
+
+    public function getInfo()
+    {
+        return $this->info;
+    }
+
+    public function setInfo($info)
+    {
+        $this->info = $info;
     }
 
 }
