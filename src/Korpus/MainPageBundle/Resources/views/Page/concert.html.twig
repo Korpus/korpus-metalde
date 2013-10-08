@@ -1,0 +1,25 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}live{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-8">
+        <h2>{{concert.event}}</h2>
+        <strong>Location:</strong> {{concert.venue}}
+        <br>
+        <strong>Ort:</strong> {{concert.city}}
+        <br>
+        <strong>Datum:</strong> {{concert.concertDate|date('d.m.Y G:i')}}
+        {% if concert.info != null %}<br><strong>Info:</strong> {{concert.info}}{% endif %}
+        {% if concert.facebookLink != null %}
+        <br><br><a target="_blank" href="{{concert.facebookLink}}" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
+        {% endif %}
+    </div>
+    <div class="col-lg-4">
+        <img class="img-thumbnail" src="http://placehold.it/600x800" />
+    </div>
+</div>
+
+{% endblock %}

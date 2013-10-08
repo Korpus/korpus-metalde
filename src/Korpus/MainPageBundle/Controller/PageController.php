@@ -110,7 +110,13 @@ class PageController extends Controller
     }
     
     public function concertAction($slug) {
+        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
         
+        if(!$concert) {
+            throw new NotFoundHttpException("This Concert does not exist!");
+        } else {
+            return $this->render('KorpusMainPageBundle:Page:concert.html.twig', array('concert' => $concert));
+        }
     }
 
 }
