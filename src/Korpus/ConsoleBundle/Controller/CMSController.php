@@ -5,6 +5,7 @@ namespace Korpus\ConsoleBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Korpus\DataBundle\Entity\NewsPost;
 use Symfony\Component\HttpFoundation\Request;
+use Korpus\HelperBundle\Component\NewsPostHelper;
 
 class CMSController extends Controller
 {
@@ -34,9 +35,14 @@ class CMSController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // perform some action, such as saving the task to the database
+            $post->setCreationDate(new \DateTime('now'));
+            $post->setSlug(NewsPostHelper::generateSlug($post->getTitle()));
 
-            return $this->redirect($this->generateUrl('task_success'));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_news'));
         }
 
         return $this->render('KorpusConsoleBundle:CMS:news_create.html.twig', array('form' => $form->createView()));

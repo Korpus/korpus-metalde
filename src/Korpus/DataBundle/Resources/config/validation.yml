@@ -1,0 +1,9 @@
+Korpus\DataBundle\Entity\NewsPost:
+    properties:
+        title:
+            - NotBlank: ~
+        text:
+            - NotBlank: ~
+        publishDate:
+            - NotBlank: ~
+            - Type: \DateTime
