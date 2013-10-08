@@ -53,9 +53,19 @@ class CMSController extends Controller
         return $this->render('KorpusConsoleBundle:CMS:news_update.html.twig');
     }
 
-    public function deleteNewsAction()
+    public function deleteNewsAction(Request $request, $slug)
     {
-        return $this->render('KorpusConsoleBundle:CMS:news_delete.html.twig');
+        $post = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findOneBySlug($slug);
+
+        if ($request->get('delete') == 1) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($post);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('korpus_console_cms_news'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:news_delete.html.twig', array('post' => $post));
     }
 
     public function viewNewsAction()
