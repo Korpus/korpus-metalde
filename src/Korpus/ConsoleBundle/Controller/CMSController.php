@@ -3,6 +3,8 @@
 namespace Korpus\ConsoleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Korpus\DataBundle\Entity\NewsPost;
+use Symfony\Component\HttpFoundation\Request;
 
 class CMSController extends Controller
 {
@@ -18,9 +20,26 @@ class CMSController extends Controller
         return $this->render('KorpusConsoleBundle:CMS:news.html.twig', array('posts' => $posts, 'posts_available' => $postsAvailable));
     }
 
-    public function createNewsAction()
+    public function createNewsAction(Request $request)
     {
-        return $this->render('KorpusConsoleBundle:CMS:news_create.html.twig');
+        $post = new NewsPost();
+
+        $form = $this->createFormBuilder($post)
+                ->add('title', 'text')
+                ->add('text', 'text')
+                ->add('publishDate')
+                ->add('save', 'submit')
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // perform some action, such as saving the task to the database
+
+            return $this->redirect($this->generateUrl('task_success'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:news_create.html.twig', array('form' => $form->createView()));
     }
 
     public function updateNewsAction()

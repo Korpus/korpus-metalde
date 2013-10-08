@@ -1,0 +1,16 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}news{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li><a href="{{ path('korpus_console_cms_news') }}">News</a></li>
+    <li class="active">Neu</li>
+</ol>
+
+{{form(form)}}
+
+{% endblock %}
