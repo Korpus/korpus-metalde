@@ -15,7 +15,7 @@
         <th>Gig-Datum</th><th>Event</th><th>Venue</th><th>City</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
     </tr>
     {% for concert in concerts %}
-        <tr>
+        <tr {% if concert.concertDate >= date('now') %}class="success"{% else %}class="warning"{% endif %}>
             <td>{{concert.concertDate|date('d.m.Y G:i')}}</td>
             <td>{{concert.event}}</td>
             <td>{{concert.venue}}</td>

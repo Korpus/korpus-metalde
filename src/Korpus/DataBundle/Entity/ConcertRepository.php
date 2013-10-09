@@ -13,6 +13,21 @@ use Doctrine\ORM\EntityRepository;
 class ConcertRepository extends EntityRepository
 {
 
+    public function findAllOrdered($order = 'desc')
+    {
+        //entity manager
+        $em = $this->getEntityManager();
+
+        $orders = array('desc', 'asc');
+        if (!in_array($order, $orders))
+            $order = 'desc';
+
+        $dql = 'select c from KorpusDataBundle:Concert c order by c.concertDate ' . $order;
+        $query = $em->createQuery($dql);
+
+        return $query->getResult();
+    }
+
     public function findNextConcerts()
     {
         //entity manager

@@ -28,6 +28,7 @@ class CMSController extends Controller
         $form = $this->createFormBuilder($post)
                 ->add('title', 'text', array('label' => 'Titel'))
                 ->add('text', 'textarea', array('label' => 'Text'))
+//                ->add('publishDate', 'datetime', array('widget' => 'single_text', 'label' => 'VÖ-Datum'))
                 ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
                 ->add('save', 'submit', array('label' => 'Speichern'))
                 ->getForm();
@@ -48,9 +49,31 @@ class CMSController extends Controller
         return $this->render('KorpusConsoleBundle:CMS:news_create.html.twig', array('form' => $form->createView()));
     }
 
-    public function updateNewsAction()
+    public function updateNewsAction(Request $request, $slug)
     {
-        return $this->render('KorpusConsoleBundle:CMS:news_update.html.twig');
+        $post = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findOneBySlug($slug);
+
+        $form = $this->createFormBuilder($post)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('text', 'textarea', array('label' => 'Text'))
+//                ->add('publishDate', 'datetime', array('widget' => 'single_text', 'label' => 'VÖ-Datum'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $post->setEditDate(new \DateTime('now'));
+            $post->setSlug(NewsPostHelper::generateSlug($post->getTitle()));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_news'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:news_update.html.twig', array('form' => $form->createView()));
     }
 
     public function deleteNewsAction(Request $request, $slug)
@@ -78,7 +101,7 @@ class CMSController extends Controller
      */
     public function concertAction()
     {
-        $concerts = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findAll();
+        $concerts = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findAllOrdered();
         $concertsAvailable = !(!$concerts);
 
         return $this->render('KorpusConsoleBundle:CMS:concert.html.twig', array('concerts' => $concerts, 'concerts_available' => $concertsAvailable));

@@ -1,0 +1,73 @@
+
+{% block form_row %}
+{% spaceless %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block textarea_widget %}
+{% spaceless %}
+<textarea class="form-control" rows="20" {{ block('widget_attributes') }}>{{ value }}</textarea>
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{#
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    {% if type == 'datetime' %}
+    <div id="datetimepicker_{{ form.vars.full_name }}" class="input-append date">
+        <input class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} data-format="yyyy-MM-dd hh:mm:ss" type="{{type}}"></input>
+        <a class="btn btn-defualt add-on">
+            Datum wählen
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker_{{ form.vars.full_name }}').datetimepicker({
+                language: 'pt-BR'
+            });
+        });
+    </script>
+    {% else %}
+    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_widget_simple %}
+#}
+
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %} 
+    {% if type == 'submit' %}
+    <button class="btn btn-success" type="{{ type }}" {{ block('widget_attributes') }}>Speichern</button>
+    {% else %}
+    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
+{#
+{% block choice_widget_collapsed %}
+{% spaceless %}
+    <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if empty_value is not none %}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {% endif %}
+        {% if preferred_choices|length > 0 %}
+            {% set options = preferred_choices %}
+            {{ block('choice_widget_options') }}
+            {% if choices|length > 0 and separator is not none %}
+                <option disabled="disabled">{{ separator }}</option>
+            {% endif %}
+        {% endif %}
+        {% set options = choices %}
+        {{ block('choice_widget_options') }}
+    </select>
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+#}

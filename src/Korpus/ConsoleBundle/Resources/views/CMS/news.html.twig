@@ -19,7 +19,7 @@
         <th>VÖ-Datum</th><th>Titel</th><th>Text</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
     </tr>
     {% for post in posts %}
-    <tr {% if post.publishDate >= date('now')|date_modify('-1 day') %}class="success"{% else %}class="warning"{% endif %}>
+    <tr {% if post.publishDate >= date('now') %}class="success"{% else %}class="warning"{% endif %}>
             <td>{{post.publishDate|date('d.m.Y G:i')}}</td>
             <td>{{post.title}}</td>
             <td>{{post.text|length > 50 ? post.text|slice(0, 50) ~ '...' : post.text }}</td>
