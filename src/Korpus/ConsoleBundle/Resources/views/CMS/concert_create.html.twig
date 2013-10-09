@@ -1,0 +1,24 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% form_theme form 'KorpusConsoleBundle:Form:fields.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}concert{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li><a href="{{ path('korpus_console_cms_concert') }}">Konzert</a></li>
+    <li class="active">Neu</li>
+</ol>
+
+<div class="row">
+    <div class="col-lg-8">
+        {{form(form)}}
+    </div>
+    <div class="col-lg-4">
+    </div>
+</div>
+
+{% endblock %}

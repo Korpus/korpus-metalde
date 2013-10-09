@@ -7,3 +7,15 @@ Korpus\DataBundle\Entity\NewsPost:
         publishDate:
             - NotBlank: ~
             - Type: \DateTime
+            
+Korpus\DataBundle\Entity\Concert:
+    properties:
+        event:
+            - NotBlank: ~
+        venue:
+            - NotBlank: ~
+        city:
+            - NotBlank: ~
+        concertDate:
+            - NotBlank: ~
+            - Type: \DateTime

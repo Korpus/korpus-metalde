@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Korpus\DataBundle\Entity\NewsPost;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\HelperBundle\Component\NewsPostHelper;
+use Korpus\DataBundle\Entity\Concert;
+use Korpus\HelperBundle\Component\ConcertHelper;
 
 class CMSController extends Controller
 {
@@ -84,7 +86,7 @@ class CMSController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($post);
             $em->flush();
-            
+
             return $this->redirect($this->generateUrl('korpus_console_cms_news'));
         }
 
@@ -107,19 +109,78 @@ class CMSController extends Controller
         return $this->render('KorpusConsoleBundle:CMS:concert.html.twig', array('concerts' => $concerts, 'concerts_available' => $concertsAvailable));
     }
 
-    public function createConcertAction()
+    public function createConcertAction(Request $request)
     {
-        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig');
+        $concert = new Concert();
+
+        $form = $this->createFormBuilder($concert)
+                ->add('event', 'text', array('label' => 'Event'))
+                ->add('venue', 'text', array('label' => 'Location'))
+                ->add('city', 'text', array('label' => 'Stadt'))
+                ->add('concertDate', 'datetime', array('label' => 'Konzert-Datum'))
+                ->add('facebookLink', 'text', array('label' => 'Facebook Link (optional)', 'required' => false))
+                ->add('info', 'text', array('label' => 'Information (optional)', 'required' => false))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $concert->setCreationDate(new \DateTime('now'));
+            $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($concert);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig', array('form' => $form->createView()));
     }
 
-    public function updateConcertAction()
+    public function updateConcertAction(Request $request, $slug)
     {
-        return $this->render('KorpusConsoleBundle:CMS:concert_update.html.twig');
+        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+
+        $form = $this->createFormBuilder($concert)
+                ->add('event', 'text', array('label' => 'Event'))
+                ->add('venue', 'text', array('label' => 'Location'))
+                ->add('city', 'text', array('label' => 'Stadt'))
+                ->add('concertDate', 'datetime', array('label' => 'Konzert-Datum'))
+                ->add('facebookLink', 'text', array('label' => 'Facebook Link (optional)', 'required' => false))
+                ->add('info', 'text', array('label' => 'Information (optional)', 'required' => false))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $concert->setEditDate(new \DateTime('now'));
+            $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig', array('form' => $form->createView()));
     }
 
-    public function deleteConcertAction()
+    public function deleteConcertAction(Request $request, $slug)
     {
-        return $this->render('KorpusConsoleBundle:CMS:concert_delete.html.twig');
+        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+
+        if ($request->get('delete') == 1) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($concert);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:concert_delete.html.twig', array('concert' => $concert));
     }
 
     public function viewConcertAction()

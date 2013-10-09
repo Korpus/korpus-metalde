@@ -22,10 +22,6 @@ korpus_console_cms_news_update:
 korpus_console_cms_news_delete:
     pattern:  /cms/news/{slug}/delete
     defaults: { _controller: KorpusConsoleBundle:CMS:deleteNews }
-
-korpus_console_cms_news_view:
-    pattern:  /cms/news/{slug}/view
-    defaults: { _controller: KorpusConsoleBundle:CMS:viewNews }
     
 #cms concert
 korpus_console_cms_concert:
@@ -43,7 +39,3 @@ korpus_console_cms_concert_update:
 korpus_console_cms_concert_delete:
     pattern:  /cms/concert/{slug}/delete
     defaults: { _controller: KorpusConsoleBundle:CMS:deleteConcert }
-
-korpus_console_cms_concert_view:
-    pattern:  /cms/concert/{slug}/view
-    defaults: { _controller: KorpusConsoleBundle:CMS:viewConcert }
