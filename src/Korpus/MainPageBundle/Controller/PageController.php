@@ -3,7 +3,6 @@
 namespace Korpus\MainPageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Korpus\DataBundle\Entity\NewsPost;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageController extends Controller
