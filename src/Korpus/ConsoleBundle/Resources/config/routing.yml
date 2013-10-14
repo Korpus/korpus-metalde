@@ -39,3 +39,21 @@ korpus_console_cms_concert_update:
 korpus_console_cms_concert_delete:
     pattern:  /cms/concert/{slug}/delete
     defaults: { _controller: KorpusConsoleBundle:CMS:deleteConcert }
+    
+#cms member
+korpus_console_cms_member:
+    pattern:  /cms/member
+    defaults: { _controller: KorpusConsoleBundle:CMS:member }
+    
+korpus_console_cms_member_create:
+    pattern:  /cms/member/create
+    defaults: { _controller: KorpusConsoleBundle:CMS:createMember }
+    
+korpus_console_cms_member_update:
+    pattern:  /cms/member/{nickname}/edit
+    defaults: { _controller: KorpusConsoleBundle:CMS:updateMember }
+    
+korpus_console_cms_member_delete:
+    pattern:  /cms/member/{nickname}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteMember }
+    

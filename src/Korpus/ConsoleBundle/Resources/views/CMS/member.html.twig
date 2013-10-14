@@ -1,0 +1,35 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}member{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li class="active">Mitglieder</li>
+</ol>
+
+<a href="{{ path('korpus_console_cms_member_create') }}" class="pull-right btn btn-success"><span class="glyphicon glyphicon-plus"></span> Neu</a>
+
+<br><br><br>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nickname</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
+    </tr>
+    {% for member in members %}
+        <tr>
+            <td>{{member.nickname}}</td>
+            <td>{{member.creationDate|date('d.m.Y G:i')}}</td>
+            <td>{% if member.editDate != null %}{{member.editDate|date('d.m.Y G:i')}}{% else %}-{% endif %}</td>
+            <td>
+                <a href="{{ path('korpus_console_cms_member_update', {slug: member.nickname}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                <br>
+                <a href="{{ path('korpus_console_cms_member_delete', {slug: member.nickname}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

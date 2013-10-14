@@ -113,6 +113,20 @@ class BandMember
     private $photo;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creation_date", type="datetime")
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="edit_date", type="datetime", nullable=true)
+     */
+    private $editDate;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -406,6 +420,26 @@ class BandMember
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+    }
+
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(\DateTime $creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+
+    public function getEditDate()
+    {
+        return $this->editDate;
+    }
+
+    public function setEditDate(\DateTime $editDate)
+    {
+        $this->editDate = $editDate;
     }
 
 }
