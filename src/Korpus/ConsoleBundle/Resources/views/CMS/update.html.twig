@@ -18,7 +18,9 @@
         {{form(form)}}
     </div>
     <div class="col-lg-4">
-
+    {% if subpage == 'news' or subpage == 'concert' %}
+        {% include 'KorpusConsoleBundle:CMS:text_toolbox.html.twig' %}
+    {% endif %}
     </div>
 </div>
 
