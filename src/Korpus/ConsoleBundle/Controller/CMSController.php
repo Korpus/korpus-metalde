@@ -49,7 +49,14 @@ class CMSController extends Controller
             return $this->redirect($this->generateUrl('korpus_console_cms_news'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:news_create.html.twig', array('form' => $form->createView()));
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'news',
+            'pagename' => 'News',
+            'backpath' => $this->generateUrl('korpus_console_cms_news')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create.html.twig', $tmpl);
     }
 
     public function updateNewsAction(Request $request, $slug)
@@ -94,11 +101,6 @@ class CMSController extends Controller
         return $this->render('KorpusConsoleBundle:CMS:news_delete.html.twig', array('post' => $post));
     }
 
-    public function viewNewsAction()
-    {
-        return $this->render('KorpusConsoleBundle:CMS:news_view.html.twig');
-    }
-
     /**
      * Concert
      */
@@ -137,7 +139,14 @@ class CMSController extends Controller
             return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig', array('form' => $form->createView()));
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'concert',
+            'pagename' => 'Konzerte',
+            'backpath' => $this->generateUrl('korpus_console_cms_concert')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create.html.twig', $tmpl);
     }
 
     public function updateConcertAction(Request $request, $slug)
@@ -183,7 +192,7 @@ class CMSController extends Controller
 
         return $this->render('KorpusConsoleBundle:CMS:concert_delete.html.twig', array('concert' => $concert));
     }
-    
+
     /**
      * Member
      */
@@ -227,7 +236,14 @@ class CMSController extends Controller
             return $this->redirect($this->generateUrl('korpus_console_cms_member'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig', array('form' => $form->createView()));
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'member',
+            'pagename' => 'Mitglieder',
+            'backpath' => $this->generateUrl('korpus_console_cms_member')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create.html.twig', $tmpl);
     }
 
     public function updateMemberAction(Request $request, $slug)
