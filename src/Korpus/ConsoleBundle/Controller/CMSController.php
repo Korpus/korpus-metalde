@@ -83,7 +83,14 @@ class CMSController extends Controller
             return $this->redirect($this->generateUrl('korpus_console_cms_news'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:news_update.html.twig', array('form' => $form->createView()));
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'news',
+            'pagename' => 'News',
+            'backpath' => $this->generateUrl('korpus_console_cms_news')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
     }
 
     public function deleteNewsAction(Request $request, $slug)
@@ -175,7 +182,14 @@ class CMSController extends Controller
             return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig', array('form' => $form->createView()));
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'concert',
+            'pagename' => 'Konzerte',
+            'backpath' => $this->generateUrl('korpus_console_cms_concert')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
     }
 
     public function deleteConcertAction(Request $request, $slug)
@@ -272,7 +286,14 @@ class CMSController extends Controller
             return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:concert_create.html.twig', array('form' => $form->createView()));
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'member',
+            'pagename' => 'Mitglieder',
+            'backpath' => $this->generateUrl('korpus_console_cms_member')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
     }
 
     public function deleteMemberAction(Request $request, $slug)
