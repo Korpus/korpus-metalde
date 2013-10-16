@@ -18,7 +18,7 @@ security:
             pattern:    ^/console/login$
             anonymous:  ~
         main:
-            pattern:    ^/console
+            pattern:    ^/console/
             form_login:
                 check_path: /console/login_check
                 login_path: /console/login
