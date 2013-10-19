@@ -10,4 +10,8 @@ $(document).ready(function() {
         window.open($(this).attr('href'), 'sharer', 'width=626,height=436');
     });
 
+    if ($('#current-page').html() === 'news') {
+        $('.news-post img').addClass('img-responsive').addClass('img-thumbnail');
+    }
+
 });
