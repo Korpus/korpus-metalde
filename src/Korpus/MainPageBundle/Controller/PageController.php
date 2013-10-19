@@ -97,25 +97,45 @@ class PageController extends Controller
             return $this->render('KorpusMainPageBundle:Page:member.html.twig');
         }
     }
-    
+
     /**
      * Live
      */
-    public function liveAction() {
+    public function liveAction()
+    {
         $concerts = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findNextConcerts();
         $concertsAvailable = ($concerts != null);
-        
+
         return $this->render('KorpusMainPageBundle:Page:live.html.twig', array('concerts' => $concerts, 'concerts_available' => $concertsAvailable));
     }
-    
-    public function concertAction($slug) {
+
+    public function concertAction($slug)
+    {
         $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
-        
-        if(!$concert) {
+
+        if (!$concert) {
             throw new NotFoundHttpException("This Concert does not exist!");
         } else {
             return $this->render('KorpusMainPageBundle:Page:concert.html.twig', array('concert' => $concert));
         }
+    }
+    
+    /**
+     * Kontakt
+     */
+    public function contactAction()
+    {
+        return $this->redirect($this->generateUrl('korpus_main_page_kontakt_booking'));
+    }
+
+    public function bookingAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:booking.html.twig');
+    }
+    
+    public function linksAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:links.html.twig');
     }
 
 }

@@ -73,6 +73,10 @@ korpus_main_page_kontakt:
     pattern:  /contact
     defaults: { _controller: KorpusMainPageBundle:Page:contact }
     
-korpus_main_page_photos:
+korpus_main_page_kontakt_booking:
+    pattern:  /contact/booking
+    defaults: { _controller: KorpusMainPageBundle:Page:booking }
+    
+korpus_main_page_kontakt_links:
     pattern:  /contact/links
     defaults: { _controller: KorpusMainPageBundle:Page:links }
