@@ -64,6 +64,13 @@ class File
     private $type;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="folder", type="string", length=255)
+     */
+    private $folder;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -170,6 +177,16 @@ class File
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public function getFolder()
+    {
+        return $this->folder;
+    }
+
+    public function setFolder($folder)
+    {
+        $this->folder = $folder;
     }
 
 }

@@ -12,4 +12,42 @@ use Doctrine\ORM\EntityRepository;
  */
 class FileRepository extends EntityRepository
 {
+
+    public function findAllImages()
+    {
+        $em = $this->getEntityManager();
+        
+        $dql = '
+            select f from KorpusDataBundle:File f where f.type in (
+                select t from KorpusDataBundle:FileType t where t.group = (
+                    select g from KorpusDataBundle:FileTypeGroup g where g.title = ?1
+                )
+            )';
+        $query = $em->createQuery($dql);
+        $query->setParameter(1, 'image');
+        
+        $images = $query->getResult();
+        
+        return $images;
+    }
+
+    public function findAllImagesInFolder($folder)
+    {
+        $em = $this->getEntityManager();
+        
+        $dql = '
+            select f from KorpusDataBundle:File f where f.type in (
+                select t from KorpusDataBundle:FileType t where t.group = (
+                    select g from KorpusDataBundle:FileTypeGroup g where g.title = ?1
+                )
+            ) and f.folder = ?2';
+        $query = $em->createQuery($dql);
+        $query->setParameter(1, 'image');
+        $query->setParameter(1, $folder);
+        
+        $images = $query->getResult();
+        
+        return $images;
+    }
+
 }

@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Korpus\HelperBundle\KorpusHelperBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Korpus\FileServerBundle\KorpusFileServerBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -44,6 +44,12 @@ class FileType
     private $isActive;
 
     /**
+     * @ORM\ManyToOne(targetEntity="FileTypeGroup")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * */
+    private $group;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -107,6 +113,16 @@ class FileType
     public function setExtension($extension)
     {
         $this->extension = $extension;
+    }
+
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    public function setGroup($group)
+    {
+        $this->group = $group;
     }
 
 }

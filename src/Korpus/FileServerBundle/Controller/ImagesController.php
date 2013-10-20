@@ -3,6 +3,7 @@
 namespace Korpus\FileServerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class ImagesController extends Controller
 {
@@ -15,17 +16,23 @@ class ImagesController extends Controller
     public function collectionAction($folder)
     {
         $images = null;
-        
+
         if ($folder == null) {
             $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImages();
         } else {
             $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImagesInFolder($folder);
         }
-        
-        
+
+        $serializer = $this->get('jms_serializer');
+        $data = $serializer->serialize($images, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
-    public function objectAction($title, $extension)
+    public function objectAction($folder, $title, $extension)
     {
         
     }
