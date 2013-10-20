@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "knplabs/knp-markdown-bundle": "1.2.*@dev"
+        "knplabs/knp-markdown-bundle": "1.2.*@dev",
+        "jms/serializer-bundle": "0.12"
     },
     "scripts": {
         "post-install-cmd": [

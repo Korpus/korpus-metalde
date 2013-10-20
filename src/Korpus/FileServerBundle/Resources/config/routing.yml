@@ -9,8 +9,8 @@ korpus_file_server_images:
 
 korpus_file_server_images_collection:
     pattern:  /images/{folder}
-    defaults: { _controller: KorpusFileServerBundle:Images:collection }
+    defaults: { _controller: KorpusFileServerBundle:Images:collection, folder: null }
     
 korpus_file_server_images_object:
-    pattern:  /images/{folder}/{title}.{extension}
+    pattern:  /images/{title}.{extension}
     defaults: { _controller: KorpusFileServerBundle:Images:object }

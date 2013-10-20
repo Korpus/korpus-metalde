@@ -14,10 +14,18 @@ class ImagesController extends Controller
 
     public function collectionAction($folder)
     {
+        $images = null;
+        
+        if ($folder == null) {
+            $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImages();
+        } else {
+            $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImagesInFolder($folder);
+        }
+        
         
     }
 
-    public function objectAction($folder, $title, $extension)
+    public function objectAction($title, $extension)
     {
         
     }
