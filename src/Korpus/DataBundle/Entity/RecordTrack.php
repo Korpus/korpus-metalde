@@ -30,9 +30,9 @@ class RecordTrack
     private $title;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="number", type="string", length=255)
+     * @ORM\Column(name="number", type="integer")
      */
     private $number;
 

@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class RecordRepository extends EntityRepository
 {
+
+    public function findAllWithTracks()
+    {
+        //entity manager
+        $em = $this->getEntityManager();
+
+        $records = $this->findAll();
+        $out = array();
+
+        foreach ($records as $record) {
+            $out[] = array(
+                $record,
+                $record->getTracks()
+            );
+        }
+                
+        return $out;
+    }
+
 }

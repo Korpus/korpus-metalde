@@ -59,6 +59,12 @@ class Record
      * */
     private $tracks;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="cover_id", referencedColumnName="id")
+     * */
+    private $cover;
+
     public function __construct()
     {
         $this->tracks = new \Doctrine\Common\Collections\ArrayCollection();
@@ -156,6 +162,16 @@ class Record
     {
         $this->tracks = $tracks;
         return $this;
+    }
+
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    public function setCover($cover)
+    {
+        $this->cover = $cover;
     }
 
 }

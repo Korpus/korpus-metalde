@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Korpus\DataBundle\KorpusDataBundle(),
             new Korpus\HelperBundle\KorpusHelperBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Korpus\FileServerBundle\KorpusFileServerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

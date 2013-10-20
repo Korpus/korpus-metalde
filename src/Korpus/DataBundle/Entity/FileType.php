@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FileType
 {
+
     /**
      * @var integer
      *
@@ -29,12 +30,18 @@ class FileType
     private $title;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="extension", type="string", length=255)
+     */
+    private $extension;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-
 
     /**
      * Get id
@@ -55,7 +62,7 @@ class FileType
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -78,7 +85,7 @@ class FileType
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-    
+
         return $this;
     }
 
@@ -91,4 +98,15 @@ class FileType
     {
         return $this->isActive;
     }
+
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+
 }

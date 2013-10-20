@@ -1,0 +1,16 @@
+korpus_file_server_homepage:
+    pattern:  /
+    defaults: { _controller: KorpusFileServerBundle:Page:index }
+    
+#images
+korpus_file_server_images:
+    pattern:  /images
+    defaults: { _controller: KorpusFileServerBundle:Images:index }
+
+korpus_file_server_images_collection:
+    pattern:  /images/{folder}
+    defaults: { _controller: KorpusFileServerBundle:Images:collection }
+    
+korpus_file_server_images_object:
+    pattern:  /images/{folder}/{title}.{extension}
+    defaults: { _controller: KorpusFileServerBundle:Images:object }

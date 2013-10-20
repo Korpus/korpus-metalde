@@ -148,7 +148,11 @@ class PageController extends Controller
 
     public function audioAction()
     {
-        return $this->render('KorpusMainPageBundle:Page:audio.html.twig');
+        $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();        
+        $tmpl = array();        
+        $tmpl['records'] = $records;
+        
+        return $this->render('KorpusMainPageBundle:Page:audio.html.twig', $tmpl);
     }
     
     public function videoAction()

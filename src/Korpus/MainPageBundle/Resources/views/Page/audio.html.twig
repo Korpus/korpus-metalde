@@ -9,5 +9,31 @@
 
 {% include 'KorpusMainPageBundle::small-nav-media.html.twig' %}
 
-<br><br>
+<br>
+
+<div class="row">
+    <div class="col-lg-12">
+        {% for record in records %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <br>
+                    <img src="http://placehold.it/300x300" class="img-responsive img-thumbnail">
+                </div>  
+                <div class="col-lg-6">
+                    <h2>{{record.title}}</h2>
+                    <h5>{{record.publishDate|date('Y')}}</h5>
+                    
+                    <ol>
+                    {% for track in record.tracks %}
+                        <li>{{track.title}}</li>
+                    {% endfor %}
+                    </ol>
+                    
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}
