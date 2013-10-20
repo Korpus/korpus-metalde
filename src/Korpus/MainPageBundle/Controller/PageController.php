@@ -119,7 +119,7 @@ class PageController extends Controller
             return $this->render('KorpusMainPageBundle:Page:concert.html.twig', array('concert' => $concert));
         }
     }
-    
+
     /**
      * Kontakt
      */
@@ -132,10 +132,38 @@ class PageController extends Controller
     {
         return $this->render('KorpusMainPageBundle:Page:booking.html.twig');
     }
-    
+
     public function linksAction()
     {
         return $this->render('KorpusMainPageBundle:Page:links.html.twig');
+    }
+
+    /**
+     * Media
+     */
+    public function mediaAction()
+    {
+        return $this->redirect($this->generateUrl('korpus_main_page_audio'));
+    }
+
+    public function audioAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:audio.html.twig');
+    }
+    
+    public function videoAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:video.html.twig');
+    }
+    
+    public function lyricsAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:lyrics.html.twig');
+    }
+    
+    public function photosAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:photos.html.twig');
     }
 
 }

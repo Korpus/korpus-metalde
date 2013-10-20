@@ -65,7 +65,7 @@ korpus_main_page_lyrics:
     defaults: { _controller: KorpusMainPageBundle:Page:lyrics }
     
 korpus_main_page_photos:
-    pattern:  /band/photos
+    pattern:  /media/photos
     defaults: { _controller: KorpusMainPageBundle:Page:photos }
     
 #kontakt
