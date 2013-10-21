@@ -1,0 +1,29 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}band{% endblock %}
+{% block currentsubpage %}member{% endblock %}
+
+{% block title %}Korpus &middot; Band &middot; {{member.nickname}}{% endblock %}
+
+{% block content %}
+
+{% include 'KorpusMainPageBundle::small-nav-band.html.twig' %}
+
+<div>
+    <div id="member">
+        <img src="http://placehold.it/800x400" class="img-responsive img-thumbnail">
+        <h2>{{member.nickname}}</h2>
+    </div>
+    <br>
+    <div class="centered">
+        <span>
+            <a href="{{ path('korpus_main_page_member', {name: 'Gastel'}) }}">Gastel</a> | 
+            <a href="{{ path('korpus_main_page_member', {name: 'SanZ'}) }}">SanZ</a> | 
+            <a href="{{ path('korpus_main_page_member', {name: 'Costen'}) }}">Costen</a> | 
+            <a href="{{ path('korpus_main_page_member', {name: 'Flo'}) }}">Flo</a> | 
+            <a href="{{ path('korpus_main_page_member', {name: 'Mag'}) }}">Mag</a>
+        </span>
+    </div>
+</div>
+
+{% endblock %}

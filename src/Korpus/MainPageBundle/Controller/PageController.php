@@ -92,9 +92,11 @@ class PageController extends Controller
     public function memberAction($name)
     {
         if ($name === null)
-            return $this->redirect($this->generateUrl('korpus_main_page_news', array('name' => 'Gastel'), true));
+            return $this->redirect($this->generateUrl('korpus_main_page_member', array('name' => 'Gastel'), true));
         else {
-            return $this->render('KorpusMainPageBundle:Page:member.html.twig');
+            $member = $this->getDoctrine()->getRepository('KorpusDataBundle:BandMember')->findOneByNickname($name);
+            
+            return $this->render('KorpusMainPageBundle:Page:member.html.twig', array('member' => $member));
         }
     }
 

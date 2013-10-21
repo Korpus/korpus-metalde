@@ -24,9 +24,9 @@
             <td>{{member.creationDate|date('d.m.Y G:i')}}</td>
             <td>{% if member.editDate != null %}{{member.editDate|date('d.m.Y G:i')}}{% else %}-{% endif %}</td>
             <td>
-                <a href="{{ path('korpus_console_cms_member_update', {slug: member.nickname}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                <a href="{{ path('korpus_console_cms_member_update', {nickname: member.nickname}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
                 <br>
-                <a href="{{ path('korpus_console_cms_member_delete', {slug: member.nickname}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+                <a href="{{ path('korpus_console_cms_member_delete', {nickname: member.nickname}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
             </td>
         </tr>
     {% endfor %}

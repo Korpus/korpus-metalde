@@ -16,18 +16,27 @@ class ImagesController extends Controller
     public function collectionAction($folder)
     {
         $images = null;
+        $output = array();
 
         if ($folder == null) {
             $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImages();
         } else {
             $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImagesInFolder($folder);
         }
-        
+
         //TODO
         //generate image path, then put into json
+        foreach ($images as $image) {
+            $output[] = $this->generateUrl('korpus_file_server_images_object', array(
+                'folder' => $image->getFolder(),
+                'slug' => $image->getSlug(),
+                'extension' => $image->getType()->getExtension()
+                    )
+            );
+        }
 
         $serializer = $this->get('jms_serializer');
-        $data = $serializer->serialize($images, 'json');
+        $data = $serializer->serialize($output, 'json');
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
@@ -35,7 +44,7 @@ class ImagesController extends Controller
         return $response;
     }
 
-    public function objectAction($folder, $title, $extension)
+    public function objectAction($folder, $slug, $extension)
     {
         
     }

@@ -42,5 +42,7 @@ $(document).ready(function() {
             alertify.error('Text und URL dürfen nicht leer sein!');
         }
     });
+    
+    $('button[type="submit"]').addClass('btn').addClass('btn-success');
 
 });

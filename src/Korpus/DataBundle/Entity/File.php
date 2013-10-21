@@ -32,6 +32,13 @@ class File
     /**
      * @var string
      *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="hash", type="string", length=255)
      */
     private $hash;
@@ -187,6 +194,16 @@ class File
     public function setFolder($folder)
     {
         $this->folder = $folder;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
 }
