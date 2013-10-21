@@ -56,4 +56,8 @@ korpus_console_cms_member_update:
 korpus_console_cms_member_delete:
     pattern:  /cms/member/{nickname}/delete
     defaults: { _controller: KorpusConsoleBundle:CMS:deleteMember }
-    
+
+#file upload
+korpus_console_file_upload:
+    pattern:  /upload/file
+    defaults: { _controller: KorpusConsoleBundle:Upload:file }
