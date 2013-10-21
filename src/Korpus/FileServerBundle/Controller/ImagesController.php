@@ -22,6 +22,9 @@ class ImagesController extends Controller
         } else {
             $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImagesInFolder($folder);
         }
+        
+        //TODO
+        //generate image path, then put into json
 
         $serializer = $this->get('jms_serializer');
         $data = $serializer->serialize($images, 'json');
