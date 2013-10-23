@@ -41,6 +41,8 @@ class UploadController extends Controller
 
                     if ($request->get('folder') !== null) {
                         $file->setFolder($request->get('folder'));
+                    } else {
+                        $file->setFolder('root');
                     }
 
                     $file->setType($fileType);
