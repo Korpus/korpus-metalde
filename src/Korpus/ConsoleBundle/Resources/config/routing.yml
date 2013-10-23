@@ -61,3 +61,4 @@ korpus_console_cms_member_delete:
 korpus_console_file_upload:
     pattern:  /upload/file
     defaults: { _controller: KorpusConsoleBundle:Upload:file }
+    methods: [POST]

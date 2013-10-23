@@ -46,7 +46,7 @@ class File
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=255)
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
 
@@ -60,7 +60,7 @@ class File
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="edit_date", type="datetime")
+     * @ORM\Column(name="edit_date", type="datetime", nullable=true)
      */
     private $editDate;
 
@@ -73,7 +73,7 @@ class File
     /**
      * @var string
      *
-     * @ORM\Column(name="folder", type="string", length=255)
+     * @ORM\Column(name="folder", type="string", length=255, nullable=true)
      */
     private $folder;
 
@@ -228,31 +228,6 @@ class File
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
         return 'uploads';
-    }
-
-    public function upload()
-    {
-        // the file property can be empty if the field is not required
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        // use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-        // move takes the target directory and then the
-        // target filename to move to
-        $this->getFile()->move(
-                $this->getUploadRootDir(), $this->getFile()->getClientOriginalName()
-        );
-
-        // set the path property to the filename where you've saved the file
-        $this->path = $this->getFile()->getClientOriginalName();
-        
-        $this->hash = md5($this->getFile()->getClientOriginalName());
-        $this->slug = "";
-
-        // clean up the file property as you won't need it anymore
-        $this->file = null;
     }
 
 }

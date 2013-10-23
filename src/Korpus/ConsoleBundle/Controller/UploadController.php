@@ -5,6 +5,8 @@ namespace Korpus\ConsoleBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\DataBundle\Entity\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
 
 class UploadController extends Controller
 {
@@ -12,25 +14,37 @@ class UploadController extends Controller
     public function fileAction(Request $request)
     {
         $file = new File();
-        $form = $this->createFormBuilder($file)
-                ->add('name')
-                ->add('file')
-                ->getForm();
 
-        $form->handleRequest($request);
+        //$uploadedFile = new UploadedFile();
+        $uploadedFile = $request->files->get('file');
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        $supportedMimeTypes = array(
+            'image/png',
+            'image/jpg'
+        );
+
+        //if (in_array($uploadedFile->getMimeType(), $supportedMimeTypes)) {
+            $file->setCreationDate(new \DateTime('now'));
+            $file->setHash(md5($uploadedFile->getClientOriginalExtension()));
+            $file->setSlug('dwdw');
+            $file->setPath('');
+            $file->setTitle('wdw');
             
-            $file->upload();
-
+            $fileType = $this->getDoctrine()->getRepository('KorpusDataBundle:FileType')->findOneByExtension(str_replace('.', '', $uploadedFile->getClientOriginalExtension()));
+            
+            $file->setType($fileType);
+            
+            $em = $this->getDoctrine()->getManager();
             $em->persist($file);
             $em->flush();
+            
+            $uploadedFile->move($file->getAbsolutePath(), $file->getHash());
+        //}
 
-            return $this->redirect($this->generateUrl('korpus_console_homepage'));
-        }
+        $response = new Response(json_encode(array('status' => '#')));
+        $response->headers->set('Content-Type', 'application/json');
 
-        return array('form' => $form->createView());
+        return $response;
     }
 
 }
