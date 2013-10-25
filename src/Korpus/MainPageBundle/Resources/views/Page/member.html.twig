@@ -11,7 +11,10 @@
 
 <div>
     <div id="member">
-        <img src="http://placehold.it/800x400" class="img-responsive img-thumbnail">
+        <div class="centered">
+            <img alt="{{member.photo.title}}" title="{{member.photo.title}}" src="{{ path('korpus_file_server_images_object', {folder: member.photo.folder, slug: member.photo.slug, extension: member.photo.type.extension}) }}" class="img-responsive img-thumbnail">
+        </div>
+        
         <h2>{{member.nickname}}</h2>
 
         <table class="table table-responsive table-striped">

@@ -28,12 +28,13 @@ class ImagesController extends Controller
         //TODO
         //generate image path, then put into json
         foreach ($images as $image) {
-            $output[] = $this->generateUrl('korpus_file_server_images_object', array(
+            $o['path'] = $this->generateUrl('korpus_file_server_images_object', array(
                 'folder' => $image->getFolder(),
                 'slug' => $image->getSlug(),
                 'extension' => $image->getType()->getExtension()
-                    )
-            );
+            ));
+            $o['title'] = $image->getTitle();
+            $output[] = $o;
         }
 
         $serializer = $this->get('jms_serializer');
@@ -48,14 +49,14 @@ class ImagesController extends Controller
     public function objectAction($folder, $slug, $extension)
     {
         $image = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneBySlug($slug);
-        
-        if(!$image) {
+
+        if (!$image) {
             throw new FileNotFoundException($this->generateUrl('korpus_file_server_images_object', array('folder' => $folder, 'slug' => $slug, 'extension' => $extension)));
         } else {
-            if($image->getFolder() == $folder) {
-                if($image->getType()->getExtension() == $extension) {
+            if ($image->getFolder() == $folder) {
+                if ($image->getType()->getExtension() == $extension) {
                     $file = file_get_contents('../files/uploads/' . $image->getHash());
-                    
+
                     return new Response($file, 200, array(
                         'Content-Type' => 'image/' . $image->getType()->getExtension()
                     ));

@@ -16,6 +16,24 @@
 <div class="row">
     <div class="col-lg-8">
         {{form(form)}}
+        
+        <hr>
+        <!-- img upload form -->
+        <h3>Flyer hinzufügen</h3>
+        <form action="{{ path('korpus_console_file_upload', {folder: 'concerts'}) }}" method="post" target="" id="form-img-ipload">
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="file" name="file" id="input-flyer" />
+                </div>
+                <div class="col-lg-6">
+                    <button type="submit" class="pull-right">Hochladen</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <iframe name="upload-frame" class=""></iframe>
+        <div class="" id="image-links"></div>
+        <!--------------------->
     </div>
     <div class="col-lg-4">
         {% if subpage == 'news' or subpage == 'concert' %}
