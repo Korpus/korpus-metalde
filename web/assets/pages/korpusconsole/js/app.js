@@ -10,13 +10,45 @@ var addlink = function(text, url, title) {
         link = '[' + text + '](' + url + ' "' + title + '")';
 
     tbox.value(currentContent + link);
-}
+};
+
+var refreshImages = function(folder) {
+    var url = 'http://localhost/github/korpus-metalde/web/app_dev.php/filesystem/images/' + folder;
+    $.get(url).success(function(data) {
+        var images = data;
+
+        if (images === null) {
+            $('#select-images-one').html('<strong>Keine Bilder verfügbar</strong>');
+        } else {
+            var text = '<div class="form-group"><select id="images-select" class="form-control">';
+
+            $.each(images, function(key, image) {
+                console.log(image);
+                text += '<option data-img-label="' + image.title + '" data-img-src="' + image.path + '" value="' + image.path + '">';
+            });
+
+            text += '</select></div>';
+
+            $('#select-images-one').html(text);
+            $('#images-select').livequery(function() {
+                $(this).imagepicker({
+                    show_label: true
+                });
+            });
+        }
+    });
+
+};
 
 $(document).ready(function() {
 
     $('.nav-link').removeClass('active');
     $('.nl-' + $('#current-page').html()).addClass('active');
     $('#nls-' + $('#current-subpage').html()).addClass('active');
+
+    if ($('#current-subpage').html() === 'concert') {
+        refreshImages('concert');
+    }
 
     //news toolbox
     $('#btn-add-link').popover({
@@ -42,7 +74,25 @@ $(document).ready(function() {
             alertify.error('Text und URL dürfen nicht leer sein!');
         }
     });
-    
+
     $('button[type="submit"]').addClass('btn').addClass('btn-success');
+
+    $('#form-img-upload').submit(function() {
+        var self = $(this);
+
+        $('iframe[name="upload-frame"]').load(function() {
+            var response = $.parseJSON($(this).contents().text());
+
+            if (response.status === 'error') {
+                alertify.error(response.message);
+            }
+
+            self.each(function() {
+                this.reset();
+            });
+
+            refreshImages('concert');
+        });
+    });
 
 });

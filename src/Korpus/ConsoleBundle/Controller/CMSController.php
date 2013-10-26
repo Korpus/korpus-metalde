@@ -122,6 +122,8 @@ class CMSController extends Controller
     public function createConcertAction(Request $request)
     {
         $concert = new Concert();
+        
+        $concert->setConcertDate(new \DateTime('now'));
 
         $form = $this->createFormBuilder($concert)
                 ->add('event', 'text', array('label' => 'Event'))

@@ -15,13 +15,29 @@ class UploadController extends Controller
     public function fileAction(Request $request)
     {
         $file = new File();
+        $returnData = array();
 
         //$uploadedFile = new UploadedFile();
         $uploadedFile = $request->files->get('file');
+        $title = $request->get('title');
+        $folder = $request->get('folder');
+
+        if ($title === null) {
+            $returnData['status'] = 'error';
+            $returnData['message'] = 'Title Attribute must be provided!';
+
+            $response = new Response(json_encode($returnData));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
+
+        if ($folder === null) {
+            $folder = 'root';
+        }
 
         $supportedFileTypes = $this->getDoctrine()->getRepository('KorpusDataBundle:FileType')->findAllActiveTypes();
 
-        $returnData = array();
         $fileType = $this->getDoctrine()->getRepository('KorpusDataBundle:FileType')->findOneByExtension(str_replace('.', '', $uploadedFile->getClientOriginalExtension()));
 
         try {
@@ -34,16 +50,8 @@ class UploadController extends Controller
                     $file->setSlug(FileHelper::generateSlug(str_replace($uploadedFile->getClientOriginalExtension(), '', $uploadedFile->getClientOriginalName())));
                     $file->setPath('');
 
-                    if ($request->get('title') !== null)
-                        $file->setTitle($request->get('title'));
-                    else
-                        $file->setTitle('');
-
-                    if ($request->get('folder') !== null) {
-                        $file->setFolder($request->get('folder'));
-                    } else {
-                        $file->setFolder('root');
-                    }
+                    $file->setFolder($folder);
+                    $file->setTitle($title);
 
                     $file->setType($fileType);
 

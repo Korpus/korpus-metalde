@@ -5,7 +5,7 @@ korpus_file_server_homepage:
 #images
 korpus_file_server_images_collection:
     pattern:  /images/{folder}
-    defaults: { _controller: KorpusFileServerBundle:Images:collection, folder: null }
+    defaults: { _controller: KorpusFileServerBundle:Images:collection}
     
 korpus_file_server_images_object:
     pattern:  /images/{folder}/{slug}.{extension}
