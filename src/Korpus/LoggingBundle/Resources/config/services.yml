@@ -1,0 +1,7 @@
+parameters:
+#    korpus_logging.example.class: Korpus\LoggingBundle\Example
+
+services:
+#    korpus_logging.example:
+#        class: %korpus_logging.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
