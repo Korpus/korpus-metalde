@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Korpus\FileServerBundle\KorpusFileServerBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Korpus\LoggingBundle\KorpusLoggingBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
+use Korpus\HelperBundle\Component\Zebra_Image;
 
 class ImagesController extends Controller
 {
@@ -46,6 +47,39 @@ class ImagesController extends Controller
 
         return $response;
     }
+    
+    public function collectionThumbnailsAction($folder)
+    {
+        $images = null;
+        $output = array();
+
+        if ($folder == 'root') {
+            $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImages();
+        } else {
+            $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImagesInFolder($folder);
+        }
+
+        //TODO
+        //generate image path, then put into json
+        foreach ($images as $image) {
+            $o['path'] = $this->generateUrl('korpus_file_server_images_object', array(
+                'folder' => $image->getFolder(),
+                'slug' => $image->getSlug(),
+                'extension' => $image->getType()->getExtension(),
+                'thumbnail' => 'true'
+            ));
+            $o['title'] = $image->getTitle();
+            $output[] = $o;
+        }
+
+        $serializer = $this->get('jms_serializer');
+        $data = $serializer->serialize($output, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 
     public function objectAction($folder, $slug, $extension, Request $request)
     {
@@ -64,31 +98,71 @@ class ImagesController extends Controller
                     $file = file_get_contents($filename);
 
                     if ($thumbnail == true) {
-                        // Set a maximum height and width
-                        $width = 100;
-                        $height = 100;
+                        $imageinfo = getimagesize($filename);
+                        $maxwidth = 150;
+                        $maxheight = 150;
+                        
+                        if($request->get('maxwidth') != null) $maxwidth = $request->get('maxwidth');
+                        if($request->get('maxheight') != null) $maxheight = $request->get('maxheight');
+                        
+                        $origratio = $imageinfo[0] / $imageinfo[1];
 
-                        // Get new dimensions
-                        list($width_orig, $height_orig) = getimagesize($filename);
+                        $width = $imageinfo[0];
+                        $height = $imageinfo[1];
 
-                        $ratio_orig = $width_orig / $height_orig;
-
-                        if ($width / $height > $ratio_orig) {
-                            $width = $height * $ratio_orig;
-                        } else {
-                            $height = $width / $ratio_orig;
+                        if ($height > $maxheight) {
+                            $faktor = $maxheight / $imageinfo[1];
+                            if ($faktor < 1) {
+                                $width = round($width * $faktor);
+                                $height = round($height * $faktor);
+                            }
                         }
 
-                        // Resample
-                        $image_p = imagecreatetruecolor($width, $height);
-                        $imageh = imagecreatefromjpeg($filename);
-                        imagecopyresampled($image_p, $imageh, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+                        if ($width > $maxwidth) {
+                            $faktor = $maxwidth / $width;
+                            if ($faktor < 1) {
+                                $width = round($width * $faktor);
+                                $height = round($height * $faktor);
+                            }
+                        }
 
-                        // Output
-                        $file = imagejpeg($image_p, null, 100);
-                        $file = $image_p;
-                        
-                        //var_dump($image_p);
+                        $image_p = imagecreatetruecolor($width, $height);
+
+                        switch ($imageinfo[2]):
+                            case IMAGETYPE_GIF:
+                                $img = imagecreatefromgif($filename);
+                                break;
+                            case IMAGETYPE_JPEG:
+                            case IMAGETYPE_JPEG2000:
+                                $img = imagecreatefromjpeg($filename);
+                                break;
+                            case IMAGETYPE_PNG:
+                                $img = imagecreatefrompng($filename);
+                                break;
+                            default:
+                                throw new Exception("invalid image");
+                                break;
+                        endswitch;
+
+                        imagecopyresampled($image_p, $img, 0, 0, 0, 0, $width, $height, $imageinfo[0], $imageinfo[1]);
+
+                        header("Content-type: " . image_type_to_mime_type($imageinfo[2]));
+
+                        switch ($imageinfo[2]):
+                            case IMAGETYPE_GIF:
+                                imagegif($image_p);
+                                break;
+                            case IMAGETYPE_JPEG:
+                            case IMAGETYPE_JPEG2000:
+                                imagejpeg($image_p);
+                                break;
+                            case IMAGETYPE_PNG:
+                                imagepng($image_p);
+                                break;
+                            default:
+                                throw new Exception("invalid image");
+                                break;
+                        endswitch;
                     }
 
                     return new Response($file, 200, array(

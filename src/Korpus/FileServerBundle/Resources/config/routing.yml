@@ -7,6 +7,10 @@ korpus_file_server_images_collection:
     pattern:  /images/{folder}
     defaults: { _controller: KorpusFileServerBundle:Images:collection}
     
+korpus_file_server_images_collection_thumbs:
+    pattern:  /images/thumbs/{folder}
+    defaults: { _controller: KorpusFileServerBundle:Images:collectionThumbnails}
+    
 korpus_file_server_images_object:
     pattern:  /images/{folder}/{slug}.{extension}
     defaults: { _controller: KorpusFileServerBundle:Images:object }

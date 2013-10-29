@@ -13,7 +13,7 @@ var addlink = function(text, url, title) {
 };
 
 var refreshImages = function(folder) {
-    var url = 'http://localhost/github/korpus-metalde/web/app_dev.php/filesystem/images/' + folder;
+    var url = 'http://localhost/github/korpus-metalde/web/app_dev.php/filesystem/images/thumbs/' + folder;
     $.get(url).success(function(data) {
         var images = data;
 

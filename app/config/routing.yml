@@ -1,6 +1,8 @@
 korpus_file_server:
     resource: "@KorpusFileServerBundle/Resources/config/routing.yml"
     prefix:   /filesystem
+    options:
+        expose: true
 
 #korpus_data:
     #resource: "@KorpusDataBundle/Resources/config/routing.yml"
@@ -13,3 +15,6 @@ korpus_main_page:
 korpus_console:
     resource: "@KorpusConsoleBundle/Resources/config/routing.yml"
     prefix:   /console
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
