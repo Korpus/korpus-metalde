@@ -36,6 +36,7 @@ class ImagesController extends Controller
                 'extension' => $image->getType()->getExtension()
             ));
             $o['title'] = $image->getTitle();
+            $o['hash'] = $image->getHash();
             $output[] = $o;
         }
 
@@ -69,6 +70,7 @@ class ImagesController extends Controller
                 'thumbnail' => 'true'
             ));
             $o['title'] = $image->getTitle();
+            $o['hash'] = $image->getHash();
             $output[] = $o;
         }
 

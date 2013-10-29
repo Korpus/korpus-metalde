@@ -13,18 +13,21 @@ var addlink = function(text, url, title) {
 };
 
 var refreshImages = function(folder) {
-    var url = 'http://localhost/github/korpus-metalde/web/app_dev.php/filesystem/images/thumbs/' + folder;
+    //var url = 'http://localhost/github/korpus-metalde/web/app_dev.php/filesystem/images/thumbs/' + folder;
+    var url = Routing.generate('korpus_file_server_images_collection_thumbs', {
+        folder: folder
+    }, true);
+
     $.get(url).success(function(data) {
         var images = data;
 
         if (images === null) {
             $('#select-images-one').html('<strong>Keine Bilder verfügbar</strong>');
         } else {
-            var text = '<div class="form-group"><select id="images-select" class="form-control">';
+            var text = '<div class="form-group div-image-select"><select id="images-select" class="form-control" name="sel_image">';
 
             $.each(images, function(key, image) {
-                console.log(image);
-                text += '<option data-img-label="' + image.title + '" data-img-src="' + image.path + '" value="' + image.path + '">';
+                text += '<option data-img-label="' + image.title + '" data-img-src="' + image.path + '" value="' + image.hash + '">';
             });
 
             text += '</select></div>';
