@@ -15,7 +15,13 @@
     {% for concert in concerts %}
         <div class="media">
             <a class="pull-left" href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">
-                <img class="media-object" src="http://placehold.it/64x64" alt="...">
+                {% if concert.flyer == null %}
+                    {% set flyerThumb = 'http://placehold.it/64x64' %}
+                {% else %}
+                    {% set flyerThumb = path('korpus_file_server_images_object', {folder: concert.flyer.folder, slug: concert.flyer.slug, extension: concert.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
+                {% endif %}
+                
+                <img class="media-object" src="{{flyerThumb}}" alt="...">
             </a>
             <div class="media-body">
                 {% if concert.facebookLink != null %}

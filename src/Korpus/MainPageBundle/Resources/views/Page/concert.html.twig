@@ -6,8 +6,14 @@
 
 {% block content %}
 
+{% if concert.flyer == null %}
+    {% set flyer = '' %}
+{% else %}
+    {% set flyer = path('korpus_file_server_images_object', {folder: concert.flyer.folder, slug: concert.flyer.slug, extension: concert.flyer.type.extension}) %}
+{% endif %}
+
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-6">
         <h2>{{concert.event}}</h2>
         <strong>Location:</strong> {{concert.venue}}
         <br>
@@ -19,8 +25,8 @@
         <br><br><a target="_blank" href="{{concert.facebookLink}}" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
         {% endif %}
     </div>
-    <div class="col-lg-4">
-        <img class="img-thumbnail" src="http://placehold.it/600x800" />
+    <div class="col-lg-6">
+        <img class="img-thumbnail" src="{{flyer}}" />
     </div>
 </div>
 
