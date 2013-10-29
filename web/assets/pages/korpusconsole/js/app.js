@@ -13,7 +13,6 @@ var addlink = function(text, url, title) {
 };
 
 var refreshImages = function(folder) {
-    //var url = 'http://localhost/github/korpus-metalde/web/app_dev.php/filesystem/images/thumbs/' + folder;
     var url = Routing.generate('korpus_file_server_images_collection_thumbs', {
         folder: folder
     }, true);
@@ -25,6 +24,8 @@ var refreshImages = function(folder) {
             $('#select-images-one').html('<strong>Keine Bilder verfügbar</strong>');
         } else {
             var text = '<div class="form-group div-image-select"><select id="images-select" class="form-control" name="sel_image">';
+            
+            text += '<option value="" selected>';
 
             $.each(images, function(key, image) {
                 text += '<option data-img-label="' + image.title + '" data-img-src="' + image.path + '" value="' + image.hash + '">';
@@ -34,8 +35,12 @@ var refreshImages = function(folder) {
 
             $('#select-images-one').html(text);
             $('#images-select').livequery(function() {
+                var self = $(this);
                 $(this).imagepicker({
-                    show_label: true
+                    show_label: true,
+                    selected: function() {
+                        $('#img-hash').val(self.val());
+                    }
                 });
             });
         }

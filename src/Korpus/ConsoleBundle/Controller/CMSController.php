@@ -140,6 +140,13 @@ class CMSController extends Controller
         if ($form->isValid()) {
             $concert->setCreationDate(new \DateTime('now'));
             $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
+            
+            if($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $flyer = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if(!(!$flyer)) {
+                    $concert->setFlyer($flyer);
+                }
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($concert);
@@ -155,7 +162,7 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_concert')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:create.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:create_concert.html.twig', $tmpl);
     }
 
     public function updateConcertAction(Request $request, $slug)
@@ -177,7 +184,14 @@ class CMSController extends Controller
         if ($form->isValid()) {
             $concert->setEditDate(new \DateTime('now'));
             $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
-
+            
+            if($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $flyer = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if(!(!$flyer)) {
+                    $concert->setFlyer($flyer);
+                }
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
@@ -191,7 +205,7 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_concert')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:update_concert.html.twig', $tmpl);
     }
 
     public function deleteConcertAction(Request $request, $slug)
