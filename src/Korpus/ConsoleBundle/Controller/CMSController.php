@@ -455,41 +455,43 @@ class CMSController extends Controller
      */
     public function createFilesFileTypeAction(Request $request)
     {
-        $record = new Record();
+        $fileType = new FileType();
 
-        $form = $this->createFormBuilder($record)
+        $fileType->setIsActive(true);
+
+        $form = $this->createFormBuilder($fileType)
                 ->add('title', 'text', array('label' => 'Titel'))
-                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('extension', 'text', array('label' => 'Erweiterung'))
+                ->add('isActive', 'choice', array(
+                    'choices' => array(
+                        'true' => 'Ja',
+                        'false' => 'Nein'
+                    ),
+                    'label' => 'Aktiv?',
+                    'multiple' => false,
+                    'expanded' => true
+                ))
                 ->add('save', 'submit', array('label' => 'Speichern'))
                 ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $record->setCreationDate(new \DateTime('now'));
-
-            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
-                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
-                if (!(!$cover)) {
-                    $record->setCover($cover);
-                }
-            }
-
             $em = $this->getDoctrine()->getManager();
-            $em->persist($record);
+            $em->persist($fileType);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+            return $this->redirect($this->generateUrl('korpus_console_cms_files'));
         }
 
         $tmpl = array(
             'form' => $form->createView(),
-            'subpage' => 'record',
-            'pagename' => 'Records',
-            'backpath' => $this->generateUrl('korpus_console_cms_media')
+            'subpage' => 'filetype',
+            'pagename' => 'Dateityp',
+            'backpath' => $this->generateUrl('korpus_console_cms_files')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:create_record.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:create_filetype.html.twig', $tmpl);
     }
 
     public function updateFilesFileTypeAction(Request $request, $title)
@@ -546,7 +548,7 @@ class CMSController extends Controller
     }
 
     /**
-     * FileTypesGroup
+     * FileTypeGroups
      */
     public function createFilesFileTypeGroupAction(Request $request)
     {
