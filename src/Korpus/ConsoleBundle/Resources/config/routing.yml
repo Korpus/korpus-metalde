@@ -62,3 +62,21 @@ korpus_console_file_upload:
     pattern:  /upload/file
     defaults: { _controller: KorpusConsoleBundle:Upload:file }
     methods: [POST]
+    
+#cms media
+korpus_console_cms_media:
+    pattern:  /cms/media
+    defaults: { _controller: KorpusConsoleBundle:CMS:media }
+    
+#records    
+korpus_console_cms_media_record_create:
+    pattern:  /cms/media/record/create
+    defaults: { _controller: KorpusConsoleBundle:CMS:createMediaRecord }
+    
+korpus_console_cms_media_record_update:
+    pattern:  /cms/media/record/{title}/edit
+    defaults: { _controller: KorpusConsoleBundle:CMS:updateMediaRecord }
+    
+korpus_console_cms_media_record_delete:
+    pattern:  /cms/media/record/{title}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteMediaRecord }

@@ -9,6 +9,8 @@ use Korpus\HelperBundle\Component\NewsPostHelper;
 use Korpus\DataBundle\Entity\Concert;
 use Korpus\HelperBundle\Component\ConcertHelper;
 use Korpus\DataBundle\Entity\BandMember;
+use Korpus\DataBundle\Entity\Record;
+use Korpus\DataBundle\Entity\RecordTrack;
 
 class CMSController extends Controller
 {
@@ -122,7 +124,7 @@ class CMSController extends Controller
     public function createConcertAction(Request $request)
     {
         $concert = new Concert();
-        
+
         $concert->setConcertDate(new \DateTime('now'));
 
         $form = $this->createFormBuilder($concert)
@@ -140,10 +142,10 @@ class CMSController extends Controller
         if ($form->isValid()) {
             $concert->setCreationDate(new \DateTime('now'));
             $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
-            
-            if($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
                 $flyer = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
-                if(!(!$flyer)) {
+                if (!(!$flyer)) {
                     $concert->setFlyer($flyer);
                 }
             }
@@ -184,14 +186,14 @@ class CMSController extends Controller
         if ($form->isValid()) {
             $concert->setEditDate(new \DateTime('now'));
             $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
-            
-            if($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
                 $flyer = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
-                if(!(!$flyer)) {
+                if (!(!$flyer)) {
                     $concert->setFlyer($flyer);
                 }
             }
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
@@ -313,6 +315,109 @@ class CMSController extends Controller
     }
 
     public function deleteMemberAction(Request $request, $slug)
+    {
+        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+
+        if ($request->get('delete') == 1) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($concert);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:concert_delete.html.twig', array('concert' => $concert));
+    }
+
+    /**
+     * Media
+     */
+    public function mediaAction()
+    {
+        $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();
+
+        return $this->render('KorpusConsoleBundle:CMS:media.html.twig', array('records' => $records));
+    }
+
+    /**
+     * Record
+     */
+    public function createMediaRecordAction(Request $request)
+    {
+        $record = new Record();
+
+        $form = $this->createFormBuilder($record)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $record->setCreationDate(new \DateTime('now'));
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$cover)) {
+                    $record->setCover($cover);
+                }
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($record);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'record',
+            'pagename' => 'Records',
+            'backpath' => $this->generateUrl('korpus_console_cms_media')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create_record.html.twig', $tmpl);
+    }
+
+    public function updateMediaRecordAction(Request $request, $slug)
+    {
+        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+
+        $form = $this->createFormBuilder($concert)
+                ->add('event', 'text', array('label' => 'Event'))
+                ->add('venue', 'text', array('label' => 'Location'))
+                ->add('city', 'text', array('label' => 'Stadt'))
+                ->add('concertDate', 'datetime', array('label' => 'Konzert-Datum'))
+                ->add('facebookLink', 'text', array('label' => 'Facebook Link (optional)', 'required' => false))
+                ->add('info', 'text', array('label' => 'Information (optional)', 'required' => false))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $concert->setEditDate(new \DateTime('now'));
+            $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'member',
+            'pagename' => 'Mitglieder',
+            'backpath' => $this->generateUrl('korpus_console_cms_member')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
+    }
+
+    public function deleteMediaRecordAction(Request $request, $slug)
     {
         $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
 

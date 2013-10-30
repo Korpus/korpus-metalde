@@ -24,7 +24,7 @@ var refreshImages = function(folder) {
             $('#select-images-one').html('<strong>Keine Bilder verfügbar</strong>');
         } else {
             var text = '<div class="form-group div-image-select"><select id="images-select" class="form-control" name="sel_image">';
-            
+
             text += '<option value="" selected>';
 
             $.each(images, function(key, image) {
@@ -50,12 +50,16 @@ var refreshImages = function(folder) {
 
 $(document).ready(function() {
 
+    var currsub = $('#current-subpage').html();
+
     $('.nav-link').removeClass('active');
     $('.nl-' + $('#current-page').html()).addClass('active');
     $('#nls-' + $('#current-subpage').html()).addClass('active');
 
-    if ($('#current-subpage').html() === 'concert') {
+    if (currsub === 'concert') {
         refreshImages('concert');
+    } else if (currsub === 'record') {
+        refreshImages('records');
     }
 
     //news toolbox
@@ -99,7 +103,11 @@ $(document).ready(function() {
                 this.reset();
             });
 
-            refreshImages('concert');
+            if (currsub === 'concert') {
+                refreshImages('concert');
+            } else if (currsub === 'record') {
+                refreshImages('records');
+            }
         });
     });
 

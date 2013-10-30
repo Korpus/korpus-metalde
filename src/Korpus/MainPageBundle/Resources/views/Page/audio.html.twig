@@ -17,7 +17,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <br>
-                    <img src="http://placehold.it/300x300" class="img-responsive img-thumbnail">
+                    
+                    {% if record.cover == null %}
+                        {% set coverThumb = 'http://placehold.it/400x400' %}
+                    {% else %}
+                        {% set coverThumb = path('korpus_file_server_images_object', {folder: record.cover.folder, slug: record.cover.slug, extension: record.cover.type.extension, thumbnail: 'true', maxwidth: '400'}) %}
+                    {% endif %}
+                    <img src="{{coverThumb}}" class="img-responsive img-thumbnail">
                 </div>  
                 <div class="col-lg-6">
                     <h2>{{record.title}}</h2>

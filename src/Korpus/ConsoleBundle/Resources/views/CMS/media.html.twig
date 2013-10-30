@@ -1,0 +1,44 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}media{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li class="active">Media</li>
+</ol>
+
+<a href="{{ path('korpus_console_cms_media_record_create') }}" class="pull-right btn btn-success"><span class="glyphicon glyphicon-plus"></span> Record</a>
+
+<br>
+
+<h3>Records</h3>
+
+<table class="table table-bordered table-responsive">
+    <tr>
+        <th>Cover</th><th>Name</th><th>VÖ</th><th>Anlage</th><th>Bearbeitet</th><th>Optionen</th>
+    </tr>
+    {% for record in records %}
+        <tr>
+            {% if record.cover == null %}
+                {% set coverThumb = 'http://placehold.it/100x100' %}
+            {% else %}
+                {% set coverThumb = path('korpus_file_server_images_object', {folder: record.cover.folder, slug: record.cover.slug, extension: record.cover.type.extension, thumbnail: 'true', maxwidth: '100'}) %}
+            {% endif %}
+            <td><img src="{{coverThumb}}"></td>
+            <td>{{record.title}}</td>
+            <td>{{record.publishDate|date('Y')}}</td>
+            <td>{{record.creationDate|date('d.m.Y G:i')}}</td>
+            <td>{% if record.editDate != null %}{{record.editDate|date('d.m.Y G:i')}}{% else %}-{% endif %}</td>
+            <td>
+                <a href="{{ path('korpus_console_cms_media_record_update', {title: record.title}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                <br>
+                <a href="{{ path('korpus_console_cms_media_record_delete', {title: record.title}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
