@@ -11,6 +11,8 @@ use Korpus\HelperBundle\Component\ConcertHelper;
 use Korpus\DataBundle\Entity\BandMember;
 use Korpus\DataBundle\Entity\Record;
 use Korpus\DataBundle\Entity\RecordTrack;
+use Korpus\DataBundle\Entity\FileType;
+use Korpus\DataBundle\Entity\FileTypeGroup;
 
 class CMSController extends Controller
 {
@@ -381,55 +383,251 @@ class CMSController extends Controller
         return $this->render('KorpusConsoleBundle:CMS:create_record.html.twig', $tmpl);
     }
 
-    public function updateMediaRecordAction(Request $request, $slug)
+    public function updateMediaRecordAction(Request $request, $title)
     {
-        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
 
-        $form = $this->createFormBuilder($concert)
-                ->add('event', 'text', array('label' => 'Event'))
-                ->add('venue', 'text', array('label' => 'Location'))
-                ->add('city', 'text', array('label' => 'Stadt'))
-                ->add('concertDate', 'datetime', array('label' => 'Konzert-Datum'))
-                ->add('facebookLink', 'text', array('label' => 'Facebook Link (optional)', 'required' => false))
-                ->add('info', 'text', array('label' => 'Information (optional)', 'required' => false))
+        $form = $this->createFormBuilder($record)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
                 ->add('save', 'submit', array('label' => 'Speichern'))
                 ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $concert->setEditDate(new \DateTime('now'));
-            $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
+            $record->setEditDate(new \DateTime('now'));
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$cover)) {
+                    $record->setCover($cover);
+                }
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
         }
 
         $tmpl = array(
             'form' => $form->createView(),
-            'subpage' => 'member',
-            'pagename' => 'Mitglieder',
-            'backpath' => $this->generateUrl('korpus_console_cms_member')
+            'subpage' => 'record',
+            'pagename' => 'Records',
+            'backpath' => $this->generateUrl('korpus_console_cms_media')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:update_record.html.twig', $tmpl);
     }
 
-    public function deleteMediaRecordAction(Request $request, $slug)
+    public function deleteMediaRecordAction(Request $request, $title)
     {
-        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
 
         if ($request->get('delete') == 1) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($concert);
+            $em->remove($record);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
         }
 
-        return $this->render('KorpusConsoleBundle:CMS:concert_delete.html.twig', array('concert' => $concert));
+        return $this->render('KorpusConsoleBundle:CMS:delete_record.html.twig', array('record' => $record));
+    }
+
+    /**
+     * Files
+     */
+    public function filesAction()
+    {
+        $fileTypes = $this->getDoctrine()->getRepository('KorpusDataBundle:FileType')->findAll();
+        $fileTypesGroups = $this->getDoctrine()->getRepository('KorpusDataBundle:FileTypeGroup')->findAll();
+
+        return $this->render('KorpusConsoleBundle:CMS:files.html.twig', array(
+                    'fileTypes' => $fileTypes,
+                    'fileTypeGroups' => $fileTypesGroups
+        ));
+    }
+
+    /**
+     * FileTypes
+     */
+    public function createFilesFileTypeAction(Request $request)
+    {
+        $record = new Record();
+
+        $form = $this->createFormBuilder($record)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $record->setCreationDate(new \DateTime('now'));
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$cover)) {
+                    $record->setCover($cover);
+                }
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($record);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'record',
+            'pagename' => 'Records',
+            'backpath' => $this->generateUrl('korpus_console_cms_media')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create_record.html.twig', $tmpl);
+    }
+
+    public function updateFilesFileTypeAction(Request $request, $title)
+    {
+        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
+
+        $form = $this->createFormBuilder($record)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $record->setEditDate(new \DateTime('now'));
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$cover)) {
+                    $record->setCover($cover);
+                }
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'record',
+            'pagename' => 'Records',
+            'backpath' => $this->generateUrl('korpus_console_cms_media')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:update_record.html.twig', $tmpl);
+    }
+
+    public function deleteFilesFileTypeAction(Request $request, $title)
+    {
+        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
+
+        if ($request->get('delete') == 1) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($record);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:delete_record.html.twig', array('record' => $record));
+    }
+
+    /**
+     * FileTypesGroup
+     */
+    public function createFilesFileTypeGroupAction(Request $request)
+    {
+        $fileTypeGroup = new FileTypeGroup();
+
+        $form = $this->createFormBuilder($fileTypeGroup)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($fileTypeGroup);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_files'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'filetypegroup',
+            'pagename' => 'Dateityp Gruppe',
+            'backpath' => $this->generateUrl('korpus_console_cms_files')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create_filetypegroup.html.twig', $tmpl);
+    }
+
+    public function updateFilesFileTypeGroupAction(Request $request, $id)
+    {
+        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
+
+        $form = $this->createFormBuilder($record)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $record->setEditDate(new \DateTime('now'));
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$cover)) {
+                    $record->setCover($cover);
+                }
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'record',
+            'pagename' => 'Records',
+            'backpath' => $this->generateUrl('korpus_console_cms_media')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:update_record.html.twig', $tmpl);
+    }
+
+    public function deleteFilesFileTypeGroupAction(Request $request, $id)
+    {
+        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
+
+        if ($request->get('delete') == 1) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($record);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:delete_record.html.twig', array('record' => $record));
     }
 
 }

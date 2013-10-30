@@ -110,5 +110,33 @@ $(document).ready(function() {
             }
         });
     });
+    
+    $('#toggle-filetypegroups').click(function(e) {
+        e.preventDefault();
+        var status = $('#section-filetypegroups').css('display');
+
+        if (status === 'block') {
+            $('#section-filetypegroups').fadeOut();
+            $(this).children('span.glyphicon').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        }
+        if (status === 'none') {
+            $('#section-filetypegroups').fadeIn();
+            $(this).children('span.glyphicon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        }
+    });
+    
+    $('#toggle-filetypes').click(function(e) {
+        e.preventDefault();
+        var status = $('#section-filetypes').css('display');
+
+        if (status === 'block') {
+            $('#section-filetypes').fadeOut();
+            $(this).children('span.glyphicon').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        }
+        if (status === 'none') {
+            $('#section-filetypes').fadeIn();
+            $(this).children('span.glyphicon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        }
+    });
 
 });

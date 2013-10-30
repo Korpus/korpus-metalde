@@ -1,0 +1,62 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}files{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li class="active">Dateien</li>
+</ol>
+
+<br>
+<h3 class="">Dateitypen Gruppen <a href="#" id="toggle-filetypegroups" class="pull-right"><span class="glyphicon glyphicon-chevron-down"></span></a></h3>
+<hr>
+<div id="section-filetypegroups" style="display:none;">
+    <a href="{{ path('korpus_console_cms_files_filetypegroup_create') }}" class="pull-right btn btn-success"><span class="glyphicon glyphicon-plus"></span> Dateityp Gruppe</a>
+    <br><br><br>
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>ID</th><th>Gruppe</th><th>Optionen</th>
+        </tr>
+        {% for group in fileTypeGroups %}
+            <tr>
+                <td>{{group.id}}</td>
+                <td>{{group.title}}</td>                
+                <td>
+                    <a href="{{ path('korpus_console_cms_files_filetypegroup_update', {id: group.id}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                    <br>
+                    <a href="{{ path('korpus_console_cms_files_filetypegroup_delete', {id: group.id}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br>
+<h3 class="">Dateitypen <a href="#" id="toggle-filetypes" class="pull-right"><span class="glyphicon glyphicon-chevron-down"></span></a></h3>
+<hr>
+<div id="section-filetypes" style="display:none;">
+    <a href="{{ path('korpus_console_cms_files_filetype_create') }}" class="pull-right btn btn-success"><span class="glyphicon glyphicon-plus"></span> Dateityp</a>
+    <br><br><br>
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>Titel</th><th>Gruppe</th><th>Erweiterung</th><th>Optionen</th>
+        </tr>
+        {% for filetype in fileTypes %}
+            <tr>
+                <td>{{filetype.title}}</td>
+                <td>{{filetype.group.title}}</td>
+                <td>{{filetype.extension}}</td>
+                <td>
+                    <a href="{{ path('korpus_console_cms_files_filetype_update', {title: filetype.title}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+                    <br>
+                    <a href="{{ path('korpus_console_cms_files_filetype_delete', {title: filetype.title}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

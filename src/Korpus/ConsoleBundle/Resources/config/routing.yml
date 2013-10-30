@@ -62,7 +62,38 @@ korpus_console_file_upload:
     pattern:  /upload/file
     defaults: { _controller: KorpusConsoleBundle:Upload:file }
     methods: [POST]
+
+#cms files
+korpus_console_cms_files:
+    pattern:  /cms/files
+    defaults: { _controller: KorpusConsoleBundle:CMS:files }
     
+#file type
+korpus_console_cms_files_filetype_create:
+    pattern:  /cms/files/filetype/create
+    defaults: { _controller: KorpusConsoleBundle:CMS:createFilesFileType }
+    
+korpus_console_cms_files_filetype_update:
+    pattern:  /cms/files/filetype/{title}/edit
+    defaults: { _controller: KorpusConsoleBundle:CMS:updateFilesFileType }
+    
+korpus_console_cms_files_filetype_delete:
+    pattern:  /cms/files/filetype/{title}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteFilesFileType }
+    
+#file type group
+korpus_console_cms_files_filetypegroup_create:
+    pattern:  /cms/files/filetypegroup/create
+    defaults: { _controller: KorpusConsoleBundle:CMS:createFilesFileTypeGroup }
+    
+korpus_console_cms_files_filetypegroup_update:
+    pattern:  /cms/files/filetypegroup/{id}/edit
+    defaults: { _controller: KorpusConsoleBundle:CMS:updateFilesFileTypeGroup }
+    
+korpus_console_cms_files_filetypegroup_delete:
+    pattern:  /cms/files/filetypegroup/{id}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteFilesFileTypeGroup }
+
 #cms media
 korpus_console_cms_media:
     pattern:  /cms/media
