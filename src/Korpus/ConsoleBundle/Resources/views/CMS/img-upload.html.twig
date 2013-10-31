@@ -1,5 +1,5 @@
 <!-- img upload form -->
-{% if subpage == 'concert' or subpage == 'record' %}
+{% if subpage == 'concert' or subpage == 'record' or subpage == 'member' %}
     <h3>Bild wählen</h3>
     <div id="select-images-one"></div>
 {% endif %}
@@ -23,7 +23,15 @@
             </div>
             <div class="form-group">
                 <strong>Ordner</strong>
-                <input type="text" id="input-folder" class="form-control" placeholder="Ordner" name="folder" required="false" {% if subpage == 'concert' %}readonly="true" value="concert"{% elseif subpage == 'record' %}readonly="true" value="records"{% endif %}>
+                <input type="text" id="input-folder" class="form-control" placeholder="Ordner" name="folder" required="false" 
+                    {% if subpage == 'concert' %}
+                       readonly="true" value="concert"
+                    {% elseif subpage == 'record' %}
+                       readonly="true" value="records"
+                    {% elseif subpage == 'member' %}
+                       readonly="true" value="band"
+                    {% endif %}
+                >
             </div>
         </div>
         <div class="col-lg-6">

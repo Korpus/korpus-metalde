@@ -263,6 +263,13 @@ class CMSController extends Controller
         if ($form->isValid()) {
             $member->setCreationDate(new \DateTime('now'));
 
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $photo = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$photo)) {
+                    $member->setPhoto($photo);
+                }
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
@@ -277,33 +284,45 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_member')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:create.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:create_member.html.twig', $tmpl);
     }
 
-    public function updateMemberAction(Request $request, $slug)
+    public function updateMemberAction(Request $request, $nickname)
     {
-        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
+        $member = $this->getDoctrine()->getRepository('KorpusDataBundle:BandMember')->findOneByNickname($nickname);
 
-        $form = $this->createFormBuilder($concert)
-                ->add('event', 'text', array('label' => 'Event'))
-                ->add('venue', 'text', array('label' => 'Location'))
-                ->add('city', 'text', array('label' => 'Stadt'))
-                ->add('concertDate', 'datetime', array('label' => 'Konzert-Datum'))
-                ->add('facebookLink', 'text', array('label' => 'Facebook Link (optional)', 'required' => false))
-                ->add('info', 'text', array('label' => 'Information (optional)', 'required' => false))
+        $form = $this->createFormBuilder($member)
+                ->add('nickname', 'text', array('label' => 'Nickname'))
+                ->add('firstName', 'text', array('label' => 'Vorname'))
+                ->add('lastName', 'text', array('label' => 'Nachname'))
+                ->add('position', 'text', array('label' => 'Position'))
+                ->add('equipment', 'text', array('label' => 'Equipment'))
+                ->add('musik', 'text', array('label' => 'Musik'))
+                ->add('interessen', 'text', array('label' => 'Interessen'))
+                ->add('filme', 'text', array('label' => 'Filme'))
+                ->add('bestesAlbum', 'text', array('label' => 'Bestes Album'))
+                ->add('besteBand', 'text', array('label' => 'Beste Band'))
+                ->add('lieblingsEssen', 'text', array('label' => 'Lieblings Essen'))
+                ->add('besterDrink', 'text', array('label' => 'Bester Drink'))
                 ->add('save', 'submit', array('label' => 'Speichern'))
                 ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $concert->setEditDate(new \DateTime('now'));
-            $concert->setSlug(ConcertHelper::generateSlug($concert->getConcertDate(), $concert->getEvent(), $concert->getCity()));
+            $member->setEditDate(new \DateTime('now'));
+
+            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
+                $photo = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
+                if (!(!$photo)) {
+                    $member->setPhoto($photo);
+                }
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirect($this->generateUrl('korpus_console_cms_concert'));
+            return $this->redirect($this->generateUrl('korpus_console_cms_member'));
         }
 
         $tmpl = array(
@@ -313,7 +332,7 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_member')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:update_member.html.twig', $tmpl);
     }
 
     public function deleteMemberAction(Request $request, $slug)
@@ -471,6 +490,54 @@ class CMSController extends Controller
                     'multiple' => false,
                     'expanded' => true
                 ))
+                ->add('group', 'entity', array(
+                    'class' => 'KorpusDataBundle:FileTypeGroup',
+                    'property' => 'title',
+                    'label' => 'Dateityp Gruppe'
+                ))
+                ->add('save', 'submit', array('label' => 'Speichern'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_files'));
+        }
+
+        $tmpl = array(
+            'form' => $form->createView(),
+            'subpage' => 'filetype',
+            'pagename' => 'Dateityp',
+            'backpath' => $this->generateUrl('korpus_console_cms_files')
+        );
+
+        return $this->render('KorpusConsoleBundle:CMS:create_filetype.html.twig', $tmpl);
+    }
+
+    public function updateFilesFileTypeAction(Request $request, $title)
+    {
+        $fileType = $this->getDoctrine()->getRepository('KorpusDataBundle:FileType')->findOneByTitle($title);
+
+        $form = $this->createFormBuilder($fileType)
+                ->add('title', 'text', array('label' => 'Titel'))
+                ->add('extension', 'text', array('label' => 'Erweiterung'))
+                ->add('isActive', 'choice', array(
+                    'choices' => array(
+                        'true' => 'Ja',
+                        'false' => 'Nein'
+                    ),
+                    'label' => 'Aktiv?',
+                    'multiple' => false,
+                    'expanded' => true
+                ))
+                ->add('group', 'entity', array(
+                    'class' => 'KorpusDataBundle:FileTypeGroup',
+                    'property' => 'title',
+                    'label' => 'Dateityp Gruppe'
+                ))
                 ->add('save', 'submit', array('label' => 'Speichern'))
                 ->getForm();
 
@@ -491,45 +558,7 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_files')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:create_filetype.html.twig', $tmpl);
-    }
-
-    public function updateFilesFileTypeAction(Request $request, $title)
-    {
-        $record = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findOneByTitle($title);
-
-        $form = $this->createFormBuilder($record)
-                ->add('title', 'text', array('label' => 'Titel'))
-                ->add('publishDate', 'datetime', array('label' => 'VÖ-Datum'))
-                ->add('save', 'submit', array('label' => 'Speichern'))
-                ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $record->setEditDate(new \DateTime('now'));
-
-            if ($request->get('img_hash') !== null || $request->get('img_hash') !== "") {
-                $cover = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneByHash($request->get('img_hash'));
-                if (!(!$cover)) {
-                    $record->setCover($cover);
-                }
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('korpus_console_cms_media'));
-        }
-
-        $tmpl = array(
-            'form' => $form->createView(),
-            'subpage' => 'record',
-            'pagename' => 'Records',
-            'backpath' => $this->generateUrl('korpus_console_cms_media')
-        );
-
-        return $this->render('KorpusConsoleBundle:CMS:update_record.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:update_filetype.html.twig', $tmpl);
     }
 
     public function deleteFilesFileTypeAction(Request $request, $title)

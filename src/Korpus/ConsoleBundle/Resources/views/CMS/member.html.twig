@@ -16,10 +16,18 @@
 
 <table class="table table-bordered">
     <tr>
-        <th>Nickname</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
+        <th>Photo</th><th>Nickname</th><th>Anlagedatum</th><th>Bearbeitet</th><th>Optionen</th>
     </tr>
     {% for member in members %}
         <tr>
+            
+            {% if member.photo == null %}
+                {% set photoThumb = 'http://placehold.it/100x100' %}
+            {% else %}
+                {% set photoThumb = path('korpus_file_server_images_object', {folder: member.photo.folder, slug: member.photo.slug, extension: member.photo.type.extension, thumbnail: 'true', maxwidth: '100'}) %}
+            {% endif %}
+            
+            <td><img src="{{photoThumb}}"></td>
             <td>{{member.nickname}}</td>
             <td>{{member.creationDate|date('d.m.Y G:i')}}</td>
             <td>{% if member.editDate != null %}{{member.editDate|date('d.m.Y G:i')}}{% else %}-{% endif %}</td>

@@ -60,6 +60,8 @@ $(document).ready(function() {
         refreshImages('concert');
     } else if (currsub === 'record') {
         refreshImages('records');
+    } else if (currsub === 'member') {
+        refreshImages('band');
     }
 
     //news toolbox
@@ -107,10 +109,12 @@ $(document).ready(function() {
                 refreshImages('concert');
             } else if (currsub === 'record') {
                 refreshImages('records');
+            } else if (currsub === 'member') {
+                refreshImages('band');
             }
         });
     });
-    
+
     $('#toggle-filetypegroups').click(function(e) {
         e.preventDefault();
         var status = $('#section-filetypegroups').css('display');
@@ -124,7 +128,7 @@ $(document).ready(function() {
             $(this).children('span.glyphicon').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
         }
     });
-    
+
     $('#toggle-filetypes').click(function(e) {
         e.preventDefault();
         var status = $('#section-filetypes').css('display');
