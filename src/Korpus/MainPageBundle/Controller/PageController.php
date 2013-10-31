@@ -95,7 +95,7 @@ class PageController extends Controller
             return $this->redirect($this->generateUrl('korpus_main_page_member', array('name' => 'Gastel'), true));
         else {
             $member = $this->getDoctrine()->getRepository('KorpusDataBundle:BandMember')->findOneByNickname($name);
-            
+
             return $this->render('KorpusMainPageBundle:Page:member.html.twig', array('member' => $member));
         }
     }
@@ -150,26 +150,34 @@ class PageController extends Controller
 
     public function audioAction()
     {
-        $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();        
-        $tmpl = array();        
+        $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();
+        $tmpl = array();
         $tmpl['records'] = $records;
-        
+
         return $this->render('KorpusMainPageBundle:Page:audio.html.twig', $tmpl);
     }
-    
+
     public function videoAction()
     {
         return $this->render('KorpusMainPageBundle:Page:video.html.twig');
     }
-    
+
     public function lyricsAction()
     {
         return $this->render('KorpusMainPageBundle:Page:lyrics.html.twig');
     }
-    
+
     public function photosAction()
     {
         return $this->render('KorpusMainPageBundle:Page:photos.html.twig');
+    }
+
+    /**
+     * Merch
+     */
+    public function merchAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:merch.html.twig');
     }
 
 }

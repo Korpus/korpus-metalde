@@ -84,3 +84,8 @@ korpus_main_page_kontakt_booking:
 korpus_main_page_kontakt_links:
     pattern:  /contact/links
     defaults: { _controller: KorpusMainPageBundle:Page:links }
+    
+#merch
+korpus_main_page_merch:
+    pattern:  /merch
+    defaults: { _controller: KorpusMainPageBundle:Page:merch }
