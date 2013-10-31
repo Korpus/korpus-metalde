@@ -50,4 +50,27 @@ class ConcertRepository extends EntityRepository
         return $concerts;
     }
 
+    public function findXNextConcerts($limit)
+    {
+        //entity manager
+        $em = $this->getEntityManager();
+
+        //today, date part
+        $today = new \DateTime('now');
+        $today->setTime(0, 0, 0);
+
+        $dql = 'select c from KorpusDataBundle:Concert c where c.concertDate >= ?1 order by c.concertDate asc';
+
+        $query = $em->createQuery($dql);
+        $query->setParameter(1, $today);
+        $query->setMaxResults($limit);
+        
+        $concerts = $query->getResult();
+        
+        if (!$concerts)
+            return null;
+
+        return $concerts;
+    }
+
 }

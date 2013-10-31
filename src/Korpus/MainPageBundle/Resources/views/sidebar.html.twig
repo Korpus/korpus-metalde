@@ -32,6 +32,11 @@
         <div class="current-record">
             <img src="{{ asset('assets/img/layout/ebenbild.jpg') }}" class="img-thumbnail">
         </div>
+        <br>
+        <h4>Konzerte <small>Alle <a href="{{ path('korpus_main_page_live') }}"><span class="glyphicon glyphicon-share-alt"></span></a></small></h4>
+        <div id="next-concerts">
+            {% render url('korpus_main_page_next_concerts', { 'max': 3 }) %}
+        </div>
         
     </div>
 

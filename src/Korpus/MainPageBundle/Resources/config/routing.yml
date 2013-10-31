@@ -1,6 +1,10 @@
 korpus_main_page_homepage:
     pattern:  /
     defaults: { _controller: KorpusMainPageBundle:Page:index }
+    
+korpus_main_page_next_concerts:
+    pattern:  /concerts/next/{max}
+    defaults: { _controller: KorpusMainPageBundle:Sidebar:nextConcerts }
 
 #news
 korpus_main_page_news:

@@ -1,0 +1,13 @@
+<table class="table table-striped table-responsive">
+    <tr>
+        <th>Datum</th><th>Location</th>
+    </tr>
+    {% for concert in concerts %}
+    <tr>
+        <td>{{concert.concertDate|date('d.m.Y')}}</td>
+        <td>
+            <strong><a href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">{{concert.event}}</a></strong>, {{concert.venue}}, {{concert.city}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
