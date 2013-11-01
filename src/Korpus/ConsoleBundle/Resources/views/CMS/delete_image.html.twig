@@ -1,0 +1,26 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}images{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li>Dateien</li>
+    <li><a href="{{ path('korpus_console_cms_files_images') }}">Bilder</a></li>
+    <li class="active">Löschen</li>
+</ol>
+
+<div class="alert alert-danger">
+    Wollen Sie wirklich dieses Bild <strong>'{{image.slug}}'</strong> löschen?
+    <div class="pull-right">
+        <form method="post" action="{{ path('korpus_console_cms_files_images_delete', {slug: image.slug}) }}">
+            <input type="hidden" value="1" name="delete">
+            <button type="submit" class="btn btn-danger">Ja</button> <a class="btn btn-success" href="{{ path('korpus_console_cms_files_images') }}">Nein</a>
+        </form>
+    </div>
+    <br><br>
+</div>
+
+{% endblock %}

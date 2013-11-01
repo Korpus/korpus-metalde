@@ -5,7 +5,6 @@ namespace Korpus\ConsoleBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\DataBundle\Entity\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Korpus\HelperBundle\Component\FileHelper;
 

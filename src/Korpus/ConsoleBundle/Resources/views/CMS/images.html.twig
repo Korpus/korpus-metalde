@@ -1,0 +1,29 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}cms{% endblock %}
+{% block currentsubpage %}images{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>CMS</li>
+    <li>Dateien</li>
+    <li class="active">Bilder</li>
+</ol>
+
+<table class="table table-condensed table-bordered table-responsive">
+    <tr>
+        <th>Bild</th><th>Ordner</th><th>Optionen</th>
+    </tr>
+    {% for image in images %}
+    <tr>
+        <td><img src="{{ path('korpus_file_server_images_object', {folder: image.folder, slug: image.slug, extension: image.type.extension, thumbnail: 'true', maxwidth: '100'}) }}"></td>
+        <td>{{image.folder}}</td>
+        <td>
+            <a href="{{ path('korpus_console_cms_files_images_delete', {slug: image.slug}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

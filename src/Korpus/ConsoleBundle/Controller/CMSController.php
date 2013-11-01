@@ -31,7 +31,7 @@ class CMSController extends Controller
     public function createNewsAction(Request $request)
     {
         $post = new NewsPost();
-        
+
         $post->setPublishDate(new \DateTime('now'));
 
         $form = $this->createFormBuilder($post)
@@ -651,6 +651,37 @@ class CMSController extends Controller
         }
 
         return $this->render('KorpusConsoleBundle:CMS:delete_filetypegroup.html.twig', array('filetypegroup' => $fileTypeGroup));
+    }
+
+    /**
+     * images
+     */
+    public function imagesAction()
+    {
+        $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImages();
+        
+        return $this->render('KorpusConsoleBundle:CMS:images.html.twig', array(
+            'images' => $images
+        ));
+    }
+    
+    public function deleteImageAction(Request $request, $slug)
+    {
+        $image = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneBySlug($slug);
+
+        if ($request->get('delete') == 1) {
+            //delete file
+            $filename = '../files/uploads/' . $image->getHash();
+            unlink($filename);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($image);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('korpus_console_cms_files'));
+        }
+
+        return $this->render('KorpusConsoleBundle:CMS:delete_image.html.twig', array('image' => $image));
     }
 
 }

@@ -68,6 +68,15 @@ korpus_console_cms_files:
     pattern:  /cms/files
     defaults: { _controller: KorpusConsoleBundle:CMS:files }
     
+#images
+korpus_console_cms_files_images:
+    pattern:  /cms/files/images
+    defaults: { _controller: KorpusConsoleBundle:CMS:images }
+    
+korpus_console_cms_files_images_delete:
+    pattern:  /cms/files/images/{slug}/delete
+    defaults: { _controller: KorpusConsoleBundle:CMS:deleteImage }
+    
 #file type
 korpus_console_cms_files_filetype_create:
     pattern:  /cms/files/filetype/create
