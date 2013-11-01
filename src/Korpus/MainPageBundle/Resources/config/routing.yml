@@ -6,6 +6,11 @@ korpus_main_page_next_concerts:
     pattern:  /concerts/next/{max}
     defaults: { _controller: KorpusMainPageBundle:Sidebar:nextConcerts }
 
+#old news route
+korpus_main_page_news_old:
+    pattern:  /news/post/{number}
+    defaults: { _controller: KorpusMainPageBundle:Page:news }
+
 #news
 korpus_main_page_news:
     pattern:  /news
