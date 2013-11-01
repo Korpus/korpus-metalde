@@ -659,12 +659,12 @@ class CMSController extends Controller
     public function imagesAction()
     {
         $images = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findAllImages();
-        
+
         return $this->render('KorpusConsoleBundle:CMS:images.html.twig', array(
-            'images' => $images
+                    'images' => $images
         ));
     }
-    
+
     public function deleteImageAction(Request $request, $slug)
     {
         $image = $this->getDoctrine()->getRepository('KorpusDataBundle:File')->findOneBySlug($slug);
@@ -672,11 +672,16 @@ class CMSController extends Controller
         if ($request->get('delete') == 1) {
             //delete file
             $filename = '../files/uploads/' . $image->getHash();
-            unlink($filename);
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($image);
-            $em->flush();
+
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($image);
+                $em->flush();
+
+                unlink($filename);
+            } catch (\Exception $exc) {
+                var_dump($exc);
+            }
 
             return $this->redirect($this->generateUrl('korpus_console_cms_files'));
         }
