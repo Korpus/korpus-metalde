@@ -62,6 +62,8 @@ $(document).ready(function() {
         refreshImages('records');
     } else if (currsub === 'member') {
         refreshImages('band');
+    } else if (currsub === 'news') {
+        refreshImages('news');
     }
 
     //news toolbox
@@ -111,6 +113,8 @@ $(document).ready(function() {
                 refreshImages('records');
             } else if (currsub === 'member') {
                 refreshImages('band');
+            } else if (currsub === 'news') {
+                refreshImages('news');
             }
         });
     });

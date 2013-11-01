@@ -31,6 +31,8 @@ class CMSController extends Controller
     public function createNewsAction(Request $request)
     {
         $post = new NewsPost();
+        
+        $post->setPublishDate(new \DateTime('now'));
 
         $form = $this->createFormBuilder($post)
                 ->add('title', 'text', array('label' => 'Titel'))
@@ -60,7 +62,7 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_news')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:create.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:create_news.html.twig', $tmpl);
     }
 
     public function updateNewsAction(Request $request, $slug)
@@ -94,7 +96,7 @@ class CMSController extends Controller
             'backpath' => $this->generateUrl('korpus_console_cms_news')
         );
 
-        return $this->render('KorpusConsoleBundle:CMS:update.html.twig', $tmpl);
+        return $this->render('KorpusConsoleBundle:CMS:update_news.html.twig', $tmpl);
     }
 
     public function deleteNewsAction(Request $request, $slug)
