@@ -1,0 +1,35 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}shop{% endblock %}
+{% block currentsubpage %}articles{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>Shop</li>
+    <li class="active">Artikel</li>
+</ol>
+
+<a href="{{ path('korpus_console_shop_articles_create') }}" class="pull-right btn btn-success"><span class="glyphicon glyphicon-plus"></span> Neu</a>
+
+<br><br><br>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Bild</th><th>Artikel</th><th>Preis</th><th>Optionen</th>
+    </tr>
+    {% for article in articles %}
+    <tr>
+        <td><img src="{{ path('korpus_file_server_images_object', {folder: article.photo.folder, slug: article.photo.slug, extension: article.photo.type.extension, thumbnail: 'true', maxwidth: '100'}) }}"></td>
+        <td>{{article.title}}</td>
+        <td>{{article.price}}</td>
+        <td>
+            <a href="{{ path('korpus_console_shop_articles_update', {slug: article.slug}) }}"><span class="glyphicon glyphicon-edit"></span> Bearbeiten</a>
+            <br>
+            <a href="{{ path('korpus_console_shop_articles_delete', {slug: article.slug}) }}"><span class="glyphicon glyphicon-remove"></span> Löschen</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

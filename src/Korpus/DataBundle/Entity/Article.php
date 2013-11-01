@@ -64,6 +64,12 @@ class Article
     private $photo;
 
     /**
+     * @ORM\ManyToOne(targetEntity="ArticleGroup")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * */
+    private $group;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -170,6 +176,16 @@ class Article
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    public function setGroup($group)
+    {
+        $this->group = $group;
     }
 
 }

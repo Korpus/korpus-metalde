@@ -1,0 +1,38 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% form_theme form 'KorpusConsoleBundle:Form:fields.html.twig' %}
+
+{% block currentpage %}shop{% endblock %}
+{% block currentsubpage %}{{subpage}}{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li>Shop</li>
+    <li><a href="{{backpath}}">{{pagename}}</a></li>
+    <li class="active">Neu</li>
+</ol>
+
+<div class="row">
+    <div class="col-lg-8">
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {{ form_row(form.title) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.group) }}
+            
+            <input type="hidden" name="img_hash" value="" id="img-hash" />
+            
+        {{ form_end(form) }}
+        
+        <hr>
+        {% include 'KorpusConsoleBundle::img-upload.html.twig' %}
+    </div>
+    <div class="col-lg-4">
+    </div>
+</div>
+
+<br><br>
+
+{% endblock %}

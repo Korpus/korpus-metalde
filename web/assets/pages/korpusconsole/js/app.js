@@ -64,6 +64,8 @@ $(document).ready(function() {
         refreshImages('band');
     } else if (currsub === 'news') {
         refreshImages('news');
+    } else if (currsub === 'article') {
+        refreshImages('shop');
     }
 
     //news toolbox
@@ -115,6 +117,8 @@ $(document).ready(function() {
                 refreshImages('band');
             } else if (currsub === 'news') {
                 refreshImages('news');
+            } else if (currsub === 'article') {
+                refreshImages('shop');
             }
         });
     });

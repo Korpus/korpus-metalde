@@ -1,0 +1,49 @@
+<!-- img upload form -->
+{% if subpage == 'concert' or subpage == 'record' or subpage == 'member' or subpage == 'article' %}
+    <h3>Bild wählen</h3>
+    <div id="select-images-one"></div>
+{% endif %}
+
+{% if subpage == 'news' %}
+    <h3>Bilder wählen</h3>
+    <div id="select-images-multi"></div>
+{% endif %}
+
+<hr>
+
+<h3>Bilder hinzufügen</h3>
+<form action="{{ path('korpus_console_file_upload') }}" method="post" target="upload-frame" id="form-img-upload" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-6">
+            <input type="file" name="file" id="input-flyer" />
+            <br>
+            <div class="form-group">
+                <strong>Titel/Beschreibung</strong>
+                <input type="text" id="input-title" class="form-control" placeholder="Titel" name="title" required="true">
+            </div>
+            <div class="form-group">
+                <strong>Ordner</strong>
+                <input type="text" id="input-folder" class="form-control" placeholder="Ordner" name="folder" required="false" 
+                    {% if subpage == 'concert' %}
+                       readonly="true" value="concert"
+                    {% elseif subpage == 'record' %}
+                       readonly="true" value="records"
+                    {% elseif subpage == 'member' %}
+                       readonly="true" value="band"
+                    {% elseif subpage == 'news' %}
+                       readonly="true" value="news"
+                    {% elseif subpage == 'article' %}
+                       readonly="true" value="shop"
+                    {% endif %}
+                >
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <button type="submit" class="pull-right">Hochladen</button>
+        </div>
+    </div>
+</form>
+<hr>
+<iframe name="upload-frame" class="hidden"></iframe>
+<div class="" id="image-links"></div>
+<!--------------------->

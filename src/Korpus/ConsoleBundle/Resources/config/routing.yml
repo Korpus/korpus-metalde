@@ -120,3 +120,20 @@ korpus_console_cms_media_record_update:
 korpus_console_cms_media_record_delete:
     pattern:  /cms/media/record/{title}/delete
     defaults: { _controller: KorpusConsoleBundle:CMS:deleteMediaRecord }
+    
+#merch
+korpus_console_shop_articles:
+    pattern:  /shop/articles
+    defaults: { _controller: KorpusConsoleBundle:Shop:articles }
+    
+korpus_console_shop_articles_create:
+    pattern:  /shop/articles/create
+    defaults: { _controller: KorpusConsoleBundle:Shop:createArticle }
+    
+korpus_console_shop_articles_update:
+    pattern:  /shop/articles/{slug}/update
+    defaults: { _controller: KorpusConsoleBundle:Shop:updateArticle }
+    
+korpus_console_shop_articles_delete:
+    pattern:  /shop/articles/{slug}/delete
+    defaults: { _controller: KorpusConsoleBundle:Shop:deleteArticle }
