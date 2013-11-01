@@ -4,6 +4,8 @@ namespace Korpus\MainPageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
+use Korpus\DataBundle\Entity\SourceLog;
 
 class PageController extends Controller
 {
@@ -43,7 +45,7 @@ class PageController extends Controller
         }
     }
 
-    public function newsPostAction($day, $month, $year, $slug)
+    public function newsPostAction(Request $request, $day, $month, $year, $slug)
     {
         $newsPost = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findOneBySlug($slug);
 
@@ -53,6 +55,17 @@ class PageController extends Controller
             if ($day != $newsPost->getPublishDay() || $month != $newsPost->getPublishMonth() || $year != $newsPost->getPublishYear()) {
                 throw new NotFoundHttpException("This NewsPost does not exist!");
             }
+        }
+
+        //track source
+        if ($request->get('source') !== null && $request->get('source') !== '') {
+            $log = new SourceLog();
+            $log->setSource($request->get('source'));
+            $log->setVisitDate(new \DateTime('now'));
+            
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($log);
+            $em->flush();
         }
 
         $surroundingPosts = $this->getDoctrine()->getRepository('KorpusDataBundle:NewsPost')->findSurroundingPosts($slug);

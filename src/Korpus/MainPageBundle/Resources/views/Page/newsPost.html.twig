@@ -44,7 +44,7 @@
     <div class="share-box col-lg-8 col-md-8">
         <input class="form-control hidden" type="text" value="{{ url('korpus_main_page_news_post', {day: newspost.publishDate|date('d'), month: newspost.publishDate|date('m'), year: newspost.publishDate|date('Y'), slug: newspost.slug}) }}" />
         <div class="facebook">
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('korpus_main_page_news_post', {day: newspost.publishDate|date('d'), month: newspost.publishDate|date('m'), year: newspost.publishDate|date('Y'), slug: newspost.slug})|url_encode() }}" id="share-btn"><img src="{{ asset('assets/img/layout/facebook-icon.png') }}" style="height: 20px;"> Post auf Facebook Teilen</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('korpus_main_page_news_post', {day: newspost.publishDate|date('d'), month: newspost.publishDate|date('m'), year: newspost.publishDate|date('Y'), slug: newspost.slug, source: 'fb'})|url_encode() }}" id="share-btn"><img src="{{ asset('assets/img/layout/facebook-icon.png') }}" style="height: 20px;"> Post auf Facebook Teilen</a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4">
