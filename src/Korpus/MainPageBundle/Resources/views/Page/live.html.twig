@@ -1,10 +1,13 @@
 {% extends 'KorpusMainPageBundle::layout.html.twig' %}
 
 {% block currentpage %}live{% endblock %}
+{% block currentsubpage %}concerts{% endblock %}
 
 {% block title %}Korpus &middot; Konzerte{% endblock %}
 
 {% block content %}
+
+{% include 'KorpusMainPageBundle::small-nav-live.html.twig' %}
 
 <br>
 

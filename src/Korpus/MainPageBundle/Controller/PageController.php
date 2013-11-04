@@ -135,6 +135,14 @@ class PageController extends Controller
             return $this->render('KorpusMainPageBundle:Page:concert.html.twig', array('concert' => $concert));
         }
     }
+    
+    public function eventsAction()
+    {
+        $events = $this->getDoctrine()->getRepository('KorpusDataBundle:Event')->findNextEvents();
+        $eventsAvailable = ($events != null);
+
+        return $this->render('KorpusMainPageBundle:Page:events.html.twig', array('events' => $events, 'events_available' => $eventsAvailable));
+    }
 
     /**
      * Kontakt

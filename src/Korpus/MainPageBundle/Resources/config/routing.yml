@@ -56,6 +56,14 @@ korpus_main_page_live_concert:
     pattern:  /live/concert/{slug}
     defaults: { _controller: KorpusMainPageBundle:Page:concert }
     
+korpus_main_page_live_events:
+    pattern:  /live/events
+    defaults: { _controller: KorpusMainPageBundle:Page:events }
+    
+korpus_main_page_live_event:
+    pattern:  /live/events/{slug}
+    defaults: { _controller: KorpusMainPageBundle:Page:event }
+    
 #media
 korpus_main_page_media:
     pattern:  /media
