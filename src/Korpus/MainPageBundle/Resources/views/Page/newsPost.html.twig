@@ -46,6 +46,11 @@
         <div class="facebook">
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('korpus_main_page_news_post', {day: newspost.publishDate|date('d'), month: newspost.publishDate|date('m'), year: newspost.publishDate|date('Y'), slug: newspost.slug, source: 'fb'})|url_encode() }}" id="share-btn"><img src="{{ asset('assets/img/layout/facebook-icon.png') }}" style="height: 20px;"> Post auf Facebook Teilen</a>
         </div>
+        <br>
+        <div class="twitter">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ url('korpus_main_page_news_post', {day: newspost.publishDate|date('d'), month: newspost.publishDate|date('m'), year: newspost.publishDate|date('Y'), slug: newspost.slug, source: 'twitter'})|url_encode() }}" data-via="" data-lang="de" data-hashtags="korpus">Post Twittern</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
     </div>
     <div class="col-lg-4 col-md-4">
         <a href="{{ path('korpus_main_page_news_list') }}"><span class="glyphicon glyphicon-align-justify"></span> Listenansicht</a>
