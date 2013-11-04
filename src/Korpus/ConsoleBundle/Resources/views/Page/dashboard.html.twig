@@ -5,11 +5,27 @@
 {% block content %}
 
 <h2>Console Dashboard</h2>
-
+<br>
 <div class="row">
     <div class="col-lg-6">
         <div class="well well-sm">
             <h3>News</h3>
+            
+            <table class="table teble-condensed table-striped table-responsive">
+                <tr>
+                    <th>Quelle</th>
+                    <th>Post</th>
+                    <th>Anzahl</th>
+                </tr>
+                {% for log in logs %}
+                <tr>
+                    <td>{{log.source}}</td>
+                    <td>{{log.title}}</td>
+                    <td>{{log.count}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            
         </div>
     </div>
     <div class="col-lg-6">

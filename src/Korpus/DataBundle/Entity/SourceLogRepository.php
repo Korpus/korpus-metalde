@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class SourceLogRepository extends EntityRepository
 {
+
+    public function findAllPerNewsPost()
+    {
+        $em = $this->getEntityManager();
+        
+        $dql = 'select l, p, count(l.post) from KorpusDataBundle:SourceLog l join l.post p group by l.post';
+        
+        $query = $em->createQuery($dql);
+        
+        return $query->getResult();
+    }
+
 }
