@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SourceLog
 {
+
     /**
      * @var integer
      *
@@ -35,6 +36,11 @@ class SourceLog
      */
     private $visitDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="NewsPost")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * */
+    private $post;
 
     /**
      * Get id
@@ -55,7 +61,7 @@ class SourceLog
     public function setSource($source)
     {
         $this->source = $source;
-    
+
         return $this;
     }
 
@@ -78,7 +84,7 @@ class SourceLog
     public function setVisitDate($visitDate)
     {
         $this->visitDate = $visitDate;
-    
+
         return $this;
     }
 
@@ -91,4 +97,15 @@ class SourceLog
     {
         return $this->visitDate;
     }
+
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    public function setPost($post)
+    {
+        $this->post = $post;
+    }
+
 }
