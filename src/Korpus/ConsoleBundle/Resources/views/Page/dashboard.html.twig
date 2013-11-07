@@ -34,7 +34,6 @@
 
             <div class="serve-info">
                 <h4>Speicherplatz</h4>
-                <br>
                 <h5>Drive '/'</h5>
                 <div class="progress progress-striped">
                     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}}%">
@@ -45,6 +44,50 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="col-lg-6">
+        <div class="well well-sm">
+            <h3>Users</h3>
+
+            <form id="add-user" class="form-horizontal" method="post" action="{{ path('korpus_console_add_user') }}">
+                <div class="form-group">
+                    <label for="input-email" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="input-email" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-username" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-username" name="usename" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-password" class="col-sm-2 control-label">Passwort</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-username" name="password" placeholder="Passwort">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Anlegen</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table teble-condensed table-striped table-responsive">
+                <tr>
+                    <th>Username</th><th>E-Mail</th>
+                </tr>
+                <tr>
+                    {% for user in users %}
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                    {% endfor %}
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

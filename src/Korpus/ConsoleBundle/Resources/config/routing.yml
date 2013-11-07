@@ -5,6 +5,10 @@ korpus_console_homepage:
 korpus_console_dashboard:
     pattern:  /dashboard
     defaults: { _controller: KorpusConsoleBundle:Page:dashboard }
+    
+korpus_console_add_user:
+    pattern:  /user/create
+    defaults: { _controller: KorpusConsoleBundle:Page:addUser }
 
 #cms news
 korpus_console_cms_news:
