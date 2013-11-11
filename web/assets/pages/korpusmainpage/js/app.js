@@ -14,10 +14,17 @@ $(document).ready(function() {
         $('.news-post img').addClass('img-responsive').addClass('img-thumbnail');
     }
 
+<<<<<<< HEAD
     $("#slide1").googleslides({
         userid: '115528839112598673902',
         albumid: '5710317752556741025',
         imgmax: $('.content-area').width()
     });
+=======
+    $.facebox.settings.closeImage = $('#fbox-closelabel').html();
+    $.facebox.settings.loadingImage = $('#fbox-loading').html();
+
+    $('a[rel*=soundcloud-facebox]').facebox();
+>>>>>>> audio facebox
 
 });
