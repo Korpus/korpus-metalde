@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="{{ asset('assets/css/bookblock.css') }}" />
+        <script src="{{ asset('assets/js/lib/jquery.js') }}"></script>
+        <script src="{{ asset('assets/js/lib/modernizr.custom.js') }}"></script>
+        <script src="{{ asset('assets/js/lib/jquerypp.custom.js') }}"></script>
+        <script src="{{ asset('assets/js/lib/jquery.bookblock.min.js') }}"></script>
+        <style>
+                img {
+                    width: 100%;
+                }
+        </style>
+    </head>
+    <body>
+        <div class="bb-custom-wrapper">
+            <div id="bb-ebenbild" class="bb-bookblock">
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/1.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/2.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/3.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/4.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/5.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/6.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/7.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/8.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/9.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/9.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/10.jpg') }}">
+                </div>
+                <div class="bb-item">
+                    <img src="{{ asset('dfiles/lyrics/ebenbild/11.jpg') }}">
+                </div>
+            </div>
+            <nav>
+                <a id="bb-nav-first" href="#"><span class="glyphicon glyphicon-fast-backward"></span></a>
+                <a id="bb-nav-prev" href="#"><span class="glyphicon glyphicon-backward"></span></a>
+                <a id="bb-nav-next" href="#"><span class="glyphicon glyphicon-forward"></span></a>
+                <a id="bb-nav-last" href="#"><span class="glyphicon glyphicon-fast-forward"></span></a>
+            </nav>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#bb-ebenbild').bookblock();
+                
+                $('#bb-nav-first').click(function(e) {
+                    e.preventDefault();
+                    $('#bb-ebenbild').bookblock('first');
+                });
+            });
+        </script>
+    </body>
+</html>
