@@ -1,0 +1,11 @@
+korpus_backup_homepage:
+    pattern:  /backup
+    defaults: { _controller: KorpusBackupBundle:Backup:index }
+
+korpus_backup_all_db:
+    pattern:  /backup/all-databases
+    defaults: { _controller: KorpusBackupBundle:Backup:allDB }
+    
+korpus_backup_one_db:
+    pattern:  /backup/db/{db_name}
+    defaults: { _controller: KorpusBackupBundle:Backup:oneDB }
