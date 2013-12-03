@@ -17,19 +17,36 @@ class BackupDatabaseCommand extends Command
                 ->setName('backup:database')
                 ->setDescription('Backup some or all Database')
                 ->addArgument(
-                        'database', InputArgument::OPTIONAL, 'Which DB to Backup, optional'
+                        'targettype', InputArgument::REQUIRED, 'Which TargetType -> mail, folder'
                 )
                 ->addArgument(
                         'target', InputArgument::REQUIRED, 'Target, whether mailaddress or folderlocation'
                 )
                 ->addArgument(
-                        'targettype', InputArgument::REQUIRED, 'Which TargetType -> mail, folder'
+                        'database', InputArgument::OPTIONAL, 'Which DB to Backup, optional'
         );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        
+        $database = $input->getArgument('database');
+        $allDB = false;
+        if ($database)
+            $allDB = true;
+
+        $target = $input->getArgument('target');
+        if (!$target) {
+            $output->writeln('Target is empty!');
+            return;
+        }
+
+        $targettype = $input->getArgument('targettype');
+        if (!in_array(strtolower($targettype), array('mail', 'folder'))) {
+            $output->writeln('Target Type not matched!');
+            return;
+        } else {
+            $output->writeln('Saved!');
+        }
     }
 
 }
