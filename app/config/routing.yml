@@ -1,3 +1,7 @@
+korpus_backup:
+    resource: "@KorpusBackupBundle/Resources/config/routing.yml"
+    prefix:   /console
+
 korpus_file_server:
     resource: "@KorpusFileServerBundle/Resources/config/routing.yml"
     prefix:   /filesystem

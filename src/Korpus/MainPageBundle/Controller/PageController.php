@@ -63,7 +63,7 @@ class PageController extends Controller
             $log->setSource($request->get('source'));
             $log->setVisitDate(new \DateTime('now'));
             $log->setPost($newsPost);
-            
+
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($log);
             $em->flush();
@@ -135,7 +135,7 @@ class PageController extends Controller
             return $this->render('KorpusMainPageBundle:Page:concert.html.twig', array('concert' => $concert));
         }
     }
-    
+
     public function eventsAction()
     {
         $events = $this->getDoctrine()->getRepository('KorpusDataBundle:Event')->findNextEvents();

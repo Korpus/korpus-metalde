@@ -34,12 +34,17 @@ $(document).ready(function() {
         albumid: '5945073303979243089',
         imgmax: $('.content-area').width()
     });
+    
+    //death sentences 12
+    $("#slide4").googleslides({
+        userid: '116997391993592039168',
+        albumid: '5945443482553019665',
+        imgmax: $('.content-area').width()
+    });
 
     $.facebox.settings.closeImage = $('#fbox-closelabel').html();
     $.facebox.settings.loadingImage = $('#fbox-loading').html();
 
     $('a[rel*=soundcloud-facebox]').facebox();
-
-    $('#bb-ebenbild').bookblock();
 
 });

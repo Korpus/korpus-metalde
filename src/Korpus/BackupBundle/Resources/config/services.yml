@@ -1,0 +1,7 @@
+parameters:
+#    korpus_backup.example.class: Korpus\BackupBundle\Example
+
+services:
+#    korpus_backup.example:
+#        class: %korpus_backup.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
