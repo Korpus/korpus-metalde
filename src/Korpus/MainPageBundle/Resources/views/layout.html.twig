@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('assets/pages/korpusmainpage/css/app.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/pages/korpusmainpage/css/top-bar.css') }}" />
 {% endblock %}
 
 {% block javascripts %}
@@ -12,6 +13,10 @@
 
 <span class="hidden" id="current-page">{% block currentpage %}{% endblock %}</span>
 <span class="hidden" id="current-subpage">{% block currentsubpage %}{% endblock %}</span>
+
+<!-- TOP BAR -->
+{% include 'KorpusMainPageBundle::top-bar.html.twig' %}
+<!------------->
 
 <nav class="navbar navbar-default navbar-static-top visible-xs" role="navigation">
     <div class="navbar-header">
