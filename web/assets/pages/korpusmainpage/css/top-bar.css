@@ -55,6 +55,10 @@
     font-size: 17px;
 }
 
+.top-bar-links .active {
+    color: #0b9c9c;
+}
+
 .top-bar-links a:hover {
     color: #0b9c9c;
     text-decoration: none;
