@@ -25,57 +25,59 @@ class BackupDatabaseCommand extends ContainerAwareCommand
                         'target', InputArgument::REQUIRED, 'Target, whether mailaddress or folderlocation'
                 )
                 ->addArgument(
-                        'database', InputArgument::OPTIONAL, 'Which DB to Backup, optional'
+                        'database', InputArgument::REQUIRED, 'Which DB to Backup, optional'
         );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //get and check database argument
         $database = $input->getArgument('database');
-        $allDB = true;
-        if ($database)
-            $allDB = false;
-
-        $target = $input->getArgument('target');
-        if (!$target) {
-            $output->writeln('Target is empty!');
+        if (!$database) {
+            $output->writeln('Database Argument is empty!');
             return;
         }
 
-        if (substr($target, -1) != DIRECTORY_SEPARATOR)
-            $target .= DIRECTORY_SEPARATOR;
-
+        //get and check targettype argument
         $targettype = $input->getArgument('targettype');
         if (!in_array(strtolower($targettype), array('mail', 'folder'))) {
             $output->writeln('Target Type not matched!');
             return;
-        } else {
-            $host = $this->getContainer()->getParameter('database_host');
-            $user = $this->getContainer()->getParameter('database_user');
-            $password = $this->getContainer()->getParameter('database_password') != 'null' ? $this->getContainer()->getParameter('database_password') : '';
+        }
 
-            $fs = new Filesystem();
-            $dumps = array();
+        //get and check target argument
+        $target = $input->getArgument('target');
+        if (!$target) {
+            $output->writeln('Target Argument is empty!');
+            return;
+        }
 
-            if (!$allDB) {
-                $dumps[] = BackupMaker::backupTables($host, $user, $password, $database);
-                $output->writeln($allDB);
-            } else {
-                $output->writeln($allDB);
-            }
+        //put DS at end of path
+        if ($targettype == 'folder') {
+            if (substr($target, -1) != DIRECTORY_SEPARATOR)
+                $target .= DIRECTORY_SEPARATOR;
+        }
+
+        //get db parameters from container
+        $host = $this->getContainer()->getParameter('database_host');
+        $user = $this->getContainer()->getParameter('database_user');
+        $password = $this->getContainer()->getParameter('database_password') != 'null' ? $this->getContainer()->getParameter('database_password') : '';
+
+        //get filesystem handle
+        $fs = new Filesystem();
+
+        //dump the db in a string
+        $dump = BackupMaker::backupTables($host, $user, $password, $database);
+
+        if ($targettype == 'folder') {
+            //output file path
+            $path = $target . date('YmdHis') . '_backup_' . $database . '.sql';
+
+            //write file
+            $fs->dumpFile($path, $dump);
+            $output->writeln('File written to: ' . $path);
+        } else if ($targettype == 'mail') {
             
-            $output->writeln($target);
-
-            foreach ($dumps as $dump) {
-                if ($targettype == 'folder') {
-                    $fs->dumpFile($target . 'db-backup-' . $database . '-' . time() . '.sql', $dump);
-                    $output->writeln($target . 'db-backup-' . $database . '-' . time() . '.sql');
-                } else if ($targettype == 'mail') {
-                    
-                }
-            }
-
-            $output->writeln('Saved!');
         }
     }
 
