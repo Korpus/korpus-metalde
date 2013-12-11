@@ -18,14 +18,41 @@ class BackupDatabaseCommand extends ContainerAwareCommand
                 ->setName('backup:database')
                 ->setDescription('Backup some or all Database')
                 ->addArgument(
-                        'targettype', InputArgument::REQUIRED, 'Which TargetType -> mail, folder'
+                        'target', InputArgument::REQUIRED, 'Output Folder'
                 )
                 ->addArgument(
-                        'target', InputArgument::REQUIRED, 'Target, whether mailaddress or folderlocation'
+                        'database', InputArgument::REQUIRED, 'Which DB to Backup'
                 )
                 ->addArgument(
-                        'database', InputArgument::REQUIRED, 'Which DB to Backup, optional'
+                        'mail', InputArgument::OPTIONAL, 'MailAddress, optional'
         );
+    }
+
+    protected function sendMail($to, $from, $subject, $body, $attachmentPath = null)
+    {
+        $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom($from)
+                ->setTo($to)
+                ->setBody($body)
+        ;
+
+        if ($attachmentPath != null)
+            $message->attach(\Swift_Attachment::fromPath($attachmentPath));
+
+        $this->getContainer()->get('mailer')->send($message);
+
+        $transport = $this->getContainer()->get('mailer')->getTransport();
+        if (!$transport instanceof \Swift_Transport_SpoolTransport) {
+            return;
+        }
+
+        $spool = $transport->getSpool();
+        if (!$spool instanceof \Swift_MemorySpool) {
+            return;
+        }
+
+        $spool->flushQueue($this->getContainer()->get('swiftmailer.transport.real'));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -37,13 +64,6 @@ class BackupDatabaseCommand extends ContainerAwareCommand
             return;
         }
 
-        //get and check targettype argument
-        $targettype = $input->getArgument('targettype');
-        if (!in_array(strtolower($targettype), array('mail', 'folder'))) {
-            $output->writeln('Target Type not matched!');
-            return;
-        }
-
         //get and check target argument
         $target = $input->getArgument('target');
         if (!$target) {
@@ -51,11 +71,15 @@ class BackupDatabaseCommand extends ContainerAwareCommand
             return;
         }
 
-        //put DS at end of path
-        if ($targettype == 'folder') {
-            if (substr($target, -1) != DIRECTORY_SEPARATOR)
-                $target .= DIRECTORY_SEPARATOR;
+        //get and check mail argument
+        $mail = $input->getArgument('mail');
+        if (!$mail) {
+            $mail = null;
         }
+
+        //put DS at end of path
+        if (substr($target, -1) != DIRECTORY_SEPARATOR)
+            $target .= DIRECTORY_SEPARATOR;
 
         //get db parameters from container
         $host = $this->getContainer()->getParameter('database_host');
@@ -68,33 +92,21 @@ class BackupDatabaseCommand extends ContainerAwareCommand
         //dump the db in a string
         $dump = BackupMaker::backupTables($host, $user, $password, $database);
 
-        if ($targettype == 'folder') {
-            //output file path
-            $path = $target . date('YmdHis') . '_backup_' . $database . '.sql';
+        //output file path
+        $path = $target . date('YmdHis') . '_backup_' . $database . '.sql';
 
-            //write file
-            $fs->dumpFile($path, $dump);
-            $output->writeln('File written to: ' . $path);
-        } else if ($targettype == 'mail') {
-            $tempPath = sys_get_temp_dir();
+        //write file
+        $fs->dumpFile($path, $dump);
+        $output->writeln('File written to: ' . $path);
 
-            if (substr($tempPath, -1) != DIRECTORY_SEPARATOR)
-                $tempPath .= DIRECTORY_SEPARATOR;
-
-            $tempFile = $tempPath . date('YmdHis') . '_backup_' . $database . '.sql';
-
-            $message = \Swift_Message::newInstance()
-                    ->setSubject('DATABASE BACKUP : ' . $database . ' : ' . date('Y.m.d H:i:s'))
-                    ->setFrom('backup@biesti.com')
-                    ->setTo($target)
-                    ->setBody('Backup');
-//                    ->attach(\Swift_Attachment::fromPath($tempFile));
-
-            $this->getContainer()->get('mailer')->send($message);
-
-            $fs->remove($tempFile);
-
-            $output->writeln('File was sent to ' . $target);
+        //send mail
+        if ($mail != null) {
+            if ($dump != '' && $dump != null) {
+                $this->sendMail($mail, 'backup@biesti.com', 'DATABASE BACKUP : ' . $database . ' : ' . date('Y.m.d H:i:s'), 'Backup', $path);
+                $output->writeln('File was sent to ' . $mail);
+            }
+            else
+                $this->sendMail($mail, 'backup@biesti.com', 'Database Backup Failed! ' . date('Y.m.d H:i:s'), 'Backup Failed ' . date('Y.m.d H:i:s'));
         }
     }
 

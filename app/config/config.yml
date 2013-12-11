@@ -65,6 +65,7 @@ swiftmailer:
     password:  %mailer_password%
     auth_mode: %mailer_auth%
     port:      %mailer_port%
+    encryption: %mailer_enc%
     spool:     { type: memory }
 
 fos_user:
