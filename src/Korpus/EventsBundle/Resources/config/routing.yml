@@ -1,0 +1,7 @@
+korpus_events_homepage:
+    pattern:  /
+    defaults: { _controller: KorpusEventsBundle:Event:index }
+
+korpus_events_show_event:
+    pattern:  /{slug}
+    defaults: { _controller: KorpusEventsBundle:Event:show }

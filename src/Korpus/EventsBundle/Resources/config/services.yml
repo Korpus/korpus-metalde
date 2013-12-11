@@ -1,0 +1,7 @@
+parameters:
+#    korpus_events.example.class: Korpus\EventsBundle\Example
+
+services:
+#    korpus_events.example:
+#        class: %korpus_events.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

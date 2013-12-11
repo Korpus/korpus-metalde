@@ -17,7 +17,7 @@
 
     {% for event in events %}
         <div class="media">
-            <a class="pull-left" href="{{ path('korpus_main_page_live_event', {slug: event.slug}) }}">
+            <a class="pull-left" href="{{ path('korpus_events_show_event', {slug: event.slug}) }}">
                 {% if event.flyer == null %}
                     {% set flyerThumb = 'http://placehold.it/64x64' %}
                 {% else %}
@@ -30,7 +30,7 @@
                 {% if event.facebookLink != null %}
                     <a target="_blank" href="{{event.facebookLink}}" class="btn btn-xs btn-info pull-right"><span class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
                 {% endif %}
-                <a href="{{ path('korpus_main_page_live_event', {slug: event.slug}) }}">
+                <a href="{{ path('korpus_events_show_event', {slug: event.slug}) }}">
                     <h4 class="media-heading">{{event.title}} <span class="black-text"><strong><small>{{event.eventDate|date('d.m.Y, G:i')}}</small></strong></span></h4>
                 </a>                    
                 {{event.venue}} | {{event.city}}             
