@@ -1,5 +1,7 @@
 {% extends "KorpusEventsBundle::layout.html.twig" %}
 
+{% block title %{{event.title}}{% endblock %}
+
 {% block content %}
 
 {% if event.flyer == null %}
@@ -15,7 +17,7 @@
 {% endif %}
 
 <div class="flyer">
-    <a href="{{fbl}}"><img src="{{flyer}}"></a>
+    <a href="{{fbl}}"><img class="img-responsive" src="{{flyer}}"></a>
 </div>
 
 {% endblock %}
