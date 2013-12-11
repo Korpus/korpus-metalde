@@ -8,7 +8,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Korpus\BackupBundle\Component\BackupMaker;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class BackupDatabaseCommand extends ContainerAwareCommand
 {
@@ -77,7 +76,25 @@ class BackupDatabaseCommand extends ContainerAwareCommand
             $fs->dumpFile($path, $dump);
             $output->writeln('File written to: ' . $path);
         } else if ($targettype == 'mail') {
-            
+            $tempPath = sys_get_temp_dir();
+
+            if (substr($tempPath, -1) != DIRECTORY_SEPARATOR)
+                $tempPath .= DIRECTORY_SEPARATOR;
+
+            $tempFile = $tempPath . date('YmdHis') . '_backup_' . $database . '.sql';
+
+            $message = \Swift_Message::newInstance()
+                    ->setSubject('DATABASE BACKUP : ' . $database . ' : ' . date('Y.m.d H:i:s'))
+                    ->setFrom('backup@biesti.com')
+                    ->setTo($target)
+                    ->setBody('Backup');
+//                    ->attach(\Swift_Attachment::fromPath($tempFile));
+
+            $this->getContainer()->get('mailer')->send($message);
+
+            $fs->remove($tempFile);
+
+            $output->writeln('File was sent to ' . $target);
         }
     }
 
