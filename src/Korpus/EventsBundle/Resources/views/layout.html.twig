@@ -1,11 +1,31 @@
-{% extends "::base_2.html.twig" %}
+{% extends "::base_ember.html.twig" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/pages/korpusevents/css/' ~ event.slug ~ '.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('assets/pages/korpusevents/js/' ~ event.slug ~ '.js') }}"></script>
+{% endblock %}
 
 {% block body %}
 
 <span class="hidden" id="current-page">{% block currentpage %}{% endblock %}</span>
 <span class="hidden" id="current-subpage">{% block currentsubpage %}{% endblock %}</span>
 
-{% block content %}
-{% endblock %}
+<div class="container">
+    <div class="col-lg-12 app-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <div class="footer-links">
+        <hr>
+        <span>
+            <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a> | 
+            <a href="{{ path('korpus_main_page_datenschutz') }}">Datenschutz</a>
+        </span>
+    </div>
+</div>
 
 {% endblock %}

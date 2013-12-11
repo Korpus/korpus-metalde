@@ -1,13 +1,21 @@
 {% extends "KorpusEventsBundle::layout.html.twig" %}
 
-{% block stylesheets %}
-{% endblock %}
-
-{% block javascripts %}
-{% endblock %}
-
 {% block content %}
 
-{{event.title}}
+{% if event.flyer == null %}
+    {% set flyer = 'http://placehold.it/800x800' %}
+{% else %}
+    {% set flyer = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension}) %}
+{% endif %}
+
+{% if event.facebookLink == null %}
+    {% set fbl = '' %}
+{% else %}
+    {% set fbl = event.facebookLink %}
+{% endif %}
+
+<div class="flyer">
+    <a href="{{fbl}}"><img src="{{flyer}}"></a>
+</div>
 
 {% endblock %}
