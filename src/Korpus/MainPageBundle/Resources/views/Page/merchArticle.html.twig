@@ -8,6 +8,10 @@
 {% block content %}
 
 <br>
+
+<a href="{{ path('korpus_main_page_merch') }}" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Zurück</a>
+<br>
+<br>
 <div class="row">
     <div class="col-lg-4 col-md-4">
         <img src="{{ path('korpus_file_server_images_object', {folder: article.photo.folder, slug: article.photo.slug, extension: article.photo.type.extension}) }}" class="img-thumbnail img-responsive">
