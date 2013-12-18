@@ -70,6 +70,29 @@ class Article
     private $group;
 
     /**
+     * @ORM\OneToMany(targetEntity="ArticleStoreLinks", mappedBy="article")
+     */
+    protected $shopLinks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ArticleReview", mappedBy="article")
+     */
+    protected $reviews;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="infotext", type="text", nullable=true)
+     */
+    private $infotext;
+
+    public function __construct()
+    {
+        $this->shopLinks = new ArrayCollection;
+        $this->reviews = new ArrayCollection;
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -186,6 +209,36 @@ class Article
     public function setGroup($group)
     {
         $this->group = $group;
+    }
+
+    public function getShopLinks()
+    {
+        return $this->shopLinks;
+    }
+
+    public function setShopLinks($shopLinks)
+    {
+        $this->shopLinks = $shopLinks;
+    }
+
+    public function getInfotext()
+    {
+        return $this->infotext;
+    }
+
+    public function setInfotext($infotext)
+    {
+        $this->infotext = $infotext;
+    }
+
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    public function setReviews($reviews)
+    {
+        $this->reviews = $reviews;
     }
 
 }

@@ -30,6 +30,16 @@ class ArticleGroup
     private $title;
 
     /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="group")
+     */
+    protected $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection;
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -60,6 +70,16 @@ class ArticleGroup
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
     }
 
 }

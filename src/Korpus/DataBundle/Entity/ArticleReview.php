@@ -5,12 +5,12 @@ namespace Korpus\DataBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ArticleStoreLinks
+ * ArticleReview
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Korpus\DataBundle\Entity\ArticleStoreLinksRepository")
+ * @ORM\Entity(repositoryClass="Korpus\DataBundle\Entity\ArticleReviewRepository")
  */
-class ArticleStoreLinks
+class ArticleReview
 {
 
     /**
@@ -43,12 +43,6 @@ class ArticleStoreLinks
     private $article;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ArticleStore")
-     * @ORM\JoinColumn(name="store_id", referencedColumnName="id")
-     * */
-    private $store;
-
-    /**
      * Get id
      *
      * @return integer 
@@ -62,7 +56,7 @@ class ArticleStoreLinks
      * Set title
      *
      * @param string $title
-     * @return ArticleStoreLinks
+     * @return ArticleReview
      */
     public function setTitle($title)
     {
@@ -85,7 +79,7 @@ class ArticleStoreLinks
      * Set link
      *
      * @param string $link
-     * @return ArticleStoreLinks
+     * @return ArticleReview
      */
     public function setLink($link)
     {
@@ -112,16 +106,6 @@ class ArticleStoreLinks
     public function setArticle($article)
     {
         $this->article = $article;
-    }
-
-    public function getStore()
-    {
-        return $this->store;
-    }
-
-    public function setStore($store)
-    {
-        $this->store = $store;
     }
 
 }
