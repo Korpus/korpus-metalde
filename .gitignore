@@ -219,7 +219,6 @@ pip-log.txt
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
-composer.lock
 /nbproject/*
 /files/*
 /web/dfiles/
