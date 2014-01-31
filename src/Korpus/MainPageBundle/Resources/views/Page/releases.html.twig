@@ -1,0 +1,51 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}media{% endblock %}
+{% block currentsubpage %}releases{% endblock %}
+
+{% block title %}Korpus &middot; Media &middot; Audio{% endblock %}
+
+{% block content %}
+
+{% include 'KorpusMainPageBundle::small-nav-media.html.twig' %}
+
+<br>
+
+<div class="row">
+    <div class="col-lg-12">
+        {% for record in records %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <br>
+                    
+                    {% if record.cover == null %}
+                        {% set coverThumb = 'http://placehold.it/400x400' %}
+                    {% else %}
+                        {% set coverThumb = path('korpus_file_server_images_object', {folder: record.cover.folder, slug: record.cover.slug, extension: record.cover.type.extension}) %}
+                    {% endif %}
+                    <img src="{{coverThumb}}" class="img-responsive img-thumbnail" style="max-width: 200px;">
+                </div>  
+                <div class="col-lg-6">
+                    <h2>
+                        {% if record.article != null %}
+                        <a href="{{ path('korpus_main_page_merch_article', {slug: record.article.slug}) }}">{{record.title}}</a>
+                        {% else %}
+                        {{record.title}}
+                        {% endif %}
+                    </h2>
+                    <h5>{{record.publishDate|date('Y')}}</h5>
+                    
+                    <ol>
+                    {% for track in record.tracks %}
+                        <li>{{track.title}}</li>
+                    {% endfor %}
+                    </ol>
+                    
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

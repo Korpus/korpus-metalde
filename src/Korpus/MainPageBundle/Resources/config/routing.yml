@@ -69,6 +69,10 @@ korpus_main_page_media:
     pattern:  /media
     defaults: { _controller: KorpusMainPageBundle:Page:media }
     
+korpus_main_page_releases:
+    pattern:  /media/releases
+    defaults: { _controller: KorpusMainPageBundle:Page:releases }
+
 korpus_main_page_audio:
     pattern:  /media/audio
     defaults: { _controller: KorpusMainPageBundle:Page:audio }

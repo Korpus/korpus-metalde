@@ -167,16 +167,21 @@ class PageController extends Controller
      */
     public function mediaAction()
     {
-        return $this->redirect($this->generateUrl('korpus_main_page_audio'));
+        return $this->redirect($this->generateUrl('korpus_main_page_releases'));
     }
-
-    public function audioAction()
+    
+    public function releasesAction()
     {
         $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();
         $tmpl = array();
         $tmpl['records'] = $records;
 
-        return $this->render('KorpusMainPageBundle:Page:audio.html.twig', $tmpl);
+        return $this->render('KorpusMainPageBundle:Page:releases.html.twig', $tmpl);
+    }
+    
+    public function audioAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:audio.html.twig');
     }
 
     public function videoAction()

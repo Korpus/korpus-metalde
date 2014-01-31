@@ -45,16 +45,4 @@ $(document).ready(function() {
         });
     }
 
-    var hash = window.location.hash;
-    if (hash === '#player') {
-        $('#area-soundcloud').fadeIn();
-    }
-
-    $(window).on('hashchange', function() {
-        var hash = window.location.hash;
-        if (hash === '#player') {
-            $('#area-soundcloud').fadeIn();
-        }
-    });
-
 });
