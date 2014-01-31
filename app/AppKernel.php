@@ -28,7 +28,6 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Korpus\LoggingBundle\KorpusLoggingBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new Korpus\BackupBundle\KorpusBackupBundle(),
             new Korpus\EventsBundle\KorpusEventsBundle(),
         );
