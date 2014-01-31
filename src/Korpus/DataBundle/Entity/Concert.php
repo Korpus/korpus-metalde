@@ -92,6 +92,13 @@ class Concert
     private $info;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="state", type="string", length=255)
+     */
+    private $state;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -290,6 +297,16 @@ class Concert
     public function setInfo($info)
     {
         $this->info = $info;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 
 }

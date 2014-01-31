@@ -16,6 +16,8 @@ Korpus\DataBundle\Entity\Concert:
             - NotBlank: ~
         city:
             - NotBlank: ~
+        state:
+            - NotBlank: ~
         concertDate:
             - NotBlank: ~
             - Type: \DateTime
