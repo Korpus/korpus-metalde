@@ -3,6 +3,7 @@
 namespace Korpus\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Event
@@ -96,6 +97,16 @@ class Event
      * @ORM\Column(name="is_viewable", type="boolean")
      */
     private $isViewable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EventReservation", mappedBy="event")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -280,6 +291,16 @@ class Event
     public function setIsViewable($isViewable)
     {
         $this->isViewable = $isViewable;
+    }
+
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
     }
 
 }
