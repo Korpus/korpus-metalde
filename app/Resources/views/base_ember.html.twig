@@ -25,6 +25,9 @@
         <script src="{{ asset('assets/js/lib/ember.min.js') }}"></script>
         <!--block JS-->
         {% block javascripts %}{% endblock %}
+        
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
         <!--favicon-->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />

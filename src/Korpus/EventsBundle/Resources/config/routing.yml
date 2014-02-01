@@ -5,3 +5,10 @@ korpus_events_homepage:
 korpus_events_show_event:
     pattern:  /{slug}
     defaults: { _controller: KorpusEventsBundle:Event:show }
+    
+korpus_events_reservate:
+    pattern:  /{slug}/reservate
+    defaults: { _controller: KorpusEventsBundle:Event:reservate }
+    methods: [POST]
+    options:
+        expose: true

@@ -1,0 +1,17 @@
+{% extends "KorpusEventsBundle::email_layout.html.twig" %}
+
+{% block email %}
+
+<h2>{{event.title}}</h2>
+<h3>Reservationsbestätigung</h3>
+
+<div class="panel panel-success">
+    <div class="panel-body">
+        <h4>Vielen Dank!</h4>
+        Hiermit wird bestätigt, dass Sie erfolgreich <strong>{{reservation.amount}}</strong> Tickets
+        für das Event <strong>{{event.title}}</strong> am <strong>{{event.eventDate|date('d.m.Y')}}</strong>
+        reserviert haben!
+    </div>
+</div>
+
+{% endblock %}

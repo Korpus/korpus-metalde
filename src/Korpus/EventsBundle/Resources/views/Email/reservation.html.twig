@@ -1,0 +1,19 @@
+{% extends "KorpusEventsBundle::email_layout.html.twig" %}
+
+{% block email %}
+
+<h2>{{event.title}}</h2>
+<h3>Reservation</h3>
+
+<div>
+    Jemand mit folgenden Daten hat <strong>{{reservation.amount}}</strong> Tickets reserviert:
+    <div class="panel panel-success">
+        <div class="panel-body">
+            {{reservation.name}}<br>
+            {{reservation.email}}<br>
+            {{reservation.address|nl2br}}<br>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
