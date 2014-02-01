@@ -10,22 +10,6 @@
 
 {% block body %}
 
-<span class="hidden" id="current-page">{% block currentpage %}{% endblock %}</span>
-<span class="hidden" id="current-subpage">{% block currentsubpage %}{% endblock %}</span>
-
-<div class="container">
-    <div class="col-lg-12 app-container">
-        {% block content %}
-        {% endblock %}
-    </div>
-    
-    <div class="footer-links">
-        <hr>
-        <span>
-            <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a> | 
-            <a href="{{ path('korpus_main_page_datenschutz') }}">Datenschutz</a>
-        </span>
-    </div>
-</div>
+{% block content %}{% endblock %}
 
 {% endblock %}

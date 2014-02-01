@@ -91,6 +91,13 @@ class Event
     private $concert;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_viewable", type="boolean")
+     */
+    private $isViewable;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -263,6 +270,16 @@ class Event
     public function setConcert($concert)
     {
         $this->concert = $concert;
+    }
+
+    public function getIsViewable()
+    {
+        return $this->isViewable;
+    }
+
+    public function setIsViewable($isViewable)
+    {
+        $this->isViewable = $isViewable;
     }
 
 }

@@ -4,28 +4,90 @@
 
 {% block content %}
 
-{% if event.flyer == null %}
-    {% if event.concert != null %}
-        {% if event.concert.flyer != null %}
-            {% set flyer = path('korpus_file_server_images_object', {folder: event.concert.flyer.folder, slug: event.concert.flyer.slug, extension: event.concert.flyer.type.extension}) %}
-        {% else %}
-            {% set flyer = 'http://placehold.it/800x800' %}
-        {% endif %}
-    {% else %}
-        {% set flyer = 'http://placehold.it/800x800' %}
-    {% endif %}
-{% else %}
-    {% set flyer = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension}) %}
-{% endif %}
+<style>
+    body {
+        background-image: url('{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/background.jpg') }}');
+        background-attachment: fixed;
+    }
+</style>
 
-{% if event.facebookLink == null %}
-    {% set fbl = '' %}
-{% else %}
-    {% set fbl = event.facebookLink %}
-{% endif %}
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9:all.js"></script>
 
-<div class="flyer">
-    <a href="{{fbl}}"><img class="img-responsive" src="{{flyer}}"></a>
+<script type="text/x-handlebars" data-template-name="application">
+<div class="container">
+    <div class="col-lg-12 app-container">
+        <div class="page">
+            <div class="header">
+                <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/header.png') }}">
+            </div>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="navigator">
+                        {% raw %}{{#link-to 'info' class="nav-link"}}Info{{/link-to}}{% endraw %}
+                        {% raw %}{{#link-to 'bands' class="nav-link"}}Bands{{/link-to}}{% endraw %}
+                        {% raw %}{{#link-to 'reservierung' class="nav-link"}}Reservierung{{/link-to}}{% endraw %}
+                        {% raw %}{{#link-to 'kontakt' class="nav-link"}}Kontakt{{/link-to}}{% endraw %}
+                    </div>
+                    <div class="content">{% raw %}{{outlet}}{% endraw %}</div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="sidebar">
+                        <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/partner.png') }}">
+                        <div class="partners">
+                            <a href="http://www.skullcrusher-dresden.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/skull.png') }}">
+                            </a>
+                            <br>
+                            <a href="http://www.evolution-of-metal.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/evo.png') }}">
+                            </a>
+                            <br>
+                            <a href="http://www.sektor-evolution.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/sektor.png') }}">
+                            </a>
+                            <br>
+                            <a href="" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/ebmc.png') }}">
+                            </a>
+                            <br>
+                            <a href="http://sprengies-world.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/sprengie.png') }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-links">
+        <hr>
+        <span>
+            <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a> | 
+            <a href="{{ path('korpus_main_page_datenschutz') }}">Datenschutz</a>
+        </span>
+    </div>
 </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="info">
+<div class="centered">
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/index.png') }}">
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="reservierung">
+<div class="centered">
+    <p class="greentext bold">
+        Bitte fülle das folgende Formular aus, um Tickets für das SummernightInferno 2014 zu reservieren!
+    </p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="kontakt">
+<div class="centered">
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/anfahrt.jpg') }}">
+</div>
+</script>
 
 {% endblock %}

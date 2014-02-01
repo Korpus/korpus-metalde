@@ -1,19 +1,76 @@
 
 body {
     background-color: #000000;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 
-.flyer {
+.centered {
     text-align: center;
+}
+
+.content {
+    margin-top: 20px;
 }
 
 .footer-links {
     text-align: center;
-    color: #ffffff;
+    color: #cccccc;
     margin-top: 50px;
+    font-family: source-sans-pro, sans-serif;
+    padding-bottom: 20px;
 }
 
 .footer-links a {
-    color: #ffffff;
+    color: #cccccc;
+}
+
+.header {
+/*    background-image: url('../summernight-inferno-2/img/header.png');
+    width: 955px;
+    height: 250px;*/
+    text-align: center;
+}
+
+.sidebar {
+    padding-top: 25px;
+    text-align: center;
+}
+
+.navigator {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.nav-link {
+    font-family: source-sans-pro, sans-serif;
+    font-size: 35px;
+    margin-left: 30px;
+}
+
+.nav-link:link {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.nav-link:visited {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: #4EAD50;
+}
+
+.nav-link.active {
+    text-decoration: none;
+    color: #4EAD50;
+}
+
+.greentext {
+    color: #4EAD50;
+}
+
+.bold {
+    font-weight: 800;
 }

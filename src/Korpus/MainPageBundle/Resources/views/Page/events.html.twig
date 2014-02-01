@@ -16,6 +16,8 @@
 {% else %}
 
     {% for event in events %}
+    
+        {% if event.isViewable == true %}
         <div class="media">
             <a class="pull-left" href="{{ path('korpus_events_show_event', {slug: event.slug}) }}">
                 
@@ -53,6 +55,8 @@
                 {{event.venue}} | {{event.city}}             
             </div>
         </div>
+        {% endif %}
+    
     {% endfor %}
 
 {% endif %}
