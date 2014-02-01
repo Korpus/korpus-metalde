@@ -22,7 +22,7 @@
                 {% if event.flyer == null %}
                     {% if event.concert != null %}
                         {% if event.concert.flyer != null %}
-                            {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.concert.flyer.folder, slug: event.concert.flyer.slug, extension: event.concert.flyer.type.extension}) %}
+                            {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.concert.flyer.folder, slug: event.concert.flyer.slug, extension: event.concert.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
                         {% else %}
                             {% set flyerThumb = 'http://placehold.it/64x64' %}
                         {% endif %}
@@ -30,7 +30,7 @@
                         {% set flyerThumb = 'http://placehold.it/64x64' %}
                     {% endif %}
                 {% else %}
-                    {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension}) %}
+                    {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
                 {% endif %}
                 
                 {#
