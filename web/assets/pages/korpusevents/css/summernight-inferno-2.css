@@ -1,0 +1,19 @@
+
+body {
+    background-color: #000000;
+    margin-top: 70px;
+}
+
+.flyer {
+    text-align: center;
+}
+
+.footer-links {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 50px;
+}
+
+.footer-links a {
+    color: #ffffff;
+}

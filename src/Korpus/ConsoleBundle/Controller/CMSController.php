@@ -132,7 +132,7 @@ class CMSController extends Controller
         $concert->setConcertDate(new \DateTime('now'));
 
         $form = $this->createFormBuilder($concert)
-                ->add('event', 'text', array('label' => 'Event'))
+                ->add('eventName', 'text', array('label' => 'Event'))
                 ->add('venue', 'text', array('label' => 'Location'))
                 ->add('city', 'text', array('label' => 'Stadt'))
                 ->add('state', 'text', array('label' => 'Bundesland'))
@@ -177,7 +177,7 @@ class CMSController extends Controller
         $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneBySlug($slug);
 
         $form = $this->createFormBuilder($concert)
-                ->add('event', 'text', array('label' => 'Event'))
+                ->add('eventName', 'text', array('label' => 'Event'))
                 ->add('venue', 'text', array('label' => 'Location'))
                 ->add('city', 'text', array('label' => 'Stadt'))
                 ->add('state', 'text', array('label' => 'Bundesland'))

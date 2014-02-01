@@ -53,7 +53,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_link", type="string", length=255)
+     * @ORM\Column(name="facebook_link", type="string", length=255, nullable=true)
      */
     private $facebookLink;
 
@@ -83,6 +83,12 @@ class Event
      * @ORM\JoinColumn(name="flyer_id", referencedColumnName="id")
      * */
     private $flyer;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Concert", inversedBy="event")
+     * @ORM\JoinColumn(name="concert_id", referencedColumnName="id")
+     * */
+    private $concert;
 
     /**
      * Get id
@@ -247,6 +253,16 @@ class Event
     public function setFlyer($flyer)
     {
         $this->flyer = $flyer;
+    }
+
+    public function getConcert()
+    {
+        return $this->concert;
+    }
+
+    public function setConcert($concert)
+    {
+        $this->concert = $concert;
     }
 
 }
