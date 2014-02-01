@@ -18,11 +18,28 @@
     {% for event in events %}
         <div class="media">
             <a class="pull-left" href="{{ path('korpus_events_show_event', {slug: event.slug}) }}">
+                
+                {% if event.flyer == null %}
+                    {% if event.concert != null %}
+                        {% if event.concert.flyer != null %}
+                            {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.concert.flyer.folder, slug: event.concert.flyer.slug, extension: event.concert.flyer.type.extension}) %}
+                        {% else %}
+                            {% set flyerThumb = 'http://placehold.it/64x64' %}
+                        {% endif %}
+                    {% else %}
+                        {% set flyerThumb = 'http://placehold.it/64x64' %}
+                    {% endif %}
+                {% else %}
+                    {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension}) %}
+                {% endif %}
+                
+                {#
                 {% if event.flyer == null %}
                     {% set flyerThumb = 'http://placehold.it/64x64' %}
                 {% else %}
                     {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
                 {% endif %}
+                #}
                 
                 <img class="media-object" src="{{flyerThumb}}" alt="...">
             </a>
