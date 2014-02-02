@@ -151,8 +151,12 @@ korpus_console_events_toggle_viewable:
     pattern:  /events/{slug}/toggleViewable
     defaults: { _controller: KorpusConsoleBundle:Events:toggleViewable }
     methods: [POST]
+    options:
+        expose: true
     
 korpus_console_events_toggle_reservable:
     pattern:  /events/{slug}/toggleReservable
     defaults: { _controller: KorpusConsoleBundle:Events:toggleReservable }
     methods: [POST]
+    options:
+        expose: true

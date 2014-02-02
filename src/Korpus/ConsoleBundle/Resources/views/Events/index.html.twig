@@ -48,10 +48,10 @@
                 {{event.venue}} | {{event.city}}
                 <br><br>
                 <div>
-                    <a class="btn btn-xs btn-{% if event.isViewable %}danger{% else %}success{% endif %}" href="#">
+                    <a class="btn btn-xs btn-{% if event.isViewable %}danger{% else %}success{% endif %}" id="toggle-viewable" href="#" data-slug="{{event.slug}}">
                         <span class="glyphicon glyphicon-eye-open"></span> {% if event.isViewable %}Unsichtbar{% else %}Sichtbar{% endif %} schalten
                     </a>
-                    <a class="btn btn-xs btn-{% if event.isReservable %}danger{% else %}success{% endif %}" href="#">
+                    <a class="btn btn-xs btn-{% if event.isReservable %}danger{% else %}success{% endif %}" id="toggle-reservable" href="#" data-slug="{{event.slug}}">
                         <span class="glyphicon glyphicon-pencil"></span> Reservierung {% if event.isReservable %}aus{% else %}ein{% endif %}schalten
                     </a>
                 </div>
