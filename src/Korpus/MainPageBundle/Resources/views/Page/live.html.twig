@@ -31,7 +31,7 @@
                     <a target="_blank" href="{{concert.facebookLink}}" class="btn btn-xs btn-info pull-right"><span class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
                 {% endif %}
                 <a href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">
-                    <h4 class="media-heading">{{concert.event}} <span class="black-text"><strong><small>{{concert.concertDate|date('d.m.Y, G:i')}}</small></strong></span></h4>
+                    <h4 class="media-heading">{{concert.eventName}} <span class="black-text"><strong><small>{{concert.concertDate|date('d.m.Y, G:i')}}</small></strong></span></h4>
                 </a>                    
                 {{concert.venue}} | {{concert.city}}{% if concert.info != null %} | {{concert.info}}{% endif %}                
             </div>

@@ -6,7 +6,7 @@
     <tr>
         <td>{{concert.concertDate|date('d.m.Y')}}</td>
         <td>
-            <strong><a href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">{{concert.event}}</a></strong>, {{concert.venue}}, {{concert.city}}
+            <strong><a href="{{ path('korpus_main_page_live_concert', {slug: concert.slug}) }}">{{concert.eventName}}</a></strong>, {{concert.venue}}, {{concert.city}}
         </td>
     </tr>
     {% endfor %}
