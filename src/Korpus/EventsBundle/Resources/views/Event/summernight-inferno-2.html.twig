@@ -87,6 +87,8 @@
 <br>
 <div class="row">
     <div class="formular col-lg-6 col-lg-offset-3">
+        
+        {% if event.isReservable == true %}
         <div class="panel panel-default">
             {# flash messages #}
             {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -115,6 +117,12 @@
                 </form>
             </div>
         </div>
+        {% else %}
+        <p class="redtext bold">
+            Die Reservierung ist momentan nicht Freigeschalten!
+        </p>
+        {% endif %}
+        
     </div>
 </div>
 </script>

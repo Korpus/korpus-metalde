@@ -99,6 +99,13 @@ class Event
     private $isViewable;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_reservable", type="boolean")
+     */
+    private $isReservable;
+
+    /**
      * @ORM\OneToMany(targetEntity="EventReservation", mappedBy="event")
      */
     private $reservations;
@@ -301,6 +308,16 @@ class Event
     public function setReservations($reservations)
     {
         $this->reservations = $reservations;
+    }
+
+    public function getIsReservable()
+    {
+        return $this->isReservable;
+    }
+
+    public function setIsReservable($isReservable)
+    {
+        $this->isReservable = $isReservable;
     }
 
 }

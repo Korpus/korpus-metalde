@@ -66,6 +66,11 @@ class EventController extends Controller
 
         $session = $request->getSession();
 
+        //check isReservable state
+        if (!$event->getIsReservable()) {
+            return $this->redirect($request->get('referer'));
+        }
+
         $name = $request->get('name');
         $email = $request->get('email');
         $amount = (int) $request->get('amount');

@@ -71,6 +71,10 @@ body {
     color: #4EAD50;
 }
 
+.redtext {
+    color: #ff0000;
+}
+
 .bold {
     font-weight: 800;
 }
