@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Korpus\BackupBundle\KorpusBackupBundle(),
             new Korpus\EventsBundle\KorpusEventsBundle(),
+            new Korpus\EmailBundle\KorpusEmailBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

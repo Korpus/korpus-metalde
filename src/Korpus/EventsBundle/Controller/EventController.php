@@ -22,7 +22,36 @@ class EventController extends Controller
             return $this->redirect($this->generateUrl('korpus_main_page_live_events'));
         }
 
+        if (!$event->getIsViewable()) {
+            return $this->redirect($this->generateUrl('korpus_main_page_live_events'));
+        }
+
         return $this->render('KorpusEventsBundle:Event:' . $event->getSlug() . '.html.twig', array('event' => $event));
+    }
+
+    private function sendEmail($subject, $from, $to, $body)
+    {
+        $resMessage = \Swift_Message::newInstance()
+                ->setContentType("text/html")
+                ->setSubject($subject)
+                ->setFrom($from)
+                ->setTo($to)
+                ->setBody($body)
+        ;
+
+        $this->get('mailer')->send($resMessage);
+
+        $transport = $this->get('mailer')->getTransport();
+        if (!$transport instanceof \Swift_Transport_SpoolTransport) {
+            return;
+        }
+
+        $spool = $transport->getSpool();
+        if (!$spool instanceof \Swift_MemorySpool) {
+            return;
+        }
+
+        $spool->flushQueue($this->get('swiftmailer.transport.real'));
     }
 
     public function reservateAction(Request $request, $slug)
@@ -59,58 +88,10 @@ class EventController extends Controller
 
             //send email
             //to korpus
-            $resMessage = \Swift_Message::newInstance()
-                    ->setContentType("text/html")
-                    ->setSubject($event->getTitle() . ' | Reservation')
-                    ->setFrom($email)
-                    ->setTo('order@korpus-metal.de')
-                    ->setBody(
-                    $this->renderView(
-                            'KorpusEventsBundle:Email:reservation.html.twig', array('event' => $event, 'reservation' => $reservation)
-                    )
-                    )
-            ;
-
-            $this->get('mailer')->send($resMessage);
-
-            $transport = $this->get('mailer')->getTransport();
-            if (!$transport instanceof \Swift_Transport_SpoolTransport) {
-                return;
-            }
-
-            $spool = $transport->getSpool();
-            if (!$spool instanceof \Swift_MemorySpool) {
-                return;
-            }
-
-            $spool->flushQueue($this->get('swiftmailer.transport.real'));
+            $this->sendEmail($event->getTitle() . ' | Reservation', $email, 'order@korpus-metal.de', $this->renderView('KorpusEmailBundle:Events:reservation.html.twig', array('event' => $event, 'reservation' => $reservation)));
 
             //to user
-            $confirmMessage = \Swift_Message::newInstance()
-                    ->setContentType("text/html")
-                    ->setSubject($event->getTitle() . ' | Reservationsbestätigung')
-                    ->setFrom('order@korpus-metal.de')
-                    ->setTo($email)
-                    ->setBody(
-                    $this->renderView(
-                            'KorpusEventsBundle:Email:confirmation.html.twig', array('event' => $event, 'reservation' => $reservation)
-                    )
-                    )
-            ;
-
-            $this->get('mailer')->send($confirmMessage);
-
-            $transport = $this->get('mailer')->getTransport();
-            if (!$transport instanceof \Swift_Transport_SpoolTransport) {
-                return;
-            }
-
-            $spool = $transport->getSpool();
-            if (!$spool instanceof \Swift_MemorySpool) {
-                return;
-            }
-
-            $spool->flushQueue($this->get('swiftmailer.transport.real'));
+            $this->sendEmail($event->getTitle() . ' | Reservationsbestätigung', 'order@korpus-metal.de', $email, $this->renderView('KorpusEmailBundle:Events:confirmation.html.twig', array('event' => $event, 'reservation' => $reservation)));
 
             //set flash message                    
             $session->getFlashBag()->add('notice', 'Die Reservierung wurde vorgenommen! Sie werden in kürze eine Bestätigungsemail erhalten!');
