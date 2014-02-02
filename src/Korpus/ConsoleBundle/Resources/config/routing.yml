@@ -141,3 +141,18 @@ korpus_console_shop_articles_update:
 korpus_console_shop_articles_delete:
     pattern:  /shop/articles/{slug}/delete
     defaults: { _controller: KorpusConsoleBundle:Shop:deleteArticle }
+    
+#events
+korpus_console_events:
+    pattern:  /events
+    defaults: { _controller: KorpusConsoleBundle:Events:index }
+    
+korpus_console_events_toggle_viewable:
+    pattern:  /events/{slug}/toggleViewable
+    defaults: { _controller: KorpusConsoleBundle:Events:toggleViewable }
+    methods: [POST]
+    
+korpus_console_events_toggle_reservable:
+    pattern:  /events/{slug}/toggleReservable
+    defaults: { _controller: KorpusConsoleBundle:Events:toggleReservable }
+    methods: [POST]
