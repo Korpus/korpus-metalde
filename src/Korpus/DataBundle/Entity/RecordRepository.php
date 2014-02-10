@@ -16,7 +16,7 @@ class RecordRepository extends EntityRepository
     public function findAllWithTracks()
     {
         //entity manager
-        $em = $this->getEntityManager();
+        $em = $this->getManager();
 
         $records = $this->findAll();
         $out = array();

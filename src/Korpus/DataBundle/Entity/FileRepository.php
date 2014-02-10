@@ -15,7 +15,7 @@ class FileRepository extends EntityRepository
 
     public function findAllImages()
     {
-        $em = $this->getEntityManager();
+        $em = $this->getManager();
 
         $dql = '
             select f from KorpusDataBundle:File f where f.type in (
@@ -33,7 +33,7 @@ class FileRepository extends EntityRepository
 
     public function findAllImagesInFolder($folder)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getManager();
 
         $dql = '
             select f from KorpusDataBundle:File f where f.type in (

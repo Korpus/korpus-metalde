@@ -64,7 +64,7 @@ class PageController extends Controller
             $log->setVisitDate(new \DateTime('now'));
             $log->setPost($newsPost);
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($log);
             $em->flush();
         }

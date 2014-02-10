@@ -14,7 +14,7 @@ class FileTypeRepository extends EntityRepository
 {
     public function findAllActiveTypes() {
         //entity manager
-        $em = $this->getEntityManager();        
+        $em = $this->getManager();
         $dql = 'select ft from KorpusDataBundle:FileType ft where ft.isActive = true';        
         $query = $em->createQuery($dql);
         return $query->getResult();

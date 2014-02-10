@@ -15,7 +15,7 @@ class SourceLogRepository extends EntityRepository
 
     public function findAllPerNewsPost()
     {
-        $em = $this->getEntityManager();
+        $em = $this->getManager();
         
         $dql = 'select l, p, count(l.post) from KorpusDataBundle:SourceLog l join l.post p group by l.post order by l.post desc';
         
