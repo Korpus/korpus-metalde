@@ -1,3 +1,7 @@
+korpus_admin_panel:
+    resource: "@KorpusAdminPanelBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 korpus_events:
     resource: "@KorpusEventsBundle/Resources/config/routing.yml"
     prefix:   /events

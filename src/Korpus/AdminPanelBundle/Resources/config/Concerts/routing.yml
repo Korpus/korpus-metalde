@@ -1,0 +1,19 @@
+korpus_admin_panel_concerts_index:
+    pattern:  /
+    defaults: { _controller: KorpusAdminPanelBundle:Concerts:index }
+
+korpus_admin_panel_concerts_create:
+    pattern:  /create
+    defaults: { _controller: KorpusAdminPanelBundle:Concerts:create }
+
+korpus_admin_panel_concerts_read:
+    pattern:  /{id}/preview
+    defaults: { _controller: KorpusAdminPanelBundle:Concerts:read }
+
+korpus_admin_panel_concerts_update:
+    pattern:  /{id}/update
+    defaults: { _controller: KorpusAdminPanelBundle:Concerts:update }
+
+korpus_admin_panel_concerts_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: KorpusAdminPanelBundle:Concerts:delete }
