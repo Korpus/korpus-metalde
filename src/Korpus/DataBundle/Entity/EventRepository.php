@@ -16,7 +16,7 @@ class EventRepository extends EntityRepository
     public function findNextEvents()
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         //today, date part
         $today = new \DateTime('now');

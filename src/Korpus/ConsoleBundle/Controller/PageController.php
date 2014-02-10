@@ -58,7 +58,7 @@ class PageController extends Controller
             $user = new User();
             $user->setUsername($request->get('username'))->setEmail($request->get('email'))->setPlainPassword($request->get('password'));
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($user);
             $em->flush();
         }

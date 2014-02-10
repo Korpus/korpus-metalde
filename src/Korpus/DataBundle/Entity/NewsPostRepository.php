@@ -16,7 +16,7 @@ class NewsPostRepository extends EntityRepository
     public function findAllOrdered($order = 'desc')
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         $orders = array('desc', 'asc');
         if (!in_array($order, $orders))
@@ -31,7 +31,7 @@ class NewsPostRepository extends EntityRepository
     public function findLatestPost()
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         $currentDate = new \DateTime('now');
         //$currentDate->setTime(0, 0, 0);
@@ -53,7 +53,7 @@ class NewsPostRepository extends EntityRepository
     public function findSurroundingPosts($slug)
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         $dqlA = 'select n from KorpusDataBundle:NewsPost n where n.slug = ?1';
         $query = $em->createQuery($dqlA);

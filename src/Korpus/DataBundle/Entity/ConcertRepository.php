@@ -16,7 +16,7 @@ class ConcertRepository extends EntityRepository
     public function findAllOrdered($order = 'desc')
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         $orders = array('desc', 'asc');
         if (!in_array($order, $orders))
@@ -31,7 +31,7 @@ class ConcertRepository extends EntityRepository
     public function findNextConcerts()
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         //today, date part
         $today = new \DateTime('now');
@@ -53,7 +53,7 @@ class ConcertRepository extends EntityRepository
     public function findXNextConcerts($limit)
     {
         //entity manager
-        $em = $this->getManager();
+        $em = $this->getEntityManager();
 
         //today, date part
         $today = new \DateTime('now');
