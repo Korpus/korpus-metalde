@@ -20,7 +20,7 @@
     <div class="col-lg-12 app-container">
         <div class="page">
             <div class="header">
-                <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/header.png') }}">
+                {% raw %}{{#link-to 'index'}}{% endraw %}<img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/header.png') }}">{% raw %}{{/link-to}}{% endraw %}
             </div>
             <div class="row">
                 <div class="col-lg-10">
@@ -72,16 +72,45 @@
 </div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="info">
+<script type="text/x-handlebars" data-template-name="index">
 <div class="centered">
     <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/index.png') }}">
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="info">
+<div class="greentext centered">
+    <strong>Summernight Inferno 2014</strong>
+    <br><br>
+    [TEXT]
+    <br>
+    <br>
+    EINLASS: 17:00 Uhr
+    <br>
+    Metal Outdoor Party mit Konservenmusik und Cocktailbar unter freiem Himmel!
+    <br>
+    <br>
+    Beginn: 19:00 Uhr
+    <br>
+    Metal Indoor Party mit Livemusik bis in die Nacht
+    <br>
+    + anschliessender Aftershow Party
+    <br>
+    <br>
+    EINTRITT
+    <br>
+    10&euro; (17-19 Uhr)
+    <br>
+    12&euro; (ab 19 Uhr)
 </div>
 </script>
 
 <script type="text/x-handlebars" data-template-name="reservierung">
 <div class="centered">
     <p class="greentext bold">
-        Bitte fülle das folgende Formular aus, um Tickets für das SummernightInferno 2014 zu reservieren!
+        Hier könnt Ihr eure Tickets für das Summernight Inferno II vorbestellen!
+        <br>
+        Tragt einfach eure Daten in das Formular ein, die Tickets werden dann am Einlass auf euren Namen hinterlegt.
     </p>
 </div>
 <br>

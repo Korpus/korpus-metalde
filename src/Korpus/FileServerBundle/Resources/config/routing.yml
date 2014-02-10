@@ -13,4 +13,4 @@ korpus_file_server_images_collection_thumbs:
     
 korpus_file_server_images_object:
     pattern:  /images/{folder}/{slug}.{extension}
-    defaults: { _controller: KorpusFileServerBundle:Images:object }
+    defaults: { _controller: KorpusFileServerBundle:Images:getImage }

@@ -8,8 +8,8 @@ App.Router.map(function() {
     this.route("kontakt", {path: "/kontakt"});
 });
 
-App.IndexRoute = Ember.Route.extend({
-    beforeModel: function() {
-        this.transitionTo('info');
-    }
-});
+//App.IndexRoute = Ember.Route.extend({
+//    beforeModel: function() {
+//        this.transitionTo('info');
+//    }
+//});
