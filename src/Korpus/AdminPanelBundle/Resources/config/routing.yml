@@ -17,3 +17,7 @@ korpus_admin_panel_concerts:
 korpus_admin_panel_news:
     resource: "@KorpusAdminPanelBundle/Resources/config/News/routing.yml"
     prefix:   /news
+
+korpus_admin_panel_events:
+    resource: "@KorpusAdminPanelBundle/Resources/config/Events/routing.yml"
+    prefix:   /events

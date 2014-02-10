@@ -1,0 +1,15 @@
+korpus_admin_panel_events_index:
+    pattern:  /
+    defaults: { _controller: KorpusAdminPanelBundle:Events:index }
+
+korpus_admin_panel_events_create:
+    pattern:  /create
+    defaults: { _controller: KorpusAdminPanelBundle:Events:create }
+
+korpus_admin_panel_events_update:
+    pattern:  /{id}/update
+    defaults: { _controller: KorpusAdminPanelBundle:Events:update }
+
+korpus_admin_panel_events_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: KorpusAdminPanelBundle:Events:delete }
