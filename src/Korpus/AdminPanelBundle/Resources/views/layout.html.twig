@@ -1,12 +1,12 @@
 {% extends '::base_admin.html.twig' %}
 
 {% block javascripts %}
-<script src="{{ asset('assets/pages/korpusadminpanel/js/app.js') }}"></script>
+    <script src="{{ asset('assets/pages/korpusadminpanel/js/app.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}
-<link href="{{ asset('assets/pages/korpusadminpanel/css/dashboard.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/pages/korpusadminpanel/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/pages/korpusadminpanel/css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/pages/korpusadminpanel/css/app.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -24,7 +24,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('korpus_admin_panel_homepage') }}">Dashboard</a></li>
+                    <li><a href="{{ path('korpus_admin_panel_dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ path('korpus_admin_panel_settings') }}">Einstellungen</a></li>
                     <li><a href="#">{{ app.user.username }}</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
@@ -39,22 +39,14 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Overview</a></li>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Analytics</a></li>
-                    <li><a href="#">Export</a></li>
+                    <li><a href="">News</a></li>
+                    <li><a href="">Konzerte</a></li>
+                    <li><a href="">Band</a></li>
+                    <li><a href="">Records</a></li>
+                    <li><a href="">Shop</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item</a></li>
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                    <li><a href="">More navigation</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
+                    <li><a href="">Events</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

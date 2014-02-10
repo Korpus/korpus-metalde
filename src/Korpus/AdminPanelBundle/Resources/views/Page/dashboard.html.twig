@@ -4,4 +4,54 @@
 
     <h1 class="page-header">Dashboard</h1>
 
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">News</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table teble-condensed table-responsive">
+                        <tr>
+                            <th>Quelle</th>
+                            <th>Post</th>
+                            <th>Anzahl</th>
+                        </tr>
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{ log.source }}</td>
+                                <td>{{ log.title }}</td>
+                                <td>{{ log.count }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Server</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="server-info">
+                        <h4>Speicherplatz</h4>
+                        <h5>Drive '/'</h5>
+
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-{{ progressbar_class }}" role="progressbar"
+                                 aria-valuenow="{{ percentage }}"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage }}%">
+                                <span class="sr-only">{{ percentage }}% Complete</span>
+                                {{ percentage }}%
+                            </div>
+                        </div>
+                        <strong>{{ current_usage }}</strong>MB / <strong>{{ max_size }}</strong>MB ~
+                        <strong>{{ free_space }}</strong>MB frei
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
