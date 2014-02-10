@@ -1,0 +1,44 @@
+{% extends 'KorpusAdminPanelBundle::layout.html.twig' %}
+
+{% block current_page %}events{% endblock %}
+
+{% block content %}
+
+    <h1 class="page-header">
+        Events<span class="pull-right"><span class="glyphicon glyphicon-plus-sign"></span></span>
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form role="form" method="post" action="{{ path('korpus_admin_panel_events_create') }}">
+                <div class="form-group">
+                    <label for="input-title">Titel</label>
+                    <input type="text" class="form-control" id="input-title" placeholder="Title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="input-slug">Slug</label>
+                    <input type="text" class="form-control" id="input-slug" placeholder="Slug" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-event-date">Event Datum</label>
+                    <input type="text" class="form-control" id="input-event-date" placeholder="EventDate" name="eventDate">
+                </div>
+                <div class="form-group">
+                    <label for="input-venue">Location</label>
+                    <input type="text" class="form-control" id="input-venue" placeholder="Venue" name="venue">
+                </div>
+                <div class="form-group">
+                    <label for="input-city">Stadt</label>
+                    <input type="text" class="form-control" id="input-city" placeholder="City" name="city">
+                </div>
+                <div class="form-group">
+                    <label for="input-facebook-link">Facebook-Link (optional)</label>
+                    <input type="text" class="form-control" id="input-facebook-link" placeholder="FacebookLink" name="facebookLink">
+                </div>
+                <input type="hidden" name="sent" value="1">
+                <button type="submit" class="btn btn-primary">Speichern</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

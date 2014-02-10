@@ -118,7 +118,7 @@ class Event
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -141,7 +141,7 @@ class Event
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -164,7 +164,7 @@ class Event
     /**
      * Get creationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreationDate()
     {
@@ -187,7 +187,7 @@ class Event
     /**
      * Get editDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEditDate()
     {
@@ -210,7 +210,7 @@ class Event
     /**
      * Get eventDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEventDate()
     {
@@ -233,7 +233,7 @@ class Event
     /**
      * Get facebookLink
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookLink()
     {

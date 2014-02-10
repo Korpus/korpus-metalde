@@ -1,4 +1,21 @@
+function filterSpecialChars(str) {
+    return str.replace(/[^\w\s]/gi, '-');
+};
+
+function generateEventSlug(str) {
+    console.log(str);
+    str = str.replace(/ /g, '-');
+    str = filterSpecialChars(str);
+    str = str.toLowerCase();
+    return str;
+};
+
 $(document).ready(function () {
+    var currentPage = $('#current-page').html();
+
+    $('.nav-link').removeClass('active');
+    $('#nl-' + currentPage).addClass('active');
+
     //EVENTS
     $('#toggle-viewable').click(function (e) {
         e.preventDefault();
@@ -17,4 +34,13 @@ $(document).ready(function () {
             location.reload();
         });
     });
+
+    //events slug
+    $('#input-title').keyup(function () {
+        $('#input-slug').val(generateEventSlug($(this).val()));
+    });
+
+    //event datepicker
+    $('#input-event-date').datepicker();
+
 });
