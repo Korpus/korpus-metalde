@@ -13,3 +13,17 @@ korpus_admin_panel_events_update:
 korpus_admin_panel_events_delete:
     pattern:  /{id}/delete
     defaults: { _controller: KorpusAdminPanelBundle:Events:delete }
+
+korpus_admin_panel_events_toggle_viewable:
+    pattern:  /events/{id}/toggleViewable
+    defaults: { _controller: KorpusAdminPanelBundle:Events:toggleViewable }
+    methods: [POST]
+    options:
+        expose: true
+
+korpus_admin_panel_events_toggle_reservable:
+    pattern:  /events/{id}/toggleReservable
+    defaults: { _controller: KorpusAdminPanelBundle:Events:toggleReservable }
+    methods: [POST]
+    options:
+        expose: true

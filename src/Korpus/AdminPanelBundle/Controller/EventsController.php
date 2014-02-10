@@ -3,6 +3,7 @@
 namespace Korpus\AdminPanelBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class EventsController extends Controller
 {
