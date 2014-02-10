@@ -32,9 +32,9 @@ class PageController extends Controller
         $percentage = number_format(($currentUsage / $maxSize) * 100, 2, '.', '');
         $freeSpace = disk_free_space('/');
 
-        $currentUsageMB = $currentUsage / 1000000;
-        $maxSizeMB = $maxSize / 1000000;
-        $freeSpaceMB = $freeSpace / 1000000;
+        $currentUsageMB = $currentUsage / 1000000000;
+        $maxSizeMB = $maxSize / 1000000000;
+        $freeSpaceMB = $freeSpace / 1000000000;
 
         $progressbarClass = 'info';
         if ((double)$percentage >= 30) {
