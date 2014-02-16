@@ -1,7 +1,0 @@
-parameters:
-#    korpus_main_page.example.class: Korpus\MainPageBundle\Example
-
-services:
-#    korpus_main_page.example:
-#        class: %korpus_main_page.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

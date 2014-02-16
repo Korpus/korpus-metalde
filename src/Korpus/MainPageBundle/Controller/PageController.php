@@ -169,7 +169,7 @@ class PageController extends Controller
     {
         return $this->redirect($this->generateUrl('korpus_main_page_releases'));
     }
-    
+
     public function releasesAction()
     {
         $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();
@@ -178,7 +178,7 @@ class PageController extends Controller
 
         return $this->render('KorpusMainPageBundle:Page:releases.html.twig', $tmpl);
     }
-    
+
     public function audioAction()
     {
         return $this->render('KorpusMainPageBundle:Page:audio.html.twig');
@@ -216,4 +216,11 @@ class PageController extends Controller
         return $this->render('KorpusMainPageBundle:Page:merchArticle.html.twig', array('article' => $article));
     }
 
+    /**
+     * Dev
+     */
+    public function developmentPageAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:dev.html.twig');
+    }
 }

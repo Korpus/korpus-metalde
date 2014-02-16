@@ -110,3 +110,8 @@ korpus_main_page_merch:
 korpus_main_page_merch_article:
     pattern:  /merch/{slug}
     defaults: { _controller: KorpusMainPageBundle:Page:merchArticle }
+
+#dev
+korpus_main_page_development:
+    pattern:  /development
+    defaults: { _controller: KorpusMainPageBundle:Page:developmentPage }
