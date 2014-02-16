@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <script src="{{ asset('assets/pages/korpusmainpage/js/commitment.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/korpusmainpage/js/commitment.js') }}"></script>
 
     <legend>Development</legend>
 
@@ -45,7 +45,8 @@
             },
             error: function (message) {
                 console.log(message);
-            }
+            },
+            limit: 10
         });
     </script>
 
