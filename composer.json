@@ -24,7 +24,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "knplabs/knp-markdown-bundle": "1.2.*@dev",
         "jms/serializer-bundle": "0.12",
-        "friendsofsymfony/jsrouting-bundle": "~1.1"
+        "friendsofsymfony/jsrouting-bundle": "~1.1",
+        "verbalexpressions/php-verbal-expressions": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

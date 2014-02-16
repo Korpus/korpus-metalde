@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Korpus\DataBundle\Entity\Event;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Korpus\DataBundle\Helper\EventHelper;
 
 class EventsController extends Controller
 {
@@ -28,21 +28,29 @@ class EventsController extends Controller
             $facebookLink = $request->get('facebookLink');
             $eventDate = $request->get('eventDate');
 
-            if ($title != "" && $venue != "" && $city != "" && $eventDate != "") {
-                $event = new Event();
-                $event->setCity($city);
-                $event->setCreationDate(new \DateTime('now'));
+            $event = new Event();
+            $event->setCity($city);
+            $event->setCreationDate(new \DateTime('now'));
 
-                if ($facebookLink != "") {
-                    $event->setFacebookLink($facebookLink);
-                }
+            if ($facebookLink != "") {
+                $event->setFacebookLink($facebookLink);
+            }
 
-                $event->setIsReservable(false);
-                $event->setIsViewable(false);
-                $event->setTitle($title);
-                $event->setVenue($venue);
-                $event->setEventDate(new \DateTime($eventDate));
+            $event->setIsReservable(false);
+            $event->setIsViewable(false);
+            $event->setTitle($title);
+            $event->setVenue($venue);
+            $event->setEventDate(new \DateTime($eventDate));
+            $event->setSlug(EventHelper::generateSlug($title));
 
+            //validate event
+            $validator = $this->get('validator');
+            $errors = $validator->validate($event);
+
+            if (count($errors) > 0) {
+                $errorsString = (string)$errors;
+                $session->getFlashBag()->add('error', $errorsString);
+            } else {
                 //persist event
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($event);
@@ -51,8 +59,6 @@ class EventsController extends Controller
                 $session->getFlashBag()->add('notice', 'Ein neues Event wurde hinzugefügt!');
 
                 return $this->redirect($this->generateUrl('korpus_admin_panel_events_index'));
-            } else {
-                $session->getFlashBag()->add('error', 'Alle Felder müssen ausgefüllt werden!');
             }
         }
 

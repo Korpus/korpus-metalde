@@ -3,7 +3,6 @@ function filterSpecialChars(str) {
 };
 
 function generateEventSlug(str) {
-    console.log(str);
     str = str.replace(/ /g, '-');
     str = filterSpecialChars(str);
     str = str.toLowerCase();
@@ -36,8 +35,12 @@ $(document).ready(function () {
     });
 
     //events slug
-    $('#input-title').keyup(function () {
-        $('#input-slug').val(generateEventSlug($(this).val()));
+    $('#event-input-title').keyup(function () {
+        $('#event-input-slug').val(generateEventSlug($(this).val()));
+    });
+
+    $('#event-input-title').focusout(function () {
+        $('#event-input-slug').val(generateEventSlug($(this).val()));
     });
 
     //event datepicker
