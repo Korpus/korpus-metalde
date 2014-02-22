@@ -1,0 +1,18 @@
+{% extends 'KorpusTwigBundle::custom_layout.html.twig' %}
+
+{% block title %}Ein Fehler ist aufgetreten: {{ status_text }}{% endblock %}
+
+{% block content %}
+
+    <h1>Ein Fehler ist aufgetreten!</h1>
+
+    <h3><span class="label label-danger">{{ status_code }}</span> {{ status_text }}</h3>
+    <br>
+    <p>
+        Etwas scheint defekt zu sein. Bitte sende uns eine E-Mail an <a href="mailto:bugs@korpus-metal.de">bugs@korpus-metal.de</a>
+        und lass uns wissen was du gemacht hast als dieser Fehler auftrat.
+        <br>
+        Wir werden den Fehler schnellstmöglich beseitigen. Bitte entschuldige die Unannehmlichkeiten.
+    </p>
+
+{% endblock %}

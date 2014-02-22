@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Korpus\EventsBundle\KorpusEventsBundle(),
             new Korpus\EmailBundle\KorpusEmailBundle(),
             new Korpus\AdminPanelBundle\KorpusAdminPanelBundle(),
+            new Korpus\TwigBundle\KorpusTwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,37 @@
+{% extends '::base_exc.html.twig' %}
+
+{% block body %}
+
+    <style>
+        footer {
+            text-align: center;
+        }
+
+        footer .cp {
+            font-style: oblique;
+            color: #BBBBBB;
+        }
+    </style>
+
+    <div class="container">
+        <div class=row>
+            <div class="col-lg-12">
+                {% block content %}{% endblock %}
+
+                <footer>
+                    <hr class="bs-docs-separator">
+                    <span class="cp">© {{ 'now'|date('Y') }}, Florian Weber, Korpus</span>
+                    <br>
+                    <div class="footer-links">
+                    <span>
+                        <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a>
+                    </span>
+                    </div>
+                    <br>
+                    <br>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
