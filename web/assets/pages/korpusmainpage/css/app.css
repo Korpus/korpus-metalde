@@ -194,8 +194,8 @@ a {
     }
 
     .navigator a {
-        font-size: 20px;
-        padding-left: 20px;
+        font-size: 18px;
+        padding-left: 15px;
     }
 
     .navigator-small a {
@@ -224,7 +224,7 @@ a {
 
     .navigator a {
         font-size: 25px;
-        padding-left: 38px;
+        padding-left: 22px;
     }
 
     .navigator-small a {
@@ -249,7 +249,7 @@ a {
 
     .navigator a {
         font-size: 25px;
-        padding-left: 66px;
+        padding-left: 48px;
     }
 
     .navigator-small a {

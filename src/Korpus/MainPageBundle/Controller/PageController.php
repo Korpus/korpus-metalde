@@ -3,6 +3,7 @@
 namespace Korpus\MainPageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\DataBundle\Entity\SourceLog;
@@ -197,6 +198,20 @@ class PageController extends Controller
     public function photosAction()
     {
         return $this->render('KorpusMainPageBundle:Page:photos.html.twig');
+    }
+
+    /**
+     * Fans
+     */
+    public function fansAction()
+    {
+        $album = json_decode(file_get_contents('https://graph.facebook.com/707204165977323'));
+        $photos = json_decode(file_get_contents('https://graph.facebook.com/707204165977323/photos'));
+
+        return $this->render('KorpusMainPageBundle:Page:fans.html.twig', array(
+            'album' => $album,
+            'photos' => $photos->data
+        ));
     }
 
     /**

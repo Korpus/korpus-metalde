@@ -101,7 +101,12 @@ korpus_main_page_kontakt_booking:
 korpus_main_page_kontakt_links:
     pattern:  /contact/links
     defaults: { _controller: KorpusMainPageBundle:Page:links }
-    
+
+#fans
+korpus_main_page_fans:
+    pattern:  /fans
+    defaults: { _controller: KorpusMainPageBundle:Page:fans }
+
 #merch
 korpus_main_page_merch:
     pattern:  /merch

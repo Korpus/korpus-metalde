@@ -1,0 +1,49 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}fans{% endblock %}
+
+{% block title %}Korpus &middot; Fans{% endblock %}
+
+{% block content %}
+
+    <p>
+        Tausend Dank für eure Unterstützung! Ihr seid die Geilsten, und deshalb wollen wir Euch hier verewigen!<br>
+        Wenn euer Bild auf diese Site geladen werden soll, sendet einfach euer Fan-Pic an <a
+                href="mailto:fans@korpus-metal.de">fans@korpus-metal.de</a>.
+    </p>
+
+    <div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% for i, photo in photos %}
+                    <li data-target="#carousel-example-generic" data-slide-to="{{ i }}" {% if i == 0 %}class="active"{% endif %}></li>
+                {% endfor %}
+            </ol>
+
+            <!-- Wrapper for slides -->
+
+
+            {% for i, photo in photos %}
+                <div class="carousel-inner">
+                    <div class="item{% if i == 0 %} active{% endif %}">
+                        <img src="{{ photo.images[0].source }}" alt="...">
+
+                        <div class="carousel-caption">
+                            <h3>{{ photo.name }}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
