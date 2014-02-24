@@ -6,43 +6,128 @@
 
 {% block content %}
 
+    <style>
+        .panel-body-custom {
+            padding: 0px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .comment-date {
+            font-style: oblique;
+            color: #BBBBBB;
+            font-size: 12px;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('assets/pages/korpusmainpage/css/bttrlazyloading.min.css') }}"/>
+    <script src="{{ asset('assets/pages/korpusmainpage/js/jquery.bttrlazyloading.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.bttrlazyloading').bttrlazyloading({
+                transition: 'flipInX'
+            });
+
+            $('.btn-toogle-comment').click(function (e) {
+                e.preventDefault;
+                var target = $(this).data('target');
+
+                if ($(target).css('display') === 'none') {
+                    $(target).fadeIn();
+                } else {
+                    $(target).fadeOut();
+                }
+            });
+        });
+    </script>
+
     <p>
-        Tausend Dank für eure Unterstützung! Ihr seid die Geilsten, und deshalb wollen wir Euch hier verewigen!<br>
+        Tausend Dank für eure Unterstützung! <strong>Ihr seid die Geilsten</strong>, und deshalb wollen wir Euch hier
+        verewigen!<br>
         Wenn euer Bild auf diese Site geladen werden soll, sendet einfach euer Fan-Pic an <a
                 href="mailto:fans@korpus-metal.de">fans@korpus-metal.de</a>.
     </p>
+    <p>
+        Das Album findet ihr auch auf <a href="{{ album.link }}" target="_blank">Facebook</a>!
+    </p>
 
-    <div>
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                {% for i, photo in photos %}
-                    <li data-target="#carousel-example-generic" data-slide-to="{{ i }}" {% if i == 0 %}class="active"{% endif %}></li>
-                {% endfor %}
-            </ol>
-
-            <!-- Wrapper for slides -->
-
-
-            {% for i, photo in photos %}
-                <div class="carousel-inner">
-                    <div class="item{% if i == 0 %} active{% endif %}">
-                        <img src="{{ photo.images[0].source }}" alt="...">
-
-                        <div class="carousel-caption">
-                            <h3>{{ photo.name }}</h3>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            {% for i, photo in album.photos %}
+                {% if (i is even) %}
+                    <div class="panel panel-default">
+                        <div class="panel-body-custom">
+                            <a href="{{ photo.link }}" target="_blank">
+                                <img class="img-responsive bttrlazyloading"
+                                     data-bttrlazyloading-lg-src="{{ photo.images[0].source }}">
+                            </a>
                         </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                {{ photo.name }}
+                                {% if photo.comments != null %}
+                                    <span class="pull-right">
+                                        <a class="btn-toogle-comment" data-target="#comment-ul-{{ i }}">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        {% if photo.comments != null %}
+                            <ul class="list-group" style="display: none;" id="comment-ul-{{ i }}">
+                                {% for comment in photo.comments %}
+                                    <li class="list-group-item">
+                                        <strong>{{ comment.from }}:</strong> {{ comment.message }}
+                                        <br>
+                                        <span class="comment-date">{{ comment.createdTime|date('d.m.Y G:h:i') }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            {% for i, photo in album.photos %}
+                {% if (i is not even) %}
+                    <div class="panel panel-default">
+                        <div class="panel-body-custom">
+                            <a href="{{ photo.link }}" target="_blank">
+                                <img class="img-responsive bttrlazyloading"
+                                     data-bttrlazyloading-lg-src="{{ photo.images[0].source }}">
+                            </a>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                {{ photo.name }}
+                                {% if photo.comments != null %}
+                                    <span class="pull-right">
+                                        <a class="btn-toogle-comment" data-target="#comment-ul-{{ i }}">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        {% if photo.comments != null %}
+                            <ul class="list-group" style="display: none;" id="comment-ul-{{ i }}">
+                                {% for comment in photo.comments %}
+                                    <li class="list-group-item">
+                                        <strong>{{ comment.from }}:</strong> {{ comment.message }}
+                                        <br>
+                                        <span class="comment-date">{{ comment.createdTime|date('d.m.Y G:h:i') }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 

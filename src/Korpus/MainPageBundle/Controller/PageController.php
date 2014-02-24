@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\DataBundle\Entity\SourceLog;
+use Korpus\DataBundle\Model\FacebookPhotoAlbum;
 
 class PageController extends Controller
 {
@@ -205,12 +206,22 @@ class PageController extends Controller
      */
     public function fansAction()
     {
-        $album = json_decode(file_get_contents('https://graph.facebook.com/707204165977323'));
+        /*$album = json_decode(file_get_contents('https://graph.facebook.com/707204165977323'));
         $photos = json_decode(file_get_contents('https://graph.facebook.com/707204165977323/photos'));
+
+        var_dump($photos);
+
+        return new Response('true');
 
         return $this->render('KorpusMainPageBundle:Page:fans.html.twig', array(
             'album' => $album,
             'photos' => $photos->data
+        ));*/
+
+        $album = new FacebookPhotoAlbum('https://graph.facebook.com/707204165977323');
+
+        return $this->render('KorpusMainPageBundle:Page:fans.html.twig', array(
+            'album' => $album
         ));
     }
 
