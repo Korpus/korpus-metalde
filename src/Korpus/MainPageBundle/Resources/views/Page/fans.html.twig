@@ -67,14 +67,17 @@
                         </div>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                {{ photo.name }}
-                                {% if photo.comments != null %}
-                                    <span class="pull-right">
-                                        <a class="btn-toogle-comment" data-target="#comment-ul-{{ i }}">
-                                            <span class="glyphicon glyphicon-comment"></span>
-                                        </a>
-                                    </span>
-                                {% endif %}
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">{{ photo.name }}</div>
+                                    {% if photo.comments != null %}
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                            <a class="btn-toogle-comment" data-target="#comment-ul-{{ i }}"
+                                               style="margin-left: 5px; margin-top: 2px;">
+                                                <span class="glyphicon glyphicon-comment"></span>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </li>
                         </ul>
                         {% if photo.comments != null %}
@@ -104,14 +107,17 @@
                         </div>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                {{ photo.name }}
-                                {% if photo.comments != null %}
-                                    <span class="pull-right">
-                                        <a class="btn-toogle-comment" data-target="#comment-ul-{{ i }}">
-                                            <span class="glyphicon glyphicon-comment"></span>
-                                        </a>
-                                    </span>
-                                {% endif %}
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">{{ photo.name }}</div>
+                                    {% if photo.comments != null %}
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                            <a class="btn-toogle-comment" data-target="#comment-ul-{{ i }}"
+                                               style="margin-left: 5px; margin-top: 2px;">
+                                                <span class="glyphicon glyphicon-comment"></span>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </li>
                         </ul>
                         {% if photo.comments != null %}
