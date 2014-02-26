@@ -60,9 +60,12 @@
                 {% if (i is even) %}
                     <div class="panel panel-default">
                         <div class="panel-body-custom">
-                            <a href="{{ photo.link }}" target="_blank">
+                            {#<a href="{{ photo.link }}" target="_blank">
                                 <img class="img-responsive bttrlazyloading"
                                      data-bttrlazyloading-lg-src="{{ photo.images[0].source }}">
+                            </a>#}
+                            <a href="{{ photo.link }}" target="_blank">
+                                <img class="img-responsive" src="{{ photo.images[0].source }}">
                             </a>
                         </div>
                         <ul class="list-group">
@@ -100,9 +103,12 @@
                 {% if (i is not even) %}
                     <div class="panel panel-default">
                         <div class="panel-body-custom">
-                            <a href="{{ photo.link }}" target="_blank">
+                            {#<a href="{{ photo.link }}" target="_blank">
                                 <img class="img-responsive bttrlazyloading"
                                      data-bttrlazyloading-lg-src="{{ photo.images[0].source }}">
+                            </a>#}
+                            <a href="{{ photo.link }}" target="_blank">
+                                <img class="img-responsive" src="{{ photo.images[0].source }}">
                             </a>
                         </div>
                         <ul class="list-group">
