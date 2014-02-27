@@ -43,12 +43,12 @@ class PageController extends Controller
         $users = $this->getDoctrine()->getRepository('KorpusUserBundle:User')->findAll();
 
         return $this->render('KorpusConsoleBundle:Page:dashboard.html.twig', array(
-                    'logs' => $logs,
-                    'percentage' => $percentage,
-                    'current_usage' => number_format($currentUsageMB, 2, ',', '.'),
-                    'max_size' => number_format($maxSizeMB, 2, ',', '.'),
-                    'free_space' => number_format($freeSpaceMB, 2, ',', '.'),
-                    'users' => $users
+            'logs' => $logs,
+            'percentage' => $percentage,
+            'current_usage' => number_format($currentUsageMB, 2, ',', '.'),
+            'max_size' => number_format($maxSizeMB, 2, ',', '.'),
+            'free_space' => number_format($freeSpaceMB, 2, ',', '.'),
+            'users' => $users
         ));
     }
 

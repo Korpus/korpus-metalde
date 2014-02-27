@@ -6,6 +6,10 @@ korpus_events:
     resource: "@KorpusEventsBundle/Resources/config/routing.yml"
     prefix:   /events
 
+korpus_console:
+    resource: "@KorpusConsoleBundle/Resources/config/routing.yml"
+    prefix:   /console
+
 korpus_backup:
     resource: "@KorpusBackupBundle/Resources/config/routing.yml"
     prefix:   /console
@@ -23,10 +27,6 @@ korpus_file_server:
 korpus_main_page:
     resource: "@KorpusMainPageBundle/Resources/config/routing.yml"
     prefix:   /
-    
-korpus_console:
-    resource: "@KorpusConsoleBundle/Resources/config/routing.yml"
-    prefix:   /console
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

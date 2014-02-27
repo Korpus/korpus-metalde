@@ -20,22 +20,22 @@ fos_user_change_password:
     prefix: /console/profile
 
 #admin panel
-fos_user_security_admin:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix: /admin
+#fos_user_security_admin:
+#    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+#    prefix: /admin
 
-fos_user_profile_admin:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /admin/profile
-
-fos_user_register_admin:
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /admin/register
-
-fos_user_resetting_admin:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /admin/resetting
-
-fos_user_change_password_admin:
-    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /admin/profile
+#fos_user_profile_admin:
+#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+#    prefix: /admin/profile
+#
+#fos_user_register_admin:
+#    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#    prefix: /admin/register
+#
+#fos_user_resetting_admin:
+#    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+#    prefix: /admin/resetting
+#
+#fos_user_change_password_admin:
+#    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+#    prefix: /admin/profile
