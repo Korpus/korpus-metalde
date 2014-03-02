@@ -1,0 +1,23 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}concerts{% endblock %}
+
+{% block content %}
+
+    <h2>Konzerte - Übersicht</h2>
+
+    <table class="table table-responsive table-striped">
+        {% for concert in concerts %}
+            <tr>
+                <td>{{ concert.concertDate|date('d.m.Y G:i:s') }}</td>
+                <td>{{ concert.eventName }}</td>
+                <td>{{ concert.venue }}</td>
+                <td>
+                    <a href="{{ path('korpus_console_concerts_delete', {id: concert.id}) }}"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="{{ path('korpus_console_concerts_update', {id: concert.id}) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
