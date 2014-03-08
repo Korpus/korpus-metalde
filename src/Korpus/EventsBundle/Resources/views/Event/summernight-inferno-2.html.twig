@@ -1,0 +1,364 @@
+{% extends "KorpusEventsBundle::layout.html.twig" %}
+
+{% block title %}{{event.title}}{% endblock %}
+
+{% block content %}
+
+<span class="hidden" id="slug">{{event.slug}}</span>
+
+<style>
+    body {
+        background-image: url('{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/background.jpg') }}');
+        background-attachment: fixed;
+    }
+</style>
+
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9:all.js"></script>
+
+<script type="text/x-handlebars" data-template-name="application">
+<div class="container">
+    <div class="col-lg-12 app-container">
+        <div class="page">
+            <div class="header">
+                {% raw %}{{#link-to 'index'}}{% endraw %}<img class="img-responsive img-center" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/header.png') }}">{% raw %}{{/link-to}}{% endraw %}
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <div class="navigator">
+                        {% raw %}{{#link-to 'info' class="nav-link"}}Info{{/link-to}}{% endraw %}
+                        {% raw %}{{#link-to 'bands' class="nav-link"}}Bands{{/link-to}}{% endraw %}
+                        {% raw %}{{#link-to 'reservierung' class="nav-link"}}Reservierung{{/link-to}}{% endraw %}
+                        {% raw %}{{#link-to 'kontakt' class="nav-link"}}Kontakt{{/link-to}}{% endraw %}
+                    </div>
+                    <div class="content">{% raw %}{{outlet}}{% endraw %}</div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="sidebar">
+                        <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/partner.png') }}">
+                        <div class="partners">
+                            <a href="http://www.skullcrusher-dresden.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/skull.png') }}">
+                            </a>
+                            <br>
+                            <a href="http://www.evolution-of-metal.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/evo.png') }}">
+                            </a>
+                            <br>
+                            <a href="http://www.sektor-evolution.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/sektor.png') }}">
+                            </a>
+                            <br>
+                            <a href="" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/ebmc.png') }}">
+                            </a>
+                            <br>
+                            <a href="http://sprengies-world.de/" target="blank">
+                                <img class="img-responsive" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/icons/sprengie.png') }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-links">
+        <hr>
+        <span>
+            <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a> | 
+            <a href="{{ path('korpus_main_page_datenschutz') }}">Datenschutz</a>
+        </span>
+    </div>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="index">
+<div class="centered">
+    <img class="img-responsive img-center" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/index.png') }}">
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="info">
+<div class="greentext centered">
+    <strong>Summernight Inferno 2014</strong><br>
+    <br>
+    Das Metal Indoor-Event in Dresden!<br>
+    <br>
+    - abwechlsungsreiches Metal Line-Up<br>
+    - geteilter Indoor/Outdoor Bereich<br>
+    - reichhaltiges Getränke- und Snackangebot<br>
+    - Metal-Aftershow bis in die Nacht<br>
+    - faire Getränkepreise<br>
+    <br>
+    Am 21. Juni 2014 geht das SUMMERNIGHT INFERNO in die zweite Runde!<br>
+    Nach der überaus positiven Resonanz im letzten Jahr haben wir unser Versprechen eingelöst und servieren euch ein Sequel,<br>
+    welches sich gewaschen hat! <br>
+    <br>
+    <strong>Das besondere Konzept bleibt bestehen:</strong><br>
+    <br>
+    Wir gestalten für euch einen liebevollen Außenbereich, in welchem ihr ab dem frühen Abend ausgelassen bei Drinks, Snacks und Metal-Klassikern aus der Konserve feiern könnt.<br>
+    Ab 20:00 Uhr wird zusätzlich der Indoor-Bereich geöffnet, wo sich die 5 angesagte Underground Metal-Acts die Klinke in die Hand geben werden!<br>
+    Wir haben ein musikalisch breitgefächertes Line-Up zusammengestellt, welches das Herz eines jeden Metalhead höher schlagen lassen wird!<br>
+    Und nach der Show ist noch lange nicht Schluss!:<br>
+    Euch erwartet im Anschluss eine Aftershow bis tief in die Nacht...
+    <br>
+    Der ganze Spaß kostet euch an der Abendkasse nur 10€.<br>
+    Ab Beginn der ersten Band, wird der Eintrittspreis auf 12€ angehoben - pünktliches Erscheinen wird also belohnt!<br>
+    <br>
+    <strong>Wir freuen uns auf eine heiße, schwermetallische Sommernachts-Party mit euch!</strong>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands">
+{% raw %}{{ outlet }}{% endraw %}
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands/index">
+<div class="centered">
+    {% raw %}{{#link-to 'bands.korpus'}}<img class="band-logo" src="{% endraw %}{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/1_korpus.png') }}{% raw %}">{{/link-to}}{% endraw %}
+    {% raw %}{{#link-to 'bands.arroganz'}}<img class="band-logo" src="{% endraw %}{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/2_arroganz.png') }}{% raw %}">{{/link-to}}{% endraw %}
+    {% raw %}{{#link-to 'bands.rogash'}}<img class="band-logo" src="{% endraw %}{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/3_rogash.png') }}{% raw %}">{{/link-to}}{% endraw %}
+    {% raw %}{{#link-to 'bands.origin-of-zed'}}<img class="band-logo" src="{% endraw %}{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/4_OOZ.png') }}{% raw %}">{{/link-to}}{% endraw %}
+    {% raw %}{{#link-to 'bands.metabolic'}}<img class="band-logo" src="{% endraw %}{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/5_metabolic.png') }}{% raw %}">{{/link-to}}{% endraw %}
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands/korpus">
+<div class="centered">
+    <img class="band-logo" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/1_korpus.png') }}">
+    <p>
+        <span class="greentext band-genre">Death-Thrash Metal / Dresden</span>
+    </p>
+    <p>
+        <a href="http://korpus-metal.de">korpus-metal.de</a>
+        <br>
+        <a href="https://www.facebook.com/korpusmetal">www.facebook.com/korpusmetal</a>
+    </p>
+    <img src="{{ asset('assets/img/layout/group.jpg') }}" class="img-thumbnail" />
+    <br>
+    <br>
+    <p class="greentext">
+        Die aus Dresden stammende Band KORPUS agiert seit 2008 erfolgreich im deutschen Underground.<br>
+        Dabei kreieren die fünf Bandmitglieder eine einzigartige Synthese aus<br>
+        der rohen Kraft des Death Metal, der unbändigen Energie des Thrash Metal sowie dem Groove<br>
+        und der Dynamik des Hardcore. Dieses Grundgerüst wird durch emotionale,<br>
+        deutschsprachige Texte und diverse musikalische Experimente zu einer spannenden Mixtur.<br>
+        <br>
+        Ebenbild, das zweite Album der Band, führt den eingeschlagenen Weg konsequent fort.<br>
+        Es besticht durch abwechslungsreiche Songstrukturen, epische Arrangements, unerwartete<br>
+        musikalische Wendungen und Texte, die unter die Haut gehen.<br>
+        <br>
+        In der Metalszene haben sich KORPUS durch ihren unverwechselbaren Sound bereits<br>
+        einen Namen machen können. Nicht zuletzt durch die energische Live-Darbietung konnte<br>
+        sich die Band innerhalb der letzten Jahre eine beachtliche Fanbase erspielen. Dabei teilte die<br>
+        Band die Bühne mit Größen wie Eisregen, Disbelief, Debauchery, Hail of Bullets und Hatesphere.<br>
+    </p>
+    <br>
+    <br>
+    <p>
+        <iframe width="560" height="315" src="//www.youtube.com/embed/t_dCKVPOflc" frameborder="0" allowfullscreen></iframe>
+    </p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands/arroganz">
+<div class="centered">
+    <img class="band-logo" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/2_arroganz.png') }}">
+    <p>
+        <span class="greentext band-genre">Blackened Death-Metal / Cottbus</span>
+    </p>
+    <p>
+        <a href="http://www.hellishhordes.com">www.hellishhordes.com</a>
+        <br>
+        <a href="https://www.facebook.com/hellishhordes">www.facebook.com/hellishhordes</a>
+    </p>
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/2_arroganz.jpg') }}" class="img-thumbnail" />
+    <br>
+    <br>
+    <p class="greentext">
+        Arroganz gründeten sich 2008 in Cottbus und erreichten recht schnell einen lokalen Bekanntheitsgrad.<br>
+        Bereits 2009 nahmen sie ihre erste Demo "Burning Souls" in Eigenregie auf und veröffentlichte diese ein Jahr drauf unter Blacksmith Records.<br>
+        Die Ep erhielt in zahlreichen Rezensionen hohe Punktezahlen und gute Kritiken.<br>
+        ROCK HARD - Autor Frank Albrecht kommentierte die Ep mit den Worten: “Eine gelungene Synthese aus Schwarzmetal und Death Metal. Respektabel!”
+        Im gleichen Jahr begleiteten Arroganz Varg und Dark Funeral auf deren Tourneen.<br>
+        Das Debut-Album "Dark and Deathless" erschien im April 2011.<br>
+        Die Promotion des Albums fand im Mai 2011 im Zuge der Death Infernal Tour der schwedischen Death-Metal-Band Demonical statt.
+        <br>
+        Am 13. März 2013 erschien das zweite Studioalbum der Band kaos.kult.kreation über Blacksmith Records.<br>
+        Bereits vor der Veröffentlichung erhielt das Album in zahlreichen nationalen und<br>
+        internationalen Fachzeitschriften und Webzines sehr gute Kritiken.<br>
+        Im deutschen Rock Hard Magazin wurde das Album mit 8 von 10 Punkten bewertet:<br>
+        "Keine Frage: ARROGANZ stehen kurz vor dem Sprung in die höchste Liga."
+    </p>
+    <br>
+    <br>
+    <p>
+        <iframe width="560" height="315" src="//www.youtube.com/embed/Bq4uMAh_Ls0" frameborder="0" allowfullscreen></iframe>
+    </p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands/rogash">
+<div class="centered">
+    <img class="band-logo" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/3_rogash.png') }}">
+    <p>
+        <span class="greentext band-genre">Death Metal / Jena</span>
+    </p>
+    <p>
+        <a href="http://www.rogash.de">www.rogash.de</a>
+        <br>
+        <a href="https://www.facebook.com/rogashmetal">www.facebook.com/rogashmetal</a>
+    </p>
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/3_rogash.jpg') }}" class="img-thumbnail" />
+    <br>
+    <br>
+    <p class="greentext">
+        Hailing from Germany, ROGASH are five guys which dedicated their lives to the pure passion of death metal in winter 2009.<br>
+        After their first musical try-outs and some appearances at local underground shows ,<br>
+        they released their first EP “ROGAN ERA” in 2010,<br>
+        which gathered a massive dose of praising feedback among the German metal community.<br>
+        Without having a record label or a booking agent ROGASH quickly enlarged their fanbase<br>
+        by playing more than “60” club shows in the last 2 years,<br>
+        followed by the first summer festival appearance at e.g. Chronical Moshers Open Air or Hell Inside Festival.<br>
+        Musically speaking, ROGASH is a band which combines typically Swedish melodic death metal sound structure,<br>
+        without rejecting influences from the straight forward American death metal style.<br>
+        <br>
+        Their debut album “SUPREMACY UNDONE” is set to hit the streets<br>
+        in Winter 2013/2014 via WAR ANTHEM RECORDS – so keep an eye if you dare!
+    </p>
+    <br>
+    <br>
+    <p>
+        <iframe width="560" height="315" src="//www.youtube.com/embed/-6r6GkPTLvw" frameborder="0" allowfullscreen></iframe>
+    </p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands/origin-of-zed">
+<div class="centered">
+    <img class="band-logo" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/4_OOZ.png') }}">
+    <p>
+        <span class="greentext band-genre">Modern Thrash Metal / Chemnitz</span>
+    </p>
+    <p>
+        <a href="https://www.facebook.com/originofzed">www.facebook.com/originofzed</a>
+    </p>
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/4_ooz.jpg') }}" class="img-thumbnail" />
+    <br>
+    <br>
+    <p class="greentext">
+        2008 wurde Origin of Zed durch Frontmann Zeppie ins Leben gerufen.<br>
+        Mit Butcher am Bass, Richard an den Kesseln und Ling an der Gitarre,<br>
+        war die Band im Winter komplettiert und begann erste Ideen, zu fertigen Songs zu formen.<br>
+        Anfangs noch ohne genaue Vorstellung, stellte sich bald heraus,<br>
+        dass die verschiedenen musikalischen Vorlieben aller Mitglieder, einen Mix ohne Genregrenzen hervorrufen würden.<br>
+        Ihre Texte handeln vom ewig währenden Kampf zwischen Gut & Böse:<br>
+        Der Schlacht zwischen Zed, dem Weltenzerstörer und 4 ganz normalen Typen, die plötzlich Superkräfte erlangen…<br>
+        <br>
+        Im August 2009 verließ Richard die Band.<br>
+        Nichts desto trotz begannen OoZ im Januar 2010 mit den Aufnahmen zu ihrer ersten CD.<br>
+        Bis schließlich im Mai, mit Nico von Andras, endlich ein Ersatz an den Drums gefunden war.<br>
+        Die fertige Demo "Speed of Light" enthielt 6 Songs und wurde Anfang 2011 in limitierter Stückzahl veröffentlicht.<br>
+        Ende/Anfang 2011 verließ Butcher die Band und wurde nach kurzer Zeit durch Stepsel (ex-Facehugger) ersetzt.<br>
+    </p>
+    <br>
+    <br>
+    <p>
+        <iframe width="560" height="315" src="//www.youtube.com/embed/I8U_c01vN2Y" frameborder="0" allowfullscreen></iframe>
+    </p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="bands/metabolic">
+<div class="centered">
+    <img class="band-logo" src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/5_metabolic.png') }}">
+    <p>
+        <span class="greentext band-genre">Groove Thrash Metal / Bischofswerda</span>
+    </p>
+    <p>
+        <a href="https://www.facebook.com/metabolicmetal">www.facebook.com/metabolicmetal</a>
+    </p>
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/bands/5_metabolic.jpg') }}" class="img-thumbnail" />
+    <br>
+    <br>
+    <p class="greentext">
+        Mitte 2013 taten sich Musiker der Bands Alyrium und Nevertrust zusammen,<br>
+        um gemeinsam neue Wege im Bereich des Thrash Metal zu gehen.<br>
+        Wenige Monate später wurde das Ergebnis erfolgreich auf die Öffentlichkeit losgelassen.<br>
+        Schaut vorbei, wenn es live mal wieder zur Sache geht!
+    </p>
+    <br>
+    <br>
+    <p>
+        <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/103225114&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>
+    </p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="reservierung">
+<div class="centered">
+    <p class="greentext bold">
+        Hier könnt Ihr eure Tickets für das Summernight Inferno II vorbestellen!
+        <br>
+        Tragt einfach eure Daten in das Formular ein, die Tickets werden dann am Einlass auf euren Namen hinterlegt.
+    </p>
+</div>
+<br>
+<div class="row">
+    <div class="formular col-lg-6 col-lg-offset-3">
+        
+        {% if event.isReservable == true %}
+        <div class="panel panel-default">
+            {# flash messages #}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info">{{flashMessage}}</div>
+            {% endfor %}
+            <div class="panel-body">
+                <form role="form" id="form-reservate" method="post" action="{{ path('korpus_events_reservate', {slug: event.slug}) }}">
+                    <div class="form-group">
+                        <label for="input-name">Vorname & Name</label>
+                        <input type="text" class="form-control" id="input-name" placeholder="Vorname & Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-email">Email</label>
+                        <input type="email" class="form-control" id="input-email" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-amount">Anzahl Tickets</label>
+                        <input type="number" class="form-control" id="input-amount" placeholder="Anzahl der Tickets" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-address">Adresse</label>
+                        <textarea rows="8" id="input-address" class="form-control" name="address" required></textarea>
+                    </div>
+                    <input type="hidden" value="{{ path('korpus_events_show_event', {slug: event.slug}) }}#/reservierung" name="referer"> 
+                    <button type="submit" class="btn btn-success">Absenden</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p class="redtext bold">
+            Die Reservierung ist momentan nicht Freigeschalten!
+        </p>
+        {% endif %}
+        
+    </div>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="kontakt">
+<div class="centered greentext">
+    <strong>LOCATION:</strong><br>
+    <br>
+    Sektor Evolution<br>
+    An der Eisenbahn 2<br>
+    01099 Dresden<br>
+    <br>
+    <br>
+    <a href="https://www.facebook.com/SummernightInferno">www.facebook.com/SummernightInferno</a><br>
+    <br>
+    <img src="{{ asset('assets/pages/korpusevents/summernight-inferno-2/img/anfahrt.jpg') }}">
+</div>
+</script>
+
+{% endblock %}

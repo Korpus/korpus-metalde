@@ -2,32 +2,43 @@
 
 {% block currentpage %}live{% endblock %}
 
-{% block title %}Korpus &middot; Konzert &middot; {{concert.event}}{% endblock %}
+{% block title %}Korpus &middot; Konzert &middot; {{ concert.eventName }}{% endblock %}
 
 {% block content %}
 
-{% if concert.flyer == null %}
-    {% set flyer = '' %}
-{% else %}
-    {% set flyer = path('korpus_file_server_images_object', {folder: concert.flyer.folder, slug: concert.flyer.slug, extension: concert.flyer.type.extension}) %}
-{% endif %}
+    {% if concert.flyer == null %}
+        {% set flyer = '' %}
+    {% else %}
+        {% set flyer = path('korpus_file_server_images_object', {folder: concert.flyer.folder, slug: concert.flyer.slug, extension: concert.flyer.type.extension}) %}
+    {% endif %}
 
-<div class="row">
-    <div class="col-lg-6">
-        <h2>{{concert.event}}</h2>
-        <strong>Location:</strong> {{concert.venue}}
-        <br>
-        <strong>Ort:</strong> {{concert.city}}
-        <br>
-        <strong>Datum:</strong> {{concert.concertDate|date('d.m.Y G:i')}}
-        {% if concert.info != null %}<br><strong>Info:</strong> {{concert.info}}{% endif %}
-        {% if concert.facebookLink != null %}
-        <br><br><a target="_blank" href="{{concert.facebookLink}}" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
-        {% endif %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>{{ concert.eventName }}</h2>
+            <strong>Location:</strong> {{ concert.venue }}
+            <br>
+            <strong>Ort:</strong> {{ concert.city }}
+            <br>
+            <strong>Datum:</strong> {{ concert.concertDate|date('d.m.Y G:i') }}
+            {% if concert.info != null %}<br><strong>Info:</strong> {{ concert.info }}{% endif %}
+            {% if concert.facebookLink != null %}
+                <br><br><a target="_blank" href="{{ concert.facebookLink }}" class="btn btn-sm btn-info"><span
+                        class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
+            {% endif %}
+
+            {# EVENT #}
+            {% if concert.event != null %}
+                {% if concert.event.isViewable == true %}
+                    <br>
+                    <br>
+                    <a href="{{ path('korpus_events_show_event', {slug: concert.event.slug}) }}" target="_blank"><img width="180px" src="{{ asset('assets/img/layout/korpus-event.png') }}"></a>
+                {% endif %}
+            {% endif %}
+
+        </div>
+        <div class="col-lg-6">
+            <img class="img-thumbnail" src="{{ flyer }}"/>
+        </div>
     </div>
-    <div class="col-lg-6">
-        <img class="img-thumbnail" src="{{flyer}}" />
-    </div>
-</div>
 
 {% endblock %}

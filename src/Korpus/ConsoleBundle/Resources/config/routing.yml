@@ -10,6 +10,11 @@ korpus_console_add_user:
     pattern:  /user/create
     defaults: { _controller: KorpusConsoleBundle:Page:addUser }
 
+#NewsPost
+korpus_console_news_posts:
+    resource: "@KorpusConsoleBundle/Resources/config/NewsPost/routing.yml"
+    prefix:   /news
+
 #cms news
 korpus_console_cms_news:
     pattern:  /cms/news
@@ -26,7 +31,12 @@ korpus_console_cms_news_update:
 korpus_console_cms_news_delete:
     pattern:  /cms/news/{slug}/delete
     defaults: { _controller: KorpusConsoleBundle:CMS:deleteNews }
-    
+
+#Concert
+korpus_console_concerts:
+    resource: "@KorpusConsoleBundle/Resources/config/Concert/routing.yml"
+    prefix:   /concerts
+
 #cms concert
 korpus_console_cms_concert:
     pattern:  /cms/concert
@@ -141,3 +151,22 @@ korpus_console_shop_articles_update:
 korpus_console_shop_articles_delete:
     pattern:  /shop/articles/{slug}/delete
     defaults: { _controller: KorpusConsoleBundle:Shop:deleteArticle }
+    
+#events
+korpus_console_events:
+    pattern:  /events
+    defaults: { _controller: KorpusConsoleBundle:Events:index }
+    
+korpus_console_events_toggle_viewable:
+    pattern:  /events/{slug}/toggleViewable
+    defaults: { _controller: KorpusConsoleBundle:Events:toggleViewable }
+    methods: [POST]
+    options:
+        expose: true
+    
+korpus_console_events_toggle_reservable:
+    pattern:  /events/{slug}/toggleReservable
+    defaults: { _controller: KorpusConsoleBundle:Events:toggleReservable }
+    methods: [POST]
+    options:
+        expose: true

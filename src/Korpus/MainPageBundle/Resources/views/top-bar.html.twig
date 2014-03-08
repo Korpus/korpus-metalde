@@ -1,0 +1,34 @@
+
+<div class="top-bar-container top-bar-container-responsive container no-display" id="top-bar-nav">
+    <p class="pull-right top-bar-logo">
+        <a href="{{ path('korpus_main_page_homepage') }}"><img src="{{ asset('assets/img/layout/logo_small_green.png') }}"></a>
+    </p>
+    <p class="top-bar-links">
+        <a href="{{ path('korpus_main_page_news') }}" class="nl-news top-bar-link">News</a>
+        <a href="{{ path('korpus_main_page_band') }}" class="nl-band top-bar-link">Band</a>
+        <a href="{{ path('korpus_main_page_live') }}" class="nl-live top-bar-link">Live</a>
+        <a href="{{ path('korpus_main_page_media') }}" class="nl-media top-bar-link">Media</a>
+        <a href="{{ path('korpus_main_page_fans') }}" class="nl-fans top-bar-link">Fans</a>
+        <a href="{{ path('korpus_main_page_merch') }}" class="nl-merch top-bar-link">Merch</a>
+        <a href="{{ path('korpus_main_page_kontakt') }}" class="nl-kontakt top-bar-link">Kontakt</a>
+    </p>
+</div>
+
+<script>
+
+    $(document).ready(function() {
+
+        $(window).scroll(function() {
+            var topBar = $(".top-bar-container");
+            var top = $(this).scrollTop();
+
+            if (top >= 400 && $(window).innerWidth() >= 768) {
+                topBar.show();
+            } else {
+                topBar.hide();
+            }
+        });
+
+    });
+
+</script>

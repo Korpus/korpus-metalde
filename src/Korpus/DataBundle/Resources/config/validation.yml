@@ -10,12 +10,26 @@ Korpus\DataBundle\Entity\NewsPost:
             
 Korpus\DataBundle\Entity\Concert:
     properties:
-        event:
+        eventName:
             - NotBlank: ~
         venue:
             - NotBlank: ~
         city:
             - NotBlank: ~
+        state:
+            - NotBlank: ~
         concertDate:
+            - NotBlank: ~
+            - Type: \DateTime
+
+Korpus\DataBundle\Entity\Event:
+    properties:
+        title:
+            - NotBlank: ~
+        venue:
+            - NotBlank: ~
+        city:
+            - NotBlank: ~
+        eventDate:
             - NotBlank: ~
             - Type: \DateTime

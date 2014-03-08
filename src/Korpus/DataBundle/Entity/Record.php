@@ -65,6 +65,12 @@ class Record
      * */
     private $cover;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Article")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * */
+    private $article;
+
     public function __construct()
     {
         $this->tracks = new \Doctrine\Common\Collections\ArrayCollection();
@@ -172,6 +178,16 @@ class Record
     public function setCover($cover)
     {
         $this->cover = $cover;
+    }
+
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    public function setArticle($article)
+    {
+        $this->article = $article;
     }
 
 }

@@ -25,9 +25,9 @@ class Concert
     /**
      * @var string
      *
-     * @ORM\Column(name="event", type="string", length=255)
+     * @ORM\Column(name="event_name", type="string", length=255)
      */
-    private $event;
+    private $eventName;
 
     /**
      * @var string
@@ -92,6 +92,18 @@ class Concert
     private $info;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="state", type="string", length=255)
+     */
+    private $state;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Event", mappedBy="concert")
+     */
+    private $event;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -99,29 +111,6 @@ class Concert
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set event
-     *
-     * @param string $event
-     * @return Concert
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return string 
-     */
-    public function getEvent()
-    {
-        return $this->event;
     }
 
     /**
@@ -290,6 +279,36 @@ class Concert
     public function setInfo($info)
     {
         $this->info = $info;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    public function getEventName()
+    {
+        return $this->eventName;
+    }
+
+    public function setEventName($eventName)
+    {
+        $this->eventName = $eventName;
+    }
+
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    public function setEvent($event)
+    {
+        $this->event = $event;
     }
 
 }

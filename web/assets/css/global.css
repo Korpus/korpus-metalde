@@ -61,3 +61,7 @@ body {
     color: #999;
     text-decoration: none;
 }
+
+.no-display {
+    display: none;
+}

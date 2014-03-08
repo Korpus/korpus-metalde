@@ -1,0 +1,23 @@
+korpus_admin_panel_homepage:
+    pattern:  /
+    defaults: { _controller: KorpusAdminPanelBundle:Page:index }
+
+korpus_admin_panel_dashboard:
+    pattern:  /dashboard
+    defaults: { _controller: KorpusAdminPanelBundle:Page:dashboard }
+
+korpus_admin_panel_settings:
+    pattern:  /settings
+    defaults: { _controller: KorpusAdminPanelBundle:Page:settings }
+
+korpus_admin_panel_concerts:
+    resource: "@KorpusAdminPanelBundle/Resources/config/Concerts/routing.yml"
+    prefix:   /concerts
+
+korpus_admin_panel_news:
+    resource: "@KorpusAdminPanelBundle/Resources/config/News/routing.yml"
+    prefix:   /news
+
+korpus_admin_panel_events:
+    resource: "@KorpusAdminPanelBundle/Resources/config/Events/routing.yml"
+    prefix:   /events

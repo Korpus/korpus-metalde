@@ -69,6 +69,10 @@ korpus_main_page_media:
     pattern:  /media
     defaults: { _controller: KorpusMainPageBundle:Page:media }
     
+korpus_main_page_releases:
+    pattern:  /media/releases
+    defaults: { _controller: KorpusMainPageBundle:Page:releases }
+
 korpus_main_page_audio:
     pattern:  /media/audio
     defaults: { _controller: KorpusMainPageBundle:Page:audio }
@@ -97,8 +101,22 @@ korpus_main_page_kontakt_booking:
 korpus_main_page_kontakt_links:
     pattern:  /contact/links
     defaults: { _controller: KorpusMainPageBundle:Page:links }
-    
+
+#fans
+korpus_main_page_fans:
+    pattern:  /fans
+    defaults: { _controller: KorpusMainPageBundle:Page:fans }
+
 #merch
 korpus_main_page_merch:
     pattern:  /merch
     defaults: { _controller: KorpusMainPageBundle:Page:merch }
+    
+korpus_main_page_merch_article:
+    pattern:  /merch/{slug}
+    defaults: { _controller: KorpusMainPageBundle:Page:merchArticle }
+
+#dev
+korpus_main_page_development:
+    pattern:  /development
+    defaults: { _controller: KorpusMainPageBundle:Page:developmentPage }

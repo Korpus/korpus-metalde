@@ -28,8 +28,11 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Korpus\LoggingBundle\KorpusLoggingBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new Korpus\BackupBundle\KorpusBackupBundle(),
+            new Korpus\EventsBundle\KorpusEventsBundle(),
+            new Korpus\EmailBundle\KorpusEmailBundle(),
+            new Korpus\AdminPanelBundle\KorpusAdminPanelBundle(),
+            new Korpus\TwigBundle\KorpusTwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

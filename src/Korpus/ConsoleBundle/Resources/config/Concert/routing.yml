@@ -1,0 +1,15 @@
+korpus_console_concerts_collection:
+    pattern:  /
+    defaults: { _controller: KorpusConsoleBundle:Concert:collection }
+
+korpus_console_concerts_create:
+    pattern:  /create
+    defaults: { _controller: KorpusConsoleBundle:Concert:create }
+
+korpus_console_concerts_update:
+    pattern:  /{id}/update
+    defaults: { _controller: KorpusConsoleBundle:Concert:update }
+
+korpus_console_concerts_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: KorpusConsoleBundle:Concert:delete }

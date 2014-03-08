@@ -1,0 +1,69 @@
+{% extends 'KorpusAdminPanelBundle::layout.html.twig' %}
+
+{% block current_page %}events{% endblock %}
+
+{% block content %}
+
+    <h1 class="page-header">
+        Events<span class="pull-right"><a href="{{ path('korpus_admin_panel_events_create') }}"><span class="glyphicon glyphicon-plus-sign"></span></span></a>
+    </h1>
+
+    {% for event in nextEvents %}
+        <div class="media">
+            <a class="pull-left" target="_blank" href="{{ path('korpus_events_show_event', {slug: event.slug}) }}">
+
+                {% if event.flyer == null %}
+                    {% if event.concert != null %}
+                        {% if event.concert.flyer != null %}
+                            {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.concert.flyer.folder, slug: event.concert.flyer.slug, extension: event.concert.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
+                        {% else %}
+                            {% set flyerThumb = 'http://placehold.it/64x64' %}
+                        {% endif %}
+                    {% else %}
+                        {% set flyerThumb = 'http://placehold.it/64x64' %}
+                    {% endif %}
+                {% else %}
+                    {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
+                {% endif %}
+
+                {#
+                {% if event.flyer == null %}
+                    {% set flyerThumb = 'http://placehold.it/64x64' %}
+                {% else %}
+                    {% set flyerThumb = path('korpus_file_server_images_object', {folder: event.flyer.folder, slug: event.flyer.slug, extension: event.flyer.type.extension, thumbnail: 'true', maxwidth: '64'}) %}
+                {% endif %}
+                #}
+
+                <img class="media-object" src="{{ flyerThumb }}" alt="">
+            </a>
+
+            <div class="media-body">
+                {% if event.facebookLink != null %}
+                    <a target="_blank" href="{{ event.facebookLink }}" class="btn btn-xs btn-info pull-right"><span
+                                class="glyphicon glyphicon-link"></span> Facebook Veranstaltung</a>
+                {% endif %}
+                <a target="_blank" href="{{ path('korpus_events_show_event', {slug: event.slug}) }}">
+                    <h4 class="media-heading">{{ event.title }} <span class="black-text"><strong>
+                                <small>{{ event.eventDate|date('d.m.Y, G:i') }}</small>
+                            </strong></span></h4>
+                </a>
+                {{ event.venue }} | {{ event.city }}
+                <br><br>
+
+                <div>
+                    <a class="btn btn-xs btn-{% if event.isViewable %}danger{% else %}success{% endif %}"
+                       id="toggle-viewable" href="#" data-id="{{ event.id }}">
+                        <span class="glyphicon glyphicon-eye-open"></span> {% if event.isViewable %}Unsichtbar{% else %}Sichtbar{% endif %}
+                        schalten
+                    </a>
+                    <a class="btn btn-xs btn-{% if event.isReservable %}danger{% else %}success{% endif %}"
+                       id="toggle-reservable" href="#" data-id="{{ event.id }}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        Reservierung {% if event.isReservable %}aus{% else %}ein{% endif %}schalten
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

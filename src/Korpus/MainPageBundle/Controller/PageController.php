@@ -3,9 +3,11 @@
 namespace Korpus\MainPageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\DataBundle\Entity\SourceLog;
+use Korpus\DataBundle\Model\FacebookPhotoAlbum;
 
 class PageController extends Controller
 {
@@ -167,16 +169,21 @@ class PageController extends Controller
      */
     public function mediaAction()
     {
-        return $this->redirect($this->generateUrl('korpus_main_page_audio'));
+        return $this->redirect($this->generateUrl('korpus_main_page_releases'));
     }
 
-    public function audioAction()
+    public function releasesAction()
     {
         $records = $this->getDoctrine()->getRepository('KorpusDataBundle:Record')->findAll();
         $tmpl = array();
         $tmpl['records'] = $records;
 
-        return $this->render('KorpusMainPageBundle:Page:audio.html.twig', $tmpl);
+        return $this->render('KorpusMainPageBundle:Page:releases.html.twig', $tmpl);
+    }
+
+    public function audioAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:audio.html.twig');
     }
 
     public function videoAction()
@@ -195,11 +202,51 @@ class PageController extends Controller
     }
 
     /**
+     * Fans
+     */
+    public function fansAction()
+    {
+        /*$album = json_decode(file_get_contents('https://graph.facebook.com/707204165977323'));
+        $photos = json_decode(file_get_contents('https://graph.facebook.com/707204165977323/photos'));
+
+        var_dump($photos);
+
+        return new Response('true');
+
+        return $this->render('KorpusMainPageBundle:Page:fans.html.twig', array(
+            'album' => $album,
+            'photos' => $photos->data
+        ));*/
+
+        $album = new FacebookPhotoAlbum('https://graph.facebook.com/707204165977323');
+
+        return $this->render('KorpusMainPageBundle:Page:fans.html.twig', array(
+            'album' => $album
+        ));
+    }
+
+    /**
      * Merch
      */
     public function merchAction()
     {
-        return $this->render('KorpusMainPageBundle:Page:merch.html.twig');
+        $articleGroups = $this->getDoctrine()->getRepository('KorpusDataBundle:ArticleGroup')->findAll();
+
+        return $this->render('KorpusMainPageBundle:Page:merch.html.twig', array('groups' => $articleGroups));
     }
 
+    public function merchArticleAction($slug)
+    {
+        $article = $this->getDoctrine()->getRepository('KorpusDataBundle:Article')->findOneBySlug($slug);
+
+        return $this->render('KorpusMainPageBundle:Page:merchArticle.html.twig', array('article' => $article));
+    }
+
+    /**
+     * Dev
+     */
+    public function developmentPageAction()
+    {
+        return $this->render('KorpusMainPageBundle:Page:dev.html.twig');
+    }
 }

@@ -1,0 +1,104 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block title %}Korpus &middot; Development{% endblock %}
+
+{% block content %}
+
+    <script src="{{ asset('assets/pages/korpusmainpage/js/commitment.js') }}"></script>
+
+    <legend>Development</legend>
+
+    <p>
+        Der meiste Code auf dem diese Website basiert ist Open-Source.
+        Deswegen wurde die gesamte Codebasis von Anfang an auf <a href="https://github.com">GitHub</a> in einem <a
+                href="https://github.com/fweber-de/korpus-metalde">public-repo</a> gehostet.
+        So hat jeder interessierte die möglichkeit den aktuellen Entwicklungsstand zu verfolgen - und auch die Option
+        hier mitzuarbeiten!
+    </p>
+    <p>
+        Die Basis des Projekts ist das PHP Framework <a href="http://symfony.com">Symfony 2</a> mit allerhand 3rd-Party
+        Bundles.
+        Bei interesse einfach eine Mail an: <a href="mailto:florian.weber.dd@icloud.com">florian.weber.dd@icloud.com</a>.
+        Oder findet mich auf <a href="https://github.com/fweber-de">GitHub</a>!
+    </p>
+    <p>
+        <iframe src="http://ghbtns.com/github-btn.html?user=fweber-de&type=follow"
+                allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+
+        <iframe src="http://ghbtns.com/github-btn.html?user=fweber-de&repo=korpus-metalde&type=watch&count=true"
+                allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+    </p>
+
+    <legend>Aktuelle Commits</legend>
+
+    <p>
+    <ul class="commit-ul" id="commits"></ul>
+    <div class="clear"></div>
+    </p>
+
+    <script>
+        $('#commits').commitment({
+            user: 'fweber-de',
+            repo: 'korpus-metalde',
+            success: function () {
+                console.log('Commit messages were successfuly retrieved from Github!');
+            },
+            error: function (message) {
+                console.log(message);
+            },
+            limit: 10
+        });
+    </script>
+
+    <style>
+        .clear {
+            clear: both;
+        }
+
+        .commit-ul {
+            margin: 20px 0 0 0;
+            padding: 0;
+            float: left;
+            width: 90%;
+        }
+
+        .commit-ul li {
+            border-bottom: 1px #ccc solid;
+            margin: 0 0 20px 0;
+            padding: 0px 0px 20px 0px;
+            list-style: none;
+            float: left;
+            width: 100%;
+        }
+
+        .commit-ul li:last-child {
+            border: none;
+        }
+
+        .message, .date {
+            margin: 0 0 10px 0;
+            float: left;
+            width: 100%;
+        }
+
+        .date {
+            font-style: italic;
+        }
+
+        .committer {
+            float: left;
+        }
+
+        .avatar {
+            float: left;
+            width: 30px;
+            height: 30px;
+        }
+
+        .user {
+            margin: 5px 0 0 10px;
+            float: left;
+        }
+    </style>
+
+{% endblock %}

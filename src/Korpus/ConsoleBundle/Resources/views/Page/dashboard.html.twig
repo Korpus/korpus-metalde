@@ -38,12 +38,14 @@
                 <div class="progress progress-striped">
                     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}}%">
                         <span class="sr-only">{{percentage}}% Complete</span>
+                        {{percentage}}%
                     </div>
                 </div>
                 <strong>{{current_usage}}</strong>MB / <strong>{{max_size}}</strong>MB ~ <strong>{{free_space}}</strong>MB frei
             </div>
         </div>
     </div>
+    {#
     <div class="col-lg-6">
         <div class="well well-sm">
             <h3>Users</h3>
@@ -89,5 +91,6 @@
             </div>
         </div>
     </div>
+    #}
 
 {% endblock %}

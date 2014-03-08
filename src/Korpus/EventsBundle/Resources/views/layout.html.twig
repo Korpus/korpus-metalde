@@ -1,0 +1,15 @@
+{% extends "::base_ember.html.twig" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/pages/korpusevents/css/' ~ event.slug ~ '.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('assets/pages/korpusevents/js/' ~ event.slug ~ '.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+{% block content %}{% endblock %}
+
+{% endblock %}

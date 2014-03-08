@@ -37,6 +37,18 @@ class ArticleStoreLinks
     private $link;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * */
+    private $article;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ArticleStore")
+     * @ORM\JoinColumn(name="store_id", referencedColumnName="id")
+     * */
+    private $store;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -90,6 +102,26 @@ class ArticleStoreLinks
     public function getLink()
     {
         return $this->link;
+    }
+
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    public function setArticle($article)
+    {
+        $this->article = $article;
+    }
+
+    public function getStore()
+    {
+        return $this->store;
+    }
+
+    public function setStore($store)
+    {
+        $this->store = $store;
     }
 
 }

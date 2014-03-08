@@ -1,0 +1,29 @@
+korpus_admin_panel_events_index:
+    pattern:  /
+    defaults: { _controller: KorpusAdminPanelBundle:Events:index }
+
+korpus_admin_panel_events_create:
+    pattern:  /create
+    defaults: { _controller: KorpusAdminPanelBundle:Events:create }
+
+korpus_admin_panel_events_update:
+    pattern:  /{id}/update
+    defaults: { _controller: KorpusAdminPanelBundle:Events:update }
+
+korpus_admin_panel_events_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: KorpusAdminPanelBundle:Events:delete }
+
+korpus_admin_panel_events_toggle_viewable:
+    pattern:  /events/{id}/toggleViewable
+    defaults: { _controller: KorpusAdminPanelBundle:Events:toggleViewable }
+    methods: [POST]
+    options:
+        expose: true
+
+korpus_admin_panel_events_toggle_reservable:
+    pattern:  /events/{id}/toggleReservable
+    defaults: { _controller: KorpusAdminPanelBundle:Events:toggleReservable }
+    methods: [POST]
+    options:
+        expose: true

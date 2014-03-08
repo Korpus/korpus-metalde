@@ -1,0 +1,64 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script src="{{ asset('assets/js/jquery-ui-1.10.4.custom.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/korpusadminpanel/js/app.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/pages/korpusadminpanel/css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/cupertino/jquery-ui-1.10.4.custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/pages/korpusadminpanel/css/app.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <span class="hidden" id="current-page">{% block current_page %}{% endblock %}</span>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('korpus_admin_panel_homepage') }}">Korpus AdminPanel</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('korpus_admin_panel_dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ path('korpus_admin_panel_settings') }}">Einstellungen</a></li>
+                    <li><a href="#">{{ app.user.username }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="nav-link" id="nl-news"><a href="">News</a></li>
+                    <li class="nav-link" id="nl-concerts"><a href="">Konzerte</a></li>
+                    <li class="nav-link" id="nl-band"><a href="">Band</a></li>
+                    <li class="nav-link" id="nl-records"><a href="">Records</a></li>
+                    <li class="nav-link" id="nl-shop"><a href="">Shop</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li class="nav-link" id="nl-events"><a href="{{ path('korpus_admin_panel_events_index') }}">Events</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

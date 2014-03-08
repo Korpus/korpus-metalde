@@ -151,4 +151,23 @@ $(document).ready(function() {
         }
     });
 
+    //EVENTS
+    $('#toggle-viewable').click(function(e) {
+        e.preventDefault();
+        $.post(Routing.generate('korpus_console_events_toggle_viewable', {
+            slug: $(this).data('slug')
+        }), function(data) {
+            location.reload();
+        });
+    });
+
+    $('#toggle-reservable').click(function(e) {
+        e.preventDefault();
+        $.post(Routing.generate('korpus_console_events_toggle_reservable', {
+            slug: $(this).data('slug')
+        }), function(data) {
+            location.reload();
+        });
+    });
+
 });

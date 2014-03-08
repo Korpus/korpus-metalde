@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('assets/pages/korpusmainpage/css/app.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/pages/korpusmainpage/css/top-bar.css') }}" />
 {% endblock %}
 
 {% block javascripts %}
@@ -12,6 +13,10 @@
 
 <span class="hidden" id="current-page">{% block currentpage %}{% endblock %}</span>
 <span class="hidden" id="current-subpage">{% block currentsubpage %}{% endblock %}</span>
+
+<!-- TOP BAR -->
+{% include 'KorpusMainPageBundle::top-bar.html.twig' %}
+<!------------->
 
 <nav class="navbar navbar-default navbar-static-top visible-xs" role="navigation">
     <div class="navbar-header">
@@ -30,6 +35,7 @@
             <li class="nl-band nav-link"><a href="{{ path('korpus_main_page_band') }}">Band</a></li>
             <li class="nl-live nav-link"><a href="{{ path('korpus_main_page_live') }}">Live</a></li>
             <li class="nl-media nav-link"><a href="{{ path('korpus_main_page_media') }}">Media</a></li>
+            <li class="nl-fans nav-link"><a href="{{ path('korpus_main_page_fans') }}">Fans</a></li>
             <li class="nl-merch nav-link"><a href="{{ path('korpus_main_page_merch') }}">Merch</a></li>
             <li class="nl-kontakt nav-link"><a href="{{ path('korpus_main_page_kontakt') }}">Kontakt</a></li>
         </ul>
@@ -50,6 +56,7 @@
                 <a href="{{ path('korpus_main_page_band') }}" class="nl-band nav-link">Band</a>
                 <a href="{{ path('korpus_main_page_live') }}" class="nl-live nav-link">Live</a>
                 <a href="{{ path('korpus_main_page_media') }}" class="nl-media nav-link">Media</a>
+                <a href="{{ path('korpus_main_page_fans') }}" class="nl-fans nav-link">Fans</a>
                 <a href="{{ path('korpus_main_page_merch') }}" class="nl-merch nav-link">Merch</a>
                 <a href="{{ path('korpus_main_page_kontakt') }}" class="nl-kontakt nav-link">Kontakt</a>
             </span>
@@ -64,13 +71,14 @@
             </div>
             <footer>
                 <hr class="bs-docs-separator">
-                <span class="cp">© 2013, Florian Weber, Korpus</span>
+                <span class="cp">© {{ 'now'|date('Y') }}, Florian Weber, Korpus</span>
                 <br>
                 <div class="footer-links">
                     <span>
                         <a href="{{ path('korpus_main_page_impressum') }}">Impressum</a> | 
                         <a target="_blank" href="http://forum.korpus-metal.de">Forum</a> |
                         <a href="{{ path('korpus_console_homepage') }}">Konsole</a> |
+                        <a href="{{ path('korpus_main_page_development') }}">Development</a> |
                         <a href="{{ path('korpus_main_page_datenschutz') }}">Datenschutz</a>
                     </span>
                 </div>

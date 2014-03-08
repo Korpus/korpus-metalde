@@ -1,0 +1,19 @@
+korpus_admin_panel_news_index:
+    pattern:  /
+    defaults: { _controller: KorpusAdminPanelBundle:News:index }
+
+korpus_admin_panel_news_create:
+    pattern:  /create
+    defaults: { _controller: KorpusAdminPanelBundle:News:create }
+
+korpus_admin_panel_news_read:
+    pattern:  /{id}/preview
+    defaults: { _controller: KorpusAdminPanelBundle:News:read }
+
+korpus_admin_panel_news_update:
+    pattern:  /{id}/update
+    defaults: { _controller: KorpusAdminPanelBundle:News:update }
+
+korpus_admin_panel_news_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: KorpusAdminPanelBundle:News:delete }

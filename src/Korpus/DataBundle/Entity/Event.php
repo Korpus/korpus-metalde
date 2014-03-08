@@ -3,6 +3,7 @@
 namespace Korpus\DataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Event
@@ -53,7 +54,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_link", type="string", length=255)
+     * @ORM\Column(name="facebook_link", type="string", length=255, nullable=true)
      */
     private $facebookLink;
 
@@ -85,9 +86,39 @@ class Event
     private $flyer;
 
     /**
+     * @ORM\OneToOne(targetEntity="Concert", inversedBy="event")
+     * @ORM\JoinColumn(name="concert_id", referencedColumnName="id")
+     * */
+    private $concert;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_viewable", type="boolean")
+     */
+    private $isViewable;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_reservable", type="boolean")
+     */
+    private $isReservable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EventReservation", mappedBy="event")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -110,7 +141,7 @@ class Event
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -133,7 +164,7 @@ class Event
     /**
      * Get creationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreationDate()
     {
@@ -156,7 +187,7 @@ class Event
     /**
      * Get editDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEditDate()
     {
@@ -179,7 +210,7 @@ class Event
     /**
      * Get eventDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEventDate()
     {
@@ -202,7 +233,7 @@ class Event
     /**
      * Get facebookLink
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookLink()
     {
@@ -247,6 +278,46 @@ class Event
     public function setFlyer($flyer)
     {
         $this->flyer = $flyer;
+    }
+
+    public function getConcert()
+    {
+        return $this->concert;
+    }
+
+    public function setConcert($concert)
+    {
+        $this->concert = $concert;
+    }
+
+    public function getIsViewable()
+    {
+        return $this->isViewable;
+    }
+
+    public function setIsViewable($isViewable)
+    {
+        $this->isViewable = $isViewable;
+    }
+
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+    }
+
+    public function getIsReservable()
+    {
+        return $this->isReservable;
+    }
+
+    public function setIsReservable($isReservable)
+    {
+        $this->isReservable = $isReservable;
     }
 
 }

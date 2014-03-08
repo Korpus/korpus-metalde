@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            {% include 'KorpusEmailBundle::bootstrap.css.twig' %}
+        </style>
+    </head>
+    <body>
+        {% block email %}{% endblock %}
+        
+        <hr>
+        Korpus GbR {{ 'now'|date('Y') }}
+    </body>
+</html>

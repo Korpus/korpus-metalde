@@ -27,7 +27,19 @@ security:
             logout:
                 path:   /console/logout
                 target: /
-            #anonymous: ~
+        #login_firewall_admin:
+        #    pattern:    ^/admin/login$
+        #    anonymous:  ~
+        #admin_panel:
+        #    pattern:    ^/admin
+        #    form_login:
+        #        check_path: /admin/login_check
+        #        login_path: /admin/login
+        #        provider: fos_userbundle
+        #        csrf_provider: form.csrf_provider
+        #    logout:
+        #        path:   /admin/logout
+        #        target: /
 
     access_control:
         - { path: ^/console/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -35,3 +47,6 @@ security:
         - { path: ^/console/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/console/admin/, role: ROLE_ADMIN }
         - { path: ^/_wdt, roles: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        #- { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/admin/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/console/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,111 @@
+body {
+    background-color: #000000;
+    margin-top: 30px;
+}
+
+.app-container {
+    /*background-color:rgba(255, 255, 255, 0.95);*/
+}
+
+.centered {
+    text-align: center;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+.footer-links {
+    text-align: center;
+    color: #cccccc;
+    margin-top: 50px;
+    font-family: source-sans-pro, sans-serif;
+    padding-bottom: 20px;
+}
+
+.footer-links a {
+    color: #cccccc;
+}
+
+.header {
+    /*    background-image: url('../summernight-inferno-2/img/header.png');
+        width: 955px;
+        height: 250px;*/
+    text-align: center;
+}
+
+.sidebar {
+    padding-top: 25px;
+    text-align: center;
+}
+
+.navigator {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.nav-link {
+    font-family: source-sans-pro, sans-serif;
+    font-size: 35px;
+    margin-left: 30px;
+}
+
+.nav-link:link {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.nav-link:visited {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: #4EAD50;
+}
+
+.nav-link.active {
+    text-decoration: none;
+    color: #4EAD50;
+}
+
+.greentext {
+    color: #4EAD50;
+}
+
+.redtext {
+    color: #ff0000;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+.band-logo {
+    height: 120px;
+}
+
+.band-genre {
+    font-size: 20px;
+}
+
+a:link {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #4EAD50;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.img-center {
+    margin-left: auto;
+    margin-right: auto;
+}

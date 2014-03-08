@@ -1,0 +1,15 @@
+korpus_console_news_posts_collection:
+    pattern:  /
+    defaults: { _controller: KorpusConsoleBundle:NewsPost:collection }
+
+korpus_console_news_posts_create:
+    pattern:  /create
+    defaults: { _controller: KorpusConsoleBundle:NewsPost:create }
+
+korpus_console_news_posts_update:
+    pattern:  /{id}/update
+    defaults: { _controller: KorpusConsoleBundle:NewsPost:update }
+
+korpus_console_news_posts_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: KorpusConsoleBundle:NewsPost:delete }

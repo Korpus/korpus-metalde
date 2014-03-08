@@ -1,0 +1,56 @@
+{% extends 'KorpusMainPageBundle::layout.html.twig' %}
+
+{% block currentpage %}merch{% endblock %}
+{% block currentsubpage %}article{% endblock %}
+
+{% block title %}Korpus &middot; Merch &middot; {{article.title}}{% endblock %}
+
+{% block content %}
+
+<br>
+
+<a href="{{ path('korpus_main_page_merch') }}" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Zurück</a>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <img src="{{ path('korpus_file_server_images_object', {folder: article.photo.folder, slug: article.photo.slug, extension: article.photo.type.extension}) }}" class="img-thumbnail img-responsive">
+    </div>
+    <div class="col-lg-8 col-md-8">
+        <h2>{{article.title}}</h2>
+        <h3><span class="label label-success">ab {{article.price|number_format(2, ',', '.')}}&euro;</span></h3>
+        
+        <hr>
+        
+        <div class="centered">
+            {% for link in article.shopLinks %}
+            <a target="_blank" href="{{ link.link }}"><img style="width: 100px;" src="{{ path('korpus_file_server_images_object', {folder: link.store.image.folder, slug: link.store.image.slug, extension: link.store.image.type.extension}) }}"></a>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Info</h4>
+        {{article.infotext|raw}}
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        {% if article.reviews != null %}
+            <h4>Reviews</h4>
+            <table class="table table-responsive">
+            {% for review in article.reviews %}
+            <tr>
+                <td>{{review.title}}</td><td><a href="{{review.link}}">{{review.link}}</a></td>
+            </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
