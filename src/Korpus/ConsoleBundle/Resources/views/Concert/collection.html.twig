@@ -4,7 +4,14 @@
 
 {% block content %}
 
-    <h2>Konzerte - Übersicht</h2>
+    <h2>
+        Konzerte - Übersicht
+        <span class="pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('korpus_console_concerts_create') }}">
+                <span class="glyphicon glyphicon-plus"></span> Hinzufügen
+            </a>
+        </span>
+    </h2>
 
     <table class="table table-responsive table-striped">
         {% for concert in concerts %}
@@ -13,8 +20,10 @@
                 <td>{{ concert.eventName }}</td>
                 <td>{{ concert.venue }}</td>
                 <td>
-                    <a href="{{ path('korpus_console_concerts_delete', {id: concert.id}) }}"><span class="glyphicon glyphicon-trash"></span></a>
-                    <a href="{{ path('korpus_console_concerts_update', {id: concert.id}) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="{{ path('korpus_console_concerts_delete', {id: concert.id}) }}"><span
+                                class="glyphicon glyphicon-trash"></span></a>
+                    <a href="{{ path('korpus_console_concerts_update', {id: concert.id}) }}"><span
+                                class="glyphicon glyphicon-edit"></span></a>
                 </td>
             </tr>
         {% endfor %}
