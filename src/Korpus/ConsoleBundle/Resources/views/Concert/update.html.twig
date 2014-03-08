@@ -1,0 +1,62 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}concerts{% endblock %}
+
+{% block title %}Console | Konzert bearbeiten{% endblock %}
+
+{% block content %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-warning alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> Konzert bearbeiten</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <form role="form" method="post">
+                        <div class="form-group">
+                            <label for="input-eventName">Event Name</label>
+                            <input type="text" class="form-control" id="input-eventName" name="eventName" value="{{ concert.eventName }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-concertDate">Datum</label>
+                            <input type="text" class="form-control" id="input-concertDate" name="concertDate" value="{{ concert.concertDate|date('d.m.Y') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-venue">Location</label>
+                            <input type="text" class="form-control" id="input-venue" name="venue" value="{{ concert.venue }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-city">Stadt</label>
+                            <input type="text" class="form-control" id="input-city" name="city" value="{{ concert.city }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-state">Bundesland</label>
+                            <input type="text" class="form-control" id="input-state" name="state" value="{{ concert.state }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-info">Anmerkungen (optional)</label>
+                            <input type="text" class="form-control" id="input-info" name="info" value="{{ concert.info }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-facebookLink">Facebook-Link (optional)</label>
+                            <input type="text" class="form-control" id="input-facebookLink" name="facebookLink" value="{{ concert.facebookLink }}">
+                        </div>
+                        <input type="hidden" value="1" name="sent">
+                        <button type="submit" class="btn btn-warning">Ändern</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

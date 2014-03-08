@@ -21,7 +21,7 @@
     {% for concert in concerts %}
         <tr {% if concert.concertDate >= date('now') %}class="success"{% else %}class="warning"{% endif %}>
             <td>{{concert.concertDate|date('d.m.Y G:i')}}</td>
-            <td>{{concert.event}}</td>
+            <td>{{concert.eventName}}</td>
             <td>{{concert.venue}}</td>
             <td>{{concert.city}}</td>
             <td>{{concert.creationDate|date('d.m.Y G:i')}}</td>

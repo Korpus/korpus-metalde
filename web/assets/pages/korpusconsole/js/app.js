@@ -93,7 +93,7 @@ $(document).ready(function() {
         }
     });
 
-    $('button[type="submit"]').addClass('btn').addClass('btn-success');
+    /*$('button[type="submit"]').addClass('btn').addClass('btn-success');*/
 
     $('#form-img-upload').submit(function() {
         var self = $(this);
