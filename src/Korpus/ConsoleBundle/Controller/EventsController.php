@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EventsController extends Controller
 {
-
     public function indexAction()
     {
         $nextEvents = $this->getDoctrine()->getRepository('KorpusDataBundle:Event')->findNextEvents();
@@ -40,7 +39,7 @@ class EventsController extends Controller
         if (!(!$event)) {
             $event->setIsReservable(!$event->getIsReservable());
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
@@ -49,4 +48,20 @@ class EventsController extends Controller
         return $response;
     }
 
+    public function reservationsAction($id)
+    {
+        $event = $this->getDoctrine()->getRepository('KorpusDataBundle:Event')->findOneById($id);
+
+        if (!$event) {
+            throw new $this->createNotFoundException("This Event does not Exist!");
+        }
+
+        $reservations = $this->getDoctrine()->getRepository('KorpusDataBundle:EventReservation')->findBy(array('event' => $event), array('creationDate' => 'desc'));
+        $tickets = 0;
+        foreach($reservations as $res) {
+            $tickets += (int)$res->getAmount();
+        }
+
+        return $this->render('KorpusConsoleBundle:Events:reservations.html.twig', array('event' => $event, 'reservations' => $reservations, 'tickets' => $tickets));
+    }
 }

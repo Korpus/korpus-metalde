@@ -1,0 +1,31 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}events{% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ event.title }} | {{ reservations|length }} Reservierungen | {{ tickets }} Tickets</h3>
+        </div>
+
+        {% if reservations|length > 0 %}
+            <table class="table">
+                {% for res in reservations %}
+                    <tr>
+                        <td>{{ res.name }}</td>
+                        <td>{{ res.email }}</td>
+                        <td>{{ res.address }}</td>
+                        <td>{{ res.amount }}</td>
+                        <td>{{ res.creationDate|date('d.m.Y G:h:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <div class="panel-body">
+                Es wurden noch keine Reservierungen vorgenommen!
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

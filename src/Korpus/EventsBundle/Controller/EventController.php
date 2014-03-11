@@ -5,6 +5,7 @@ namespace Korpus\EventsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Korpus\DataBundle\Entity\EventReservation;
+use VerbalExpressions\PHPVerbalExpressions\VerbalExpressions;
 
 class EventController extends Controller
 {
@@ -75,6 +76,20 @@ class EventController extends Controller
         $email = $request->get('email');
         $amount = (int) $request->get('amount');
         $address = $request->get('address');
+
+        $regex = new VerbalExpressions();
+        $regex->startOfLine()
+            ->anything()
+            ->then('@')
+            ->anything()
+            ->endOfLine();
+
+        if(!$regex->test($email)) {
+            //set flash message
+            $session->getFlashBag()->add('notice', 'Bitte geben Sie eine gültige Email-Adresse ein!');
+
+            return $this->redirect($request->get('referer'));
+        }
 
         if ($name != "" && $email != "" && $amount > 0 && $address != "") {
             //add reservation
