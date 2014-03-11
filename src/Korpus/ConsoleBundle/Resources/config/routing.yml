@@ -170,3 +170,7 @@ korpus_console_events_toggle_reservable:
     methods: [POST]
     options:
         expose: true
+
+korpus_console_events_reservations:
+    pattern:  /events/{id}/reservations
+    defaults: { _controller: KorpusConsoleBundle:Events:reservations }
