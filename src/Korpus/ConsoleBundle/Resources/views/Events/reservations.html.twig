@@ -6,7 +6,11 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ event.title }} | {{ reservations|length }} Reservierungen | {{ tickets }} Tickets</h3>
+            <h3 class="panel-title">
+                {{ event.title }}
+                <span class="label label-info">{{ reservations|length }} Reservierungen</span>
+                <span class="label label-success">{{ tickets }} Tickets</span>
+            </h3>
         </div>
 
         {% if reservations|length > 0 %}
