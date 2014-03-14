@@ -110,7 +110,16 @@ class ConcertController extends Controller
 
     public function deleteAction(Request $request, $id)
     {
+        $concert = $this->getDoctrine()->getRepository('KorpusDataBundle:Concert')->findOneById($id);
+        $session = $request->getSession();
 
+        if ($request->get('sent')) {
+
+        }
+
+        return $this->render('KorpusConsoleBundle:Concert:delete.html.twig', array(
+            'concert' => $concert
+        ));
     }
 
 }

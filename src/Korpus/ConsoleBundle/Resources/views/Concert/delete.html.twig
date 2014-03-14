@@ -1,0 +1,31 @@
+{% extends 'KorpusConsoleBundle::layout.html.twig' %}
+
+{% block currentpage %}concerts{% endblock %}
+
+{% block title %}Console | Konzert bearbeiten{% endblock %}
+
+{% block content %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-warning alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-trash"></span> Konzert '{{ concert.eventName }}' löschen</h3>
+        </div>
+        <div class="panel-body">
+
+            <form role="form" method="post">
+                <button type="submit" class="btn btn-danger">Löschen</button>
+                <a href="{{ path('korpus_console_concerts_collection') }}" class="btn btn-default">Abbrechen</a>
+                <input value="1" name="sent" type="hidden">
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
