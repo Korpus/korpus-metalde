@@ -226,23 +226,6 @@ class PageController extends Controller
     }
 
     /**
-     * Merch
-     */
-    public function merchAction()
-    {
-        $articleGroups = $this->getDoctrine()->getRepository('KorpusDataBundle:ArticleGroup')->findAll();
-
-        return $this->render('KorpusMainPageBundle:Page:merch.html.twig', array('groups' => $articleGroups));
-    }
-
-    public function merchArticleAction($slug)
-    {
-        $article = $this->getDoctrine()->getRepository('KorpusDataBundle:Article')->findOneBySlug($slug);
-
-        return $this->render('KorpusMainPageBundle:Page:merchArticle.html.twig', array('article' => $article));
-    }
-
-    /**
      * Dev
      */
     public function developmentPageAction()

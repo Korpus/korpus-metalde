@@ -1,0 +1,15 @@
+korpus_main_page_merch_index:
+    pattern:  /
+    defaults: { _controller: KorpusMainPageBundle:Merch:categoryCollection }
+
+korpus_main_page_merch_cat:
+    pattern:  /{catId}
+    defaults: { _controller: KorpusMainPageBundle:Merch:articleCollection }
+
+korpus_main_page_merch_article:
+    pattern:  /{catId}/{slug}
+    defaults: { _controller: KorpusMainPageBundle:Merch:article }
+
+korpus_main_page_merch_article_order:
+    pattern:  /{catId}/{slug}/order
+    defaults: { _controller: KorpusMainPageBundle:Merch:order }

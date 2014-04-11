@@ -144,6 +144,10 @@ a {
     text-decoration: none;
 }
 
+.article-cat-img {
+    margin-top: 5px;
+}
+
 /*screen-not-supported*/
 @media (max-width: 319px) {
     #wrap {

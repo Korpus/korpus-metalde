@@ -30,6 +30,13 @@ class ArticleGroup
     private $title;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="group")
      */
     protected $articles;
@@ -42,7 +49,7 @@ class ArticleGroup
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -65,7 +72,7 @@ class ArticleGroup
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -81,5 +88,22 @@ class ArticleGroup
     {
         $this->articles = $articles;
     }
+
+    /**
+     * @param boolean $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
 
 }

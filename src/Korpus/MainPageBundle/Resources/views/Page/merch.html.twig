@@ -6,34 +6,13 @@
 {% block title %}Korpus &middot; Merch{% endblock %}
 
 {% block content %}
-
-{#
-<div class="centered">
-    <strong>Die Merchabteilung wird momentan Aktualisiert<br>und ist bald wieder verfügbar</strong>
-    <br>
-    Bitte nutzt in der Zwischenzeit den Online Shop von Blacksmith-Records!<br>
-    <a href="http://blacksmithstore.bigcartel.com/">
-        http://blacksmithstore.bigcartel.com/
-    </a>
-</div>
-#}
-
-{% for group in groups %}
-<h2>{{group.title}}</h2>
-<div class="row">
-    {% for article in group.articles %}
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="{{ path('korpus_file_server_images_object', {folder: article.photo.folder, slug: article.photo.slug, extension: article.photo.type.extension}) }}" alt="">
-            <div class="caption">
-                <h3>{{article.title}}</h3>
-                <p><span class="label label-success">ab {{article.price|number_format(2, ',', '.')}}&euro;</span></p>
-                <p><a href="{{ path('korpus_main_page_merch_article', {slug: article.slug}) }}" class="btn btn-primary" role="button">Details</a></p>
-            </div>
-        </div>
+    
+    <div class="text-center">
+        {% for i, group in groups %}
+            <a href="{{ path('korpus_main_page_merch_cat', {catId: group.id}) }}">
+                <img src="http://placehold.it/250x250" class="img-thumbnail img-responsive article-cat-img">
+            </a>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endfor %}
 
 {% endblock %}

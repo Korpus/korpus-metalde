@@ -109,12 +109,8 @@ korpus_main_page_fans:
 
 #merch
 korpus_main_page_merch:
-    pattern:  /merch
-    defaults: { _controller: KorpusMainPageBundle:Page:merch }
-    
-korpus_main_page_merch_article:
-    pattern:  /merch/{slug}
-    defaults: { _controller: KorpusMainPageBundle:Page:merchArticle }
+    resource: "@KorpusMainPageBundle/Resources/config/Merch/routing.yml"
+    prefix:   /merch
 
 #dev
 korpus_main_page_development:
