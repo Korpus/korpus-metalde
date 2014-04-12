@@ -7,15 +7,29 @@
 
 {% block content %}
 
+    <a href="{{ path('korpus_main_page_merch_index') }}" class="btn btn-info"><span
+                class="glyphicon glyphicon-chevron-left"></span> Zurück</a>
+    <br>
+    <br>
+
     <div class="row">
         {% for article in group.articles %}
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <img src="{{ path('korpus_file_server_images_object', {folder: article.photo.folder, slug: article.photo.slug, extension: article.photo.type.extension}) }}" alt="">
+                    <img src="{{ path('korpus_file_server_images_object', {folder: article.photo.folder, slug: article.photo.slug, extension: article.photo.type.extension}) }}"
+                         alt="">
+
                     <div class="caption">
-                        <h3>{{article.title}}</h3>
-                        <p><span class="label label-success">ab {{article.price|number_format(2, ',', '.')}}&euro;</span></p>
-                        <p><a href="{{ path('korpus_main_page_merch_article', {catId: group.id, slug: article.slug}) }}" class="btn btn-primary" role="button">Details</a></p>
+                        <h3>{{ article.title }}</h3>
+
+                        <p>
+                            <span class="label label-success">
+                                {% if article.showPriceFrom == true %}ab {% endif %}{{ article.price|number_format(2, ',', '.') }}&euro;
+                            </span>
+                        </p>
+
+                        <p><a href="{{ path('korpus_main_page_merch_article', {catId: group.id, slug: article.slug}) }}"
+                              class="btn btn-primary" role="button">Details</a></p>
                     </div>
                 </div>
             </div>

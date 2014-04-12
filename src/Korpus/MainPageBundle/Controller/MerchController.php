@@ -16,7 +16,7 @@ class MerchController extends Controller
     {
         $articleGroups = $this->getDoctrine()->getRepository('KorpusDataBundle:ArticleGroup')->findAll();
 
-        return $this->render('KorpusMainPageBundle:Page:merch.html.twig', array(
+        return $this->render('KorpusMainPageBundle:Merch:categoryCollection.html.twig', array(
             'groups' => $articleGroups
         ));
     }
@@ -43,7 +43,7 @@ class MerchController extends Controller
     {
         $article = $this->getDoctrine()->getRepository('KorpusDataBundle:Article')->findOneBySlug($slug);
 
-        return $this->render('KorpusMainPageBundle:Page:merchArticle.html.twig', array(
+        return $this->render('KorpusMainPageBundle:Merch:article.html.twig', array(
             'article' => $article
         ));
     }

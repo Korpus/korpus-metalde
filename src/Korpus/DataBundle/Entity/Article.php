@@ -60,13 +60,22 @@ class Article
     /**
      * @ORM\ManyToOne(targetEntity="File")
      * @ORM\JoinColumn(name="photo_id", referencedColumnName="id")
-     * */
+     */
     private $photo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ArticleGroup")
+     * @ORM\ManyToMany(targetEntity="File")
+     * @ORM\JoinTable(name="articles_photos",
+     *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id")}
+     *      )
+     */
+    private $photos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ArticleGroup", inversedBy="articles")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-     * */
+     */
     private $group;
 
     /**
@@ -86,16 +95,24 @@ class Article
      */
     private $infotext;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="show_price_from", type="boolean")
+     */
+    private $showPriceFrom = true;
+
     public function __construct()
     {
         $this->shopLinks = new ArrayCollection;
         $this->reviews = new ArrayCollection;
+        $this->photos =  new ArrayCollection;
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -118,7 +135,7 @@ class Article
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -141,7 +158,7 @@ class Article
     /**
      * Get creationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreationDate()
     {
@@ -164,7 +181,7 @@ class Article
     /**
      * Get editDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEditDate()
     {
@@ -239,6 +256,38 @@ class Article
     public function setReviews($reviews)
     {
         $this->reviews = $reviews;
+    }
+
+    /**
+     * @param boolean $showPriceFrom
+     */
+    public function setShowPriceFrom($showPriceFrom)
+    {
+        $this->showPriceFrom = $showPriceFrom;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getShowPriceFrom()
+    {
+        return $this->showPriceFrom;
+    }
+
+    /**
+     * @param mixed $photos
+     */
+    public function setPhotos($photos)
+    {
+        $this->photos = $photos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
     }
 
 }

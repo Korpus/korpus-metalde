@@ -37,7 +37,7 @@ class ArticleStoreLinks
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="shopLinks")
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      * */
     private $article;

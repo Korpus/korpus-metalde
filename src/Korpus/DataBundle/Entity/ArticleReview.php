@@ -37,7 +37,7 @@ class ArticleReview
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="reviews")
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      * */
     private $article;
