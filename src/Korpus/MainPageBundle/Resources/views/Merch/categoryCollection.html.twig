@@ -6,12 +6,22 @@
 {% block title %}Korpus &middot; Merch{% endblock %}
 
 {% block content %}
-    
+
     <div class="text-center">
         {% for i, group in groups %}
             <a href="{{ path('korpus_main_page_merch_cat', {catId: group.id}) }}">
-                <img src="http://placehold.it/250x250" class="img-thumbnail img-responsive article-cat-img">
+                <img src="http://placehold.it/250x250" class="img-thumbnail img-responsive article-cat-img"
+                     data-group-id="{{ group.id }}">
             </a>
+            <div class="hidden" id="cat-img-box-{{ group.id }}">
+                {% for article in group.articles %}
+                    {% for img in article.photos %}
+                        <span id="cat-img-{{ img.id }}">{{ path('korpus_file_server_images_object', {folder: img.folder, slug: img.slug, extension: img.type.extension}) }}</span>
+                    {% endfor %}
+                {% else %}
+                    <span>http://placehold.it/250x250</span>
+                {% endfor %}
+            </div>
         {% endfor %}
     </div>
 

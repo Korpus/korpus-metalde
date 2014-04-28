@@ -58,12 +58,6 @@ class Article
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="File")
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id")
-     */
-    private $photo;
-
-    /**
      * @ORM\ManyToMany(targetEntity="File")
      * @ORM\JoinTable(name="articles_photos",
      *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
@@ -186,16 +180,6 @@ class Article
     public function getEditDate()
     {
         return $this->editDate;
-    }
-
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
     }
 
     public function getPrice()

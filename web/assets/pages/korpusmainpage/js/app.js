@@ -1,12 +1,13 @@
+$(document).ready(function () {
 
-$(document).ready(function() {
+    var currentPage = $('#current-page').html();
 
     $('.nav-link').removeClass('active');
     $('.top-bar-link').removeClass('active');
     $('.nl-' + $('#current-page').html()).addClass('active');
     $('#nls-' + $('#current-subpage').html()).addClass('active');
 
-    $('#share-btn').click(function(e) {
+    $('#share-btn').click(function (e) {
         e.preventDefault();
         window.open($(this).attr('href'), 'sharer', 'width=626,height=436');
     });
@@ -42,6 +43,17 @@ $(document).ready(function() {
             userid: '116997391993592039168',
             albumid: '5945443482553019665',
             imgmax: $('.content-area').width()
+        });
+    }
+
+    //MERCH
+    if (currentPage == 'merch') {
+        var groupObjects = $('.article-cat-img');
+
+        $.each(groupObjects, function(key, go) {
+            var groupId = $(go).data('group-id');
+            var images = $('#cat-img-box-' + groupId).children();
+            $(go).attr('src', $(images[0]).html());
         });
     }
 
