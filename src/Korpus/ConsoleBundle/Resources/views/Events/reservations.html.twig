@@ -10,6 +10,7 @@
                 {{ event.title }}
                 <span class="label label-info">{{ reservations|length }} Reservierungen</span>
                 <span class="label label-success">{{ tickets }} Tickets</span>
+                <a href="{{ path('korpus_console_events_reservations_print', {id: event.id}) }}" target="_blank"><span class="pull-right glyphicon glyphicon-print"></span></a>
             </h3>
         </div>
 

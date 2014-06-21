@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ event.title }} - Reservation Print Report</title>
+</head>
+<body>
+
+<h2>{{ event.title }} - Reservation Print Report</h2>
+
+<h3>{{ reservations|length }} Reservierungen | {{ tickets }} Tickets</h3>
+
+<h4>Ausgabe: {{ 'now'|date('d.m.Y G:h:i') }}</h4>
+
+{% if reservations|length > 0 %}
+    <table cellpadding="5" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Menge</th>
+            <th>Datum</th>
+        </tr>
+        {% for res in reservations %}
+            <tr>
+                <td>{{ res.name }}</td>
+                <td>{{ res.email }}</td>
+                <td>{{ res.address }}</td>
+                <td>{{ res.amount }}</td>
+                <td>{{ res.creationDate|date('d.m.Y G:h:i') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <h1>Es wurden noch keine Reservierungen vorgenommen!</h1>
+{% endif %}
+
+</body>
+</html>
