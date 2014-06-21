@@ -174,3 +174,7 @@ korpus_console_events_toggle_reservable:
 korpus_console_events_reservations:
     pattern:  /events/{id}/reservations
     defaults: { _controller: KorpusConsoleBundle:Events:reservations }
+
+korpus_console_events_reservations_print:
+    pattern:  /events/{id}/reservations/print
+    defaults: { _controller: KorpusConsoleBundle:Events:printReport }

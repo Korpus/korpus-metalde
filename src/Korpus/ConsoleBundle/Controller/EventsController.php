@@ -58,10 +58,27 @@ class EventsController extends Controller
 
         $reservations = $this->getDoctrine()->getRepository('KorpusDataBundle:EventReservation')->findBy(array('event' => $event), array('creationDate' => 'desc'));
         $tickets = 0;
-        foreach($reservations as $res) {
+        foreach ($reservations as $res) {
             $tickets += (int)$res->getAmount();
         }
 
         return $this->render('KorpusConsoleBundle:Events:reservations.html.twig', array('event' => $event, 'reservations' => $reservations, 'tickets' => $tickets));
+    }
+
+    public function printReportAction($id)
+    {
+        $event = $this->getDoctrine()->getRepository('KorpusDataBundle:Event')->findOneById($id);
+
+        if (!$event) {
+            throw new $this->createNotFoundException("This Event does not Exist!");
+        }
+
+        $reservations = $this->getDoctrine()->getRepository('KorpusDataBundle:EventReservation')->findBy(array('event' => $event), array('creationDate' => 'desc'));
+        $tickets = 0;
+        foreach ($reservations as $res) {
+            $tickets += (int)$res->getAmount();
+        }
+
+        return $this->render('KorpusConsoleBundle:Events:printReservations.html.twig', array('event' => $event, 'reservations' => $reservations, 'tickets' => $tickets));
     }
 }
